@@ -1,11 +1,11 @@
 {
     "name": "generator-boilerplatev",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Scaffolds out a front-end boilerplate based on Boilerplatev",
     "main": "index.js",
     "homepage": "https://github.com/viperfx07/generator-boilerplatev",
     "bugs": {
-        "url": "https://github.com/viperfx07/generator-boilerplatev/issues",
+        "url": "https://github.com/viperfx07/generator-boilerplatev/issues"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
