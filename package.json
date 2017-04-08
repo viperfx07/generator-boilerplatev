@@ -1,20 +1,24 @@
 {
-  "name": "generator-boilerplatev",
-  "version": "0.1.0",
-  "description": "Scaffolds out a front-end boilerplate based on Boilerplatev",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "boilerplatev",
-    "boilerplatev-bootstrap",
-    "generator-boilerplatev",
-    "yeoman-generator"
-  ],
-  "author": "Victor Tanudjaja",
-  "license": "ISC",
-  "dependencies": {
-    "yeoman-generator": "^1.1.1"
-  }
+    "name": "generator-boilerplatev",
+    "version": "0.1.0",
+    "description": "Scaffolds out a front-end boilerplate based on Boilerplatev",
+    "main": "index.js",
+    "homepage": "https://github.com/viperfx07/generator-boilerplatev",
+    "bugs": {
+        "url": "https://github.com/viperfx07/generator-boilerplatev/issues",
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "boilerplatev",
+        "boilerplatev-bootstrap",
+        "generator-boilerplatev",
+        "yeoman-generator"
+    ],
+    "author": "Victor Tanudjaja",
+    "license": "ISC",
+    "dependencies": {
+        "yeoman-generator": "^1.1.1"
+    }
 }

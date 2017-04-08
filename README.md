@@ -1,0 +1,2 @@
+#BoilerplateV Generator
+This is a generator to scaffold out the front end boilerplate using BoilerplateV. BoilerplateV itself is an extensive HTML5 framework for building robust web sites utilising [Pug](https://pugjs.org), SCSS/PostCSS with [Gulp](http://gulpjs.com). The boilerplate is based on [Yeogurt Generator](https://github.com/larsonjj/generator-yeogurt). The difference is, instead of Browserify, it uses Webpack.
