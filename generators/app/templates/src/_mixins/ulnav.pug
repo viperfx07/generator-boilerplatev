@@ -1,0 +1,16 @@
+mixin ulnavlink(item, wrapperClass)
+	a(href=item.href, title=item.title)
+		if(item.icon)
+			i(class="g-icon-" + item.icon)
+		if(wrapperClass)
+			div(class=wrapperClass)=item.title
+		else
+			=item.title
+
+mixin ulnav(items, navClass, ulClass, liClass, wrapperClass)
+	nav(class=navClass)
+		ul(class=(ulClass) ? ulClass : navClass + '__list')
+			each item in items
+				li(class=(liClass) ? liClass : (ulClass ? ulClass : navClass) + '__list-item')
+					+ulnavlink(item, wrapperClass)
+					

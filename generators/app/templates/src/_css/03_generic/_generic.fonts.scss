@@ -1,0 +1,3 @@
+@each $name, $path in $fonts{
+  @include font-face($name, $path);
+}

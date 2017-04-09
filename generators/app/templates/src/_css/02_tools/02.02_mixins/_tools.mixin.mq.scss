@@ -1,0 +1,75 @@
+@mixin mq($min: 0, $max: 0) {
+    $type: type-of($min);
+    @if $type==string {
+        @if $min==xs {
+            @media (max-width: rem($screen-xs-max)) {
+                @content;
+            }
+        }
+        @else if $min==sm {
+            @media (min-width: rem($screen-sm-min)) {
+                @content;
+            }
+        }
+        @else if $min==sm-md {
+            @media (min-width: rem($screen-sm-min)) and (max-width: rem($screen-sm-max))  {
+                @content;
+            }
+        }
+        @else if $min==md {
+            @media (min-width: rem($screen-md-min)) {
+                @content;
+            }
+        }
+        @else if $min==md-lg{
+            @media (min-width: rem($screen-md-min)) and (max-width: rem($screen-md-max))  {
+                @content;
+            }
+        }
+        @else if $min==lg {
+            @media (min-width: rem($screen-lg-min)) {
+                @content;
+            }
+        }
+        @else if $min==lg-xl {
+            @media (min-width: rem($screen-lg-min)) and (max-width: rem(1400px)) {
+                @content;
+            }
+        }
+        @else if $min==xl {
+            @media (min-width: rem(1400px)) {
+                @content;
+            }
+        }
+        @else if $min==sm-max{
+            @media (max-width: rem($screen-sm-max)){
+                @content;
+            }
+        }
+        @else if $min==md-max{
+            @media (max-width: rem($screen-md-max)){
+                @content;
+            }
+        }
+        @else if $min==lg-max{
+            @media (max-width: rem(1399px)){
+                @content;
+            }
+        }
+    }
+    @else if $type==number {
+        $query: "all" !default;
+        @if $min !=0 and $max !=0 {
+            $query: "(min-width: #{$min}) and (max-width: #{$max})";
+        }
+        @else if $min !=0 and $max==0 {
+            $query: "(min-width: #{$min})";
+        }
+        @else if $min==0 and $max !=0 {
+            $query: "(max-width: #{$max})";
+        }
+        @media #{$query} {
+            @content;
+        }
+    }
+}

@@ -1,0 +1,99 @@
+.u {
+    // Background image reset
+    // no-repeat, centered, and cover size
+    &-bgimg {
+        @include bgimg-with-ratio;
+    }
+
+    // Same embed responsive as Boostrap's embed-responsive, but with BEM style syntax
+    &-embed {
+        position: relative;
+        display: block;
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+        padding-bottom: 100%; //by default, it's a square
+
+        &__item,
+          iframe,
+          embed,
+          object,
+          video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            border: 0;
+        }
+
+        &--16by9{
+            padding-bottom: 56.25%;
+        }
+        &--4by3{
+            padding-bottom: 75%;
+        }
+    }
+
+    // Reset Button Style
+    &-btn-unstyled {
+        @include btn-unstyled;
+    }
+    // Reset List/ul Style
+    &-list-unstyled {
+        @include list-unstyled;
+    }
+    
+    // Gutter Bottom
+    // apply it in col- class
+    &-gb {
+        &:last-child {
+            margin-bottom: 0;
+        }
+        &--xs {
+            @include mq(xs) {
+                margin-bottom: $grid-gutter-width;
+            }
+        }
+        &--sm {
+            @include mq(sm) {
+                margin-bottom: $grid-gutter-width;
+            }
+        }
+    }
+    
+    // Ellipsis
+    &-ellipsis {
+        @include ellipsis;
+    }
+
+    // Collapse
+    // This will show the collapsed element if it's collapsed from Boostrap class
+    &-collapse {
+        &-xsmax {
+            @include mq(sm) {
+                display: block;
+                &-inline-block {
+                    display: inline-block;
+                }
+            }
+        }
+        &-smmax {
+            @include mq(md) {
+                display: block;
+                &-inline-block {
+                    display: inline-block;
+                }
+            }
+        }
+        &-mdmax {
+            @include mq(lg) {
+                display: block;
+                &-inline-block {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}

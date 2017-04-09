@@ -1,0 +1,23 @@
+// set text color
+@mixin color($colorName, $opacity: 1){
+	$color: map-get($colors, $color_name);
+
+	@if $opacity == 1{
+		color: $color;
+	}
+	@else{
+		color: rgba($color, $opacity);
+	}
+}
+
+// set background color
+@mixin bgcolor($colorName, $opacity: 1){
+	$color: map-get($colors, $colorName);
+
+	@if $opacity == 1{
+		background-color: $color;
+	}
+	@else{
+		background-color: rgba($color, $opacity);
+	}
+}

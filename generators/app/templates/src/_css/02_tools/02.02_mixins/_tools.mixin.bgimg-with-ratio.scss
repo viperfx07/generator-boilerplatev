@@ -1,0 +1,11 @@
+@mixin bgimg-with-ratio($ratio: "", $url: "", $position: center, $size: cover, $repeat: no-repeat){
+	@if ($url != "") {
+		background-image: url($url);
+	}
+	@if ($ratio != ""){
+    	@include maintain-ratio($ratio);
+	}
+    background-repeat: $repeat;
+    background-position: $position;
+    background-size: $size;
+}

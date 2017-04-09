@@ -1,0 +1,11 @@
+@mixin btn-unstyled{
+	margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        background-color: transparent;
+    }
+}

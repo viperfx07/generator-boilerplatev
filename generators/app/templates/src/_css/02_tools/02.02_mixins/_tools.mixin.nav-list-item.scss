@@ -1,0 +1,6 @@
+/*
+This is the mixin to style the <li> or other list tag as a table-cell
+ */
+@mixin nav-list-item{
+	display: table-cell;
+}

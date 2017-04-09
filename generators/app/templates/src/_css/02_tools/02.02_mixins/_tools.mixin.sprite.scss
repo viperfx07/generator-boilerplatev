@@ -1,0 +1,6 @@
+@mixin sprite($filename){
+	$filePath:'../_img/sprite/' + $filename + '.png';
+	background: url($filePath);
+	width: width($filePath);
+	height: height($filePath);
+}
