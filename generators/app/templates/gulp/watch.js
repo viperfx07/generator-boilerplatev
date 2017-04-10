@@ -14,7 +14,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 
       // Scripts
       gulp.watch([
-        path.join(dirs.source, dirs.scripts, '**/*.{js<% if(vue){%>vue<%} %>')], ['webpack']);
+        path.join(dirs.source, dirs.scripts, '**/*.{js<% if(vue){%>,vue<%}%>}')], ['webpack']);
 
       // Icon font
       gulp.watch([

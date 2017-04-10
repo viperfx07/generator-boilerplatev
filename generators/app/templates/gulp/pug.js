@@ -5,12 +5,12 @@ import path from 'path';
 import foldero from 'foldero';
 import pug from 'pug';
 import pugIncludeGlob from 'pug-include-glob';
-import emmity from 'emitty';
+const emitty = require('emitty');
 
 export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs) {
   let dest = path.join(taskTarget);
   let dataPath = path.join(dirs.source, dirs.data);
-  const emm = emmity.setup(dirs.source, 'pug');
+  const emm = emitty.setup(dirs.source, 'pug');
 
   // pug template compile
   gulp.task('pug', () => {

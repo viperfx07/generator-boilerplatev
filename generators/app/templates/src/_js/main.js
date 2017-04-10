@@ -16,8 +16,8 @@
  */
 
 // import wf from 'webfontloader';
-import App from './components/App.vue';
-import Test from './components/Test.vue';
+<% if (vue) { %>import App from './components/App.vue';
+import Test from './components/Test.vue';<%}%>
 
 // wf.load({
 //     google: {
@@ -40,11 +40,11 @@ $(() => {
         }, "partials");    
     }
     
-    new Vue({
+    <% if (vue) { %>new Vue({
 	  el: '#app',
 	  components: { 
-	  	'app-keren': App,
-	  	'test-keren': Test
+	  	'app-cool': App,
+	  	'test-cool': Test
 	  } 
-	});
+	});<%}%>
 });
