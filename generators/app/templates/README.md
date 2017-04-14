@@ -14,11 +14,11 @@ JavaScript
 - [Webpack](http://webpack.js.org/) with ES6/2015 support through [Babel](https://babeljs.io/)
 - [Node](https://nodejs.org/)
 
-Styles<% if (cssOption === 'sass') { %>
-- [Sass](http://sass-lang.com/) via ([node-sass](https://github.com/sass/node-sass))<% } %>
+Styles
+- [Sass](http://sass-lang.com/) via ([node-sass](https://github.com/sass/node-sass))
 
-Markup<% if (htmlOption === 'jade') { %>
-- [Pug](http://pugjs.org/)<% } %>
+Markup
+- [Pug](http://pugjs.org/)
 
 Optimization
 - [Imagemin](https://github.com/imagemin/imagemin)
@@ -31,7 +31,6 @@ Automation
 - [Gulp](http://gulpjs.com)
 
 Code Management
-- [Editorconfig](http://editorconfig.org/)
 - [Git](https://git-scm.com/)
 
 

@@ -1,10 +1,26 @@
 'use strict';
 
 var Generator = require('yeoman-generator');
+var underscore = require('underscore.string');
 var path = require('path');
+require('colors');
+var pkg;
 
 module.exports = class extends Generator {
+	initializing(){
+		pkg = (this.fs.readJSON(path.join(__dirname, '../../package.json')));
+	}
     prompting() {
+    	this.log('----------------------------------------------------'.green);
+    	this.log('    --------------------------------------------  '.cyan);
+    	this.log('                                                ');
+    	this.log('                 BOILERPLATE V         '.yellow);
+    	this.log('                 v' + pkg.version.yellow);
+    	this.log('                                                ');
+    	this.log('    --------------------------------------------  '.cyan);
+    	this.log('----------------------------------------------------'.green);
+
+
         return this.prompt([{
             type: 'input',
             name: 'name',
@@ -29,7 +45,7 @@ module.exports = class extends Generator {
             type: 'confirm',
             name: 'skipInstall',
             message: 'Do you want to skip install?',
-            default: true
+            default: false
         }
         ]).then((answers) => {
             this.projectName =  answers.name;
@@ -47,6 +63,8 @@ module.exports = class extends Generator {
             vue: this.vue,
             useNotif: this.useNotif,
             skipInstall: this.skipInstall,
+            _ : underscore,
+            pkg: pkg
         };
 
         var src = this.templatePath();
