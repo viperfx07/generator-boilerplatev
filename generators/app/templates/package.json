@@ -1,5 +1,5 @@
 {
-  "name": "<%= projectName %>",
+  "name": "<%= projectName.replace(/ /ig,'') %>",
   "version": "0.1.0",
   "devDependencies": {
     "autoprefixer": "latest",
@@ -38,6 +38,7 @@
     "imagemin-svgo": "latest",
     "lodash": "latest",
     "postcss-assets": "latest",
+    "postcss-critical-split": "latest",
     "postcss-pxtorem": "latest",
     "postcss-sprites": "latest",
     "pug": "latest",
