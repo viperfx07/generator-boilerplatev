@@ -6,6 +6,7 @@ import gulpif from 'gulp-if';
 import sprites from 'postcss-sprites';
 import assets from 'postcss-assets';
 import pxtorem from 'postcss-pxtorem';
+import criticalCSS from 'postcss-critical-split';
 import rucksack from 'rucksack-css';
 import cssnano from 'cssnano';
 
@@ -13,9 +14,9 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
   let entries = config.entries;
   let dest = path.join(taskTarget, dirs.assets, dirs.styles.replace(/^_/, ''));
 
-  // Sass compilation
-  gulp.task('sass', () => {
-    return gulp.src(path.join(dirs.source, dirs.styles, entries.css))
+  const sassTask = (isCritical) => {
+    let src = path.join(dirs.source, dirs.styles, isCritical ? 'critical.scss': entries.css);
+    return gulp.src(src)
       .pipe(plugins.plumber())
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.cssGlobbing({ extensions: ['.scss'] }))
@@ -46,6 +47,12 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                 return Promise.resolve();
             } 
           }),
+          criticalCSS({
+            blockTag: 'crit',
+            startTag: 'crit:start',
+            endTag: 'crit:end',
+            output: isCritical ? 'critical' : 'rest'
+          }),
           cssnano({
             rebase: false,
             discardComments: {removeAll: true},
@@ -58,7 +65,9 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
             convertValues: true,
             discardEmpty: true,
             minifySelectors: true,
-            reduceInitial: true
+            reduceInitial: true,
+            reduceIdents: false,
+            mergeRules: false,
           })
         ]))
       .pipe(plugins.rename(function(path) {
@@ -69,5 +78,28 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
       .pipe(plugins.sourcemaps.write('./'))
       .pipe(gulp.dest(dest))
       .pipe(browserSync.stream({match: '**/*.css'}));
+  };
+
+  // Sass compilation
+  gulp.task('sass-rest', () =>{
+    return sassTask();
+  });
+
+  gulp.task('sass-critical', () =>{
+    return sassTask(true);
+  });
+
+  gulp.task('clone-main', () => {
+    let src = path.join(dirs.source, dirs.styles, entries.css);
+    let ren = path.join(dirs.source, dirs.styles, 'critical.scss');
+    return gulp
+        .src(src)
+        .pipe(plugins.changed(ren))
+        .pipe(plugins.rename(ren))
+        .pipe(gulp.dest('.'));
+
+  });
+  gulp.task('sass', ['sass-rest', 'clone-main'], () => {
+    gulp.start('sass-critical');
   });
 }
