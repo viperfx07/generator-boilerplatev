@@ -6,6 +6,7 @@
     "del": "latest",
     "emitty": "^1.3.0",
     "foldero": "latest",
+    "gulp-cheerio": "latest",
     "gulp-data": "latest",
     "gulp-imagemin": "latest",
     "gulp-pug": "latest",
@@ -52,6 +53,7 @@
     "foundation-sites": "latest",<% } %>
     "gulp": "latest",
     "gulp-changed": "latest",
+    "gulp-check-filesize": "latest",
     "gulp-consolidate": "latest",
     "gulp-css-globbing": "latest",
     "gulp-cssnano": "latest",
@@ -74,6 +76,7 @@
     "postcss-pxtorem": "latest",
     "postcss-sprites": "latest",
     "rucksack-css": "latest",
+    "run-sequence": "latest",
     "simplestatemanager": "latest", <% if (vue) { %>
     "vue-loader": "latest",
     "vue-template-compiler": "latest", <% } %>

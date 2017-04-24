@@ -1,11 +1,5 @@
-// https://github.com/twbs/bootstrap-sass
-// 
 // Notes: Comment the ones you don't need
-
-// Bootstrap v3.3.7 (http://getbootstrap.com)
-// Copyright 2011-2016 Twitter, Inc.
-// Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-
+<% if (cssFramework == 'bootstrap') { %>
 // Core variables and mixins
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
@@ -55,4 +49,46 @@
 
 // Utility classes
 @import "bootstrap/utilities";
-@import "bootstrap/responsive-utilities";
+@import "bootstrap/responsive-utilities";<% } %><% if (cssFramework == 'foundation') { %>
+@import 'foundation';
+
+// Uncomment the ones you need
+@include foundation-global-styles;
+@include foundation-grid;
+// @include foundation-flex-grid;
+@include foundation-typography;
+@include foundation-forms;
+@include foundation-button;
+// @include foundation-accordion;
+// @include foundation-accordion-menu;
+// @include foundation-badge;
+// @include foundation-breadcrumbs;
+// @include foundation-button-group;
+// @include foundation-callout;
+// @include foundation-close-button;
+@include foundation-menu;
+// @include foundation-menu-icon;
+// @include foundation-drilldown-menu;
+// @include foundation-dropdown;
+// @include foundation-dropdown-menu;
+// @include foundation-flex-video;
+// @include foundation-label;
+// @include foundation-media-object;
+// @include foundation-off-canvas;
+// @include foundation-orbit;
+// @include foundation-pagination;
+// @include foundation-progress-bar;
+// @include foundation-slider;
+// @include foundation-sticky;
+// @include foundation-reveal;
+// @include foundation-switch;
+@include foundation-table;
+// @include foundation-tabs;
+// @include foundation-thumbnail;
+// @include foundation-title-bar;
+// @include foundation-tooltip;
+// @include foundation-top-bar;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+// @include foundation-flex-classes;
+<% } %>
