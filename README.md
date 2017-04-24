@@ -222,6 +222,8 @@ I'm using [postcss-sprites](https://github.com/2createStudio/postcss-sprites) pl
 2. [Rucksack](http://simplaio.github.io/rucksack/) - A little bag of CSS superpowers
 3. [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem) - Convert pixel units to rem (root em) units using PostCSS
 4. [postcss-sprites](https://github.com/2createStudio/postcss-sprites) - Generate sprites from stylesheets.
+5. [postcss-critical-split](https://github.com/mrnocreativity/postcss-critical-split) - A PostCSS plugin that takes existing CSS files and splits out the annotated critical styles into a seperate file.
+
 
 ### Tools/Mixins/Functions
 **Important**:
