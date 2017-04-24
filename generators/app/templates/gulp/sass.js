@@ -119,7 +119,10 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
         serial('clone-main', ['sass-rest', 'sass-critical'], function(){
             if (!args.production && fs.existsSync(critCssPath)) {
                 gulp.start('inline-critical');
-            }    
+            }
+            if(!args.production){
+                gulp.start('copy_otherWWW');
+            }
         });
     });
 

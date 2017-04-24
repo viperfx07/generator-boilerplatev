@@ -70,6 +70,7 @@
     "gulp-sourcemaps": "latest",
     "gulp-util": "latest",
     "jquery-match-height": "latest",
+    "json5": "latest",
     "lodash": "latest",
     "postcss-assets": "latest",
     "postcss-critical-split": "latest",

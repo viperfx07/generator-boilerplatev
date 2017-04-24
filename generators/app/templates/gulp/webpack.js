@@ -71,7 +71,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
         ];
     }
 
-    gulp.task('webpack', () => {
+    gulp.task('webpack-ori', () => {
         return gulp.src(path.join(dirs.source, dirs.scripts, config.entries.js))
             .pipe(plugins.plumber())
             .pipe(webpackStream(webpackSettings, webpack))
@@ -79,4 +79,9 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
             .on('end', !args.production ? browserSync.reload : function(){});
     });
 
+    gulp.task('webpack', ['webpack-ori'], function(){
+        if(!args.production){
+            gulp.start('copy_otherWWW');
+        }
+    });
 }
