@@ -10,7 +10,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
   //icon font settings
   let iconFontSettings ={
     fontName: 'g-icons', // the font-family named used in the css. use prefix for namespace
-    fontPath: '../fonts/', //relative path to the fonts file, assuming the css directory is the same level as the fonts directory
+    fontPath: '/assets/fonts/', //relative path to the fonts file, assuming the css directory is the same level as the fonts directory
     className: 'g-icon' //associated with 'className' variable in template. will be the class name used in the css. use prefix for namespace
   };
 

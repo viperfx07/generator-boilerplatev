@@ -6,10 +6,10 @@
 
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
-import browserSyncLib from 'browser-sync';
 import pjson from './package.json';
 import minimist from 'minimist';
 import wrench from 'wrench';
+import serial from 'run-sequence';
 
 // Load all gulp plugins based on their names
 // EX: gulp-copy -> copy
@@ -22,14 +22,31 @@ let taskTarget = args.production ? dirs.destination : dirs.temporary;
 let otherWWW = dirs.otherWWW;
 
 // Create a new browserSync instance
-let browserSync = browserSyncLib.create();
+let browserSync;
+if(!args.production){
+  browserSync = (require('browser-sync')).create();
+}
+
+const prodTasks = [
+  'clean',
+  'copy',
+  'iconfont',
+  'fonts',
+  'sass',
+  'webpack'
+];
 
 // This will grab all js in the `gulp` directory
 // in order to load all gulp tasks
 wrench.readdirSyncRecursive('./gulp').filter((file) => {
   return (/\.(js)$/i).test(file);
 }).map(function(file) {
-  require('./gulp/' + file)(gulp, plugins, args, config, taskTarget, browserSync, dirs, otherWWW);
+  let task = file.split('.js')[0];
+  if(args.production && prodTasks.indexOf(task) >= 0){
+    require('./gulp/' + file)(gulp, plugins, args, config, taskTarget, browserSync, dirs, otherWWW);
+  } else{
+    require('./gulp/' + file)(gulp, plugins, args, config, taskTarget, browserSync, dirs, otherWWW);
+  }
 });
 
 // Default task
@@ -40,27 +57,14 @@ gulp.task('default', ['clean'], () => {
 });
 
 // Build production-ready code
-gulp.task('build', [
-  'copy',
-  'imagemin',
-  'iconfont',
-  'fonts',
-  'sass',
-  'webpack',
-]);
+gulp.task('build', ()=>{
+  serial(['copy', 'iconfont', 'fonts', 'webpack'], 'sass');
+});
 
 // Server tasks with watch
-gulp.task('serve', [
-  'imagemin',
-  'iconfont',
-  'fonts',
-  'copy',
-  'pug',
-  'sass',
-  'webpack',
-  'browserSync',
-  'watch'
-]);
+gulp.task('serve', ()=>{
+  serial(['imagemin', 'iconfont', 'fonts', 'pug','webpack', 'copy', 'watch'], 'sass', 'browserSync');
+});
 
 // Testing
 gulp.task('test', ['eslint']);
