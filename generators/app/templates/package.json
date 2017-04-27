@@ -24,7 +24,7 @@
     "directories": {
       "source": "src",
       "destination": "./",
-      "otherWWW": ["./"],
+      "otherWWW": [],
       "temporary": "tmp",
       "//": "Directories relative to `source` directory",
       "assets": "assets",

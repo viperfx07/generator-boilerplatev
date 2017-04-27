@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Some useful packages (you can install by using npm)
  * 1. webfontloader  = async font loaders
