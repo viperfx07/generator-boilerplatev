@@ -5,6 +5,7 @@ import path from 'path';
 import foldero from 'foldero';
 import pug from 'pug';
 import pugIncludeGlob from 'pug-include-glob';
+import serial from 'run-sequence';
 const emitty = require('emitty');
 
 export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs) {
@@ -13,7 +14,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
   const emm = emitty.setup(dirs.source, 'pug');
 
   // pug template compile
-  gulp.task('pug', () => {
+  gulp.task('pug-ori', () => {
     let siteData = {};
     if (fs.existsSync(dataPath)) {
       // Convert directory to JS Object
@@ -62,7 +63,10 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
       },
       plugins: [ pugIncludeGlob({ /* options */ }) ] 
     }))
-    .pipe(gulp.dest(dest))
-    .on('end', browserSync.reload);
+    .pipe(gulp.dest(dest));
+  });
+
+  gulp.task('pug', () =>{
+    serial('pug-ori', 'inline-critical');
   });
 }

@@ -106,20 +106,21 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
     });
 
     gulp.task('inline-critical', ()=>{
-        let clientCss = fs.readFileSync(critCssPath).toString();
-        return gulp.src(path.join(taskDir, '**/*.html'))
-            .pipe(plugins.cheerio($ => {
-                $('#boilerplatev-crit-css').text('').text(clientCss);
-            }))
-            .pipe(gulp.dest(taskDir))
-            .on('end', !args.production ? browserSync.reload : function(){});
+        if (fs.existsSync(critCssPath)) {
+            let clientCss = fs.readFileSync(critCssPath).toString();
+            return gulp.src(path.join(taskDir, '**/*.html'))
+                .pipe(plugins.cheerio($ => {
+                    $('#boilerplatev-crit-css').text('').text(clientCss);
+                }))
+                .pipe(gulp.dest(taskDir))
+                .on('end', !args.production ? browserSync.reload : function(){});
+        }
     });
 
     gulp.task('sass', () => {
         serial('clone-main', ['sass-rest', 'sass-critical'], function(){
-            if (!args.production && fs.existsSync(critCssPath)) {
-                gulp.start('inline-critical');
-            }
+            gulp.start('inline-critical');
+            
             if(!args.production){
                 gulp.start('copy_otherWWW');
             }
