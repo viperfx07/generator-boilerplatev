@@ -136,5 +136,5 @@ $icon-list: (
 //usually this use on pseudo element
 @mixin icon($iconName){
   @include iconfont;
-  content: f-icon($iconName);
+  content: icon($iconName);
 }
