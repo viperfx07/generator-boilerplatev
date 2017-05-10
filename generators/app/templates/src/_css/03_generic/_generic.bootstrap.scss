@@ -14,6 +14,7 @@
 @import "bootstrap/type";
 @import "bootstrap/code";
 @import "bootstrap/grid";
+@include init-bootstrap-flex-grid;
 // @import "bootstrap/tables";
 @import "bootstrap/forms";
 // @import "bootstrap/buttons";
