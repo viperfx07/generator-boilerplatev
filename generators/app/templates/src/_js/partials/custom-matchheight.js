@@ -1,5 +1,6 @@
 'use strict';
 import mh from 'jquery-match-height';
+import JSON5 from 'json5';
 
 //////////////////
 // Match Height //
