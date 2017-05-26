@@ -25,7 +25,6 @@ html.no-js
 		
 		meta(content="#",name="description")
 		meta(content="#4285f4", name="theme-color")
-		meta(content="Victor Tanudjaja",name="author")
 		
 		//-# Mobile Viewport Scaling
 		meta(content="True",name="HandheldFriendly")
@@ -33,6 +32,10 @@ html.no-js
 		meta(content="width=device-width,initial-scale=1",name="viewport")
 		meta(content="no",name="user-scalable")
 		//-#
+
+		meta(name="dns-prefetch", content="https://fonts.googleapis.com/")
+		meta(name="dns-prefetch", content="https://cdn.polyfill.io/")
+		meta(name="dns-prefetch", content="https://ajax.googleapis.com/")
 
 		title <%= _.titleize(projectName) %>
 		
@@ -61,9 +64,9 @@ html.no-js
 			block footer
 				include ../_partials/footer.pug
 		
+		script(src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,matchMedia,modernizr:placeholder")
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
 		<% if(vue){%>script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js")<%}%>
-		script(src="https://cdn.polyfill.io/v2/polyfill.min.js")
 		
 		//- how to make it read the arguments
 		script(src= baseUrl + 'assets/js/main.js')

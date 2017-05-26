@@ -46,43 +46,14 @@ var bundleSrc = $('[src$="/main.js"]').attr("src");
 __webpack_public_path__ = bundleSrc.substr(0, bundleSrc.lastIndexOf("/") + 1);
 
 $(() => {
-    //////////////////
-    // Match Height //
-    //////////////////
+    /////////////////////////////
+    // Match Height Customized //
+    /////////////////////////////
+    require('./partials/custom-matchheight');
 
-    /**
-     * data-mh-group is different from data-mh data-mh can be used natively straight from matchHeight 
-     * data-mh-group (require data-mh-options if needed) should be used like data-mh-group='groupName' that will be used as a selector
-     * data-mh-options will be used for the options of the match height
-     */
-
-    let $jsMh = $('[data-mh-group]');
-    if ($jsMh.length) {
-        let groupArray = [];
-        $jsMh.each(function(i, el) {
-            let $el = $(el);
-            let mhOptions = $el.attr('data-mh-options');
-            let mhGroup = $el.attr('data-mh-group');
-            let jsMhOptions = {};
-            if (mhGroup) {
-                if (mhOptions) {
-                    jsMhOptions = JSON5.parse(mhOptions);
-                }
-
-                if (!(groupArray.filter(item => item.group == mhGroup)).length) {
-                    groupArray.push({ group: mhGroup, options: jsMhOptions });
-                }
-            }
-        });
-
-        groupArray.forEach(function(obj) {
-            $(`[data-mh-group="${obj.group}"]`).matchHeight(obj.options);
-        });
-    }
-
-    /////////////////////////////////
-    // Partial requires example    //
-    /////////////////////////////////
+    ///////////////////////////
+    // Async require example //
+    ///////////////////////////
     if( true ) {
         require.ensure([], () => {
             require('./partials/partial')($);

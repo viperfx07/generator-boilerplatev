@@ -22,7 +22,7 @@
             float: left;
         }
     
-        @if($lg-grid-gutter-width){
+        @if(global-variable-exists(lg-grid-gutter-width)){
             @include mq(lg){
                 padding-left: ceil(($lg-grid-gutter-width / 2));
                 padding-right: floor(($lg-grid-gutter-width / 2));
@@ -98,7 +98,7 @@
         @include clearfix;
     }
 
-    @if ($lg-grid-gutter-width){
+    @if (global-variable-exists(lg-grid-gutter-width)){
         @include mq(lg){
             margin-left: ceil(($lg-grid-gutter-width / -2));
             margin-right: floor(($lg-grid-gutter-width / -2));

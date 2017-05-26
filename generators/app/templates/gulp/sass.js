@@ -61,6 +61,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                 cssnano({
                     rebase: false,
                     discardComments: { removeAll: true },
+                    discardUnused: false,
                     minifyFontValues: true,
                     filterOptimiser: true,
                     functionOptimiser: true,

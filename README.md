@@ -84,33 +84,34 @@ Once everything is installed, you will see a project structure like below:
 
 
 ```
-├── gulp/                      # Folder for gulp tasks
-├── www/                     # Folder for production www output
-├── tmp/                       # Folder for temporary development output
+├── gulp/                      	# Folder for gulp tasks
+├── www/                     	# Folder for production www output
+├── tmp/                       	# Folder for temporary development output
 ├── src
-|   ├── _data                  # JSON/YAML files that add data to templates
-|   ├── _img		           # Images
-|   ├── _layouts               # Layout structure for app
+|   ├── _css                  	# Global css, mixins, variables, etc
+|   |   └── main.scss         	# Main stylesheet (import everything to this file)
+|   ├── _data                  	# JSON files that add data to templates
+|   ├── _fonts                	# Fonts (including icon font)
+|   ├── _icons                	# Icons (svg files) that will be generated as the icon font (default: g-icons.woff,svg,...etc)
+|   ├── _img		           	# Images
+|   ├── _js					  	# Global js, base classes, etc
+|   |   └── main.js           	# Main bootstrap file
+|   ├── _layouts               	# Layout structure for app
 |   |   └── global.pug
-|   ├── _modules               # Reusable modules (curretly not implemented)
+|   ├── _mixins               	# Pug mixins
+|   ├── _modules               	# Reusable modules (curretly not implemented)
 |   |   └── link
 |   |       ├── __tests__
 |   |       |   └── link.spec.js
 |   |       ├── link.pug
 |   |       ├── link.js
 |   |       └── link.scss
-|   ├── _partials             # Reusable jade partials
-|   ├── _mixins               # Pug mixins
-|   ├── _css                  # Global css, mixins, variables, etc
-|   |   └── main.scss         # Main stylesheet (import everything to this file)
-|   ├── _js					  # Global js, base classes, etc
-|   |   └── main.js           # Main bootstrap file
-|   ├── _fonts                # Fonts (including icon font)
-|   ├── index.pug             # Homepage template
+|   ├── _partials             	# Reusable jade partials
+|   ├── index.pug             	# Homepage template
 |   ├── favicon.ico
 |   └── robots.txt
-├── gulpfile.babel.js         # Gulp task configuration
-└── package.json              # Dependencies and site/folder configuration
+├── gulpfile.babel.js         	# Gulp task configuration
+└── package.json             	# Dependencies and site/folder configuration
 ```
 
 Congratulations! You should now have successfully created a BoilerplateV project and are ready to start building out your site/app.
