@@ -44,7 +44,14 @@ html.no-js
 		link(rel='apple-touch-icon', href="assets/apple-touch-icon.png")
 		
 		//- CSS
+		// Critical CSS
+		// TODO: Critical CSS needs to be
+		// 1. Loaded by back-end script
+		// 2. Loaded once before main.css is cached
+		// ref: https://iamsteve.me/blog/entry/using-cookies-to-serve-critical-css-for-first-time-visits
 		style(id="boilerplatev-crit-css")
+		// END Critical CSS
+
 		link(rel='preload', href='assets/css/main.css', as='style', onload="this.rel='stylesheet'")
 		noscript
 			link(rel='stylesheet', href='assets/css/main.css')

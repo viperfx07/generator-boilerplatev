@@ -52,12 +52,12 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                         return Promise.resolve();
                     }
                 }),
-                criticalCSS({
+                isCritical ? criticalCSS({
                     blockTag: 'crit',
                     startTag: 'crit:start',
                     endTag: 'crit:end',
                     output: isCritical ? 'critical' : 'rest'
-                }),
+                }) : ()=>{},
                 cssnano({
                     rebase: false,
                     discardComments: { removeAll: true },
@@ -74,6 +74,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                     reduceInitial: true,
                     reduceIdents: false,
                     mergeRules: false,
+                    zindex: false
                 })
             ]))
             .pipe(plugins.rename(function(path) {
