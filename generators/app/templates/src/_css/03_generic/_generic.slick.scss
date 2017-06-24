@@ -1,2 +1,67 @@
-// @import '../../node_modules/slick-carousel/slick/slick.scss';
-// @import '../../node_modules/slick-carousel/slick/slick-theme.scss';
+/* crit:start */
+@import '../../node_modules/slick-carousel/slick/slick.scss';
+@import '../../node_modules/slick-carousel/slick/slick-theme.scss';
+/* crit:end */
+
+// ==========================================================================
+// Override so that don't need to use assets from slick
+// ==========================================================================
+
+.slick{
+	$_this: &;
+
+	// {{ .slick-slider }}
+	&-slider {
+	    @include mq(md) {
+	        user-select: initial;
+	    }
+	}
+
+	// {{ .slick-slide }}
+	&-slide {
+	    height: auto;
+	    flex: 1;
+	    outline: 0;
+	    /* crit */
+	    .lt-ie10 {
+	        height: 100%;
+	        /* crit */
+	    }
+	}
+
+	// {{ .slick-track }}
+	&-track {
+	    display: flex;
+	    /* crit */
+	    &:before {
+	        content: none;
+	        /* crit */
+	    }
+	    .lt-ie10 & {
+	        &:before {
+	            content: '';
+	            /* crit */
+	        }
+	    }
+	}
+
+	// {{ .slick-list }}
+	&-list{
+		#{$_this}-loading &{
+		    background: #fff 50% no-repeat;
+		    /* crit */
+		}
+	}
+
+	// {{ .slick-arrow }}
+	&-arrow{
+	}
+
+	// {{ .slick-prev }}
+	&-prev{
+	}
+
+	// {{ .slick-next }}
+	&-next{
+	}
+}

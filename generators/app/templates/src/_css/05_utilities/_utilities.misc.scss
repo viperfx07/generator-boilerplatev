@@ -1,3 +1,4 @@
+/* crit:start */
 .u {
     // Background image reset
     // no-repeat, centered, and cover size
@@ -42,25 +43,11 @@
     }
     // Reset List/ul Style
     &-list-unstyled {
-        @include list-unstyled;
+        @include u-list-unstyled;
     }
-    
-    // Gutter Bottom
-    // apply it in col- class
-    &-gb {
-        &:last-child {
-            margin-bottom: 0;
-        }
-        &--xs {
-            @include mq(xs) {
-                margin-bottom: $grid-gutter-width;
-            }
-        }
-        &--sm {
-            @include mq(sm) {
-                margin-bottom: $grid-gutter-width;
-            }
-        }
+
+    &-input-unstyled {
+        @include input-unstyled;
     }
     
     // Ellipsis
@@ -97,3 +84,4 @@
         }
     }
 }
+/* crit:end */

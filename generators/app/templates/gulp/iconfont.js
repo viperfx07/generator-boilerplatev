@@ -5,12 +5,13 @@ import lodash from 'lodash';
 
 export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs){
   let runTimestamp = Math.round(Date.now()/1000);
-  let dest = path.join(taskTarget, dirs.assets, dirs.fonts.replace(/^_/, ''));
+  let assetsLoc = `/${dirs.assets}/${dirs.fonts.replace(/^_/, '')}/`;
+  let dest = path.join(taskTarget, assetsLoc);
 
   //icon font settings
   let iconFontSettings ={
     fontName: 'g-icons', // the font-family named used in the css. use prefix for namespace
-    fontPath: '/assets/fonts/', //relative path to the fonts file, assuming the css directory is the same level as the fonts directory
+    fontPath: assetsLoc, //relative path to the fonts file, assuming the css directory is the same level as the fonts directory
     className: 'g-icon' //associated with 'className' variable in template. will be the class name used in the css. use prefix for namespace
   };
 

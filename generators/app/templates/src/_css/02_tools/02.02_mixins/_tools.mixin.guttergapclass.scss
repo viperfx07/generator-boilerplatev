@@ -1,0 +1,37 @@
+@mixin guttergapclass-responsivehelper(){
+	@each $mq in (xs, sm-max, md-max){
+		&-#{$mq}{
+			@include mq($mq){
+				@content;
+			}			
+		}
+	}
+}
+
+// The mixin will create (utility) classes based on grid-gutter-width set in settings.bootstrap.scss
+@mixin guttergapclass($property){
+	&-gutter{
+		#{$property}: $grid-gutter-width;
+		&-0p25x{
+			#{$property}: $grid-gutter-width * .25;
+
+			@include guttergapclass-responsivehelper{
+				#{$property}: $grid-gutter-width * .25;
+			}
+		}
+		&-0p5x{
+			#{$property}: $grid-gutter-width * .5;
+
+			@include guttergapclass-responsivehelper{
+				#{$property}: $grid-gutter-width * .5;
+			}
+		}
+		&-2x{
+			#{$property}: $grid-gutter-width * 2;
+
+			@include guttergapclass-responsivehelper{
+				#{$property}: $grid-gutter-width * 2;
+			}
+		}
+	}
+}

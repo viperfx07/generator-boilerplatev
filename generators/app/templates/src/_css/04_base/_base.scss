@@ -16,11 +16,20 @@
     text-shadow: none;
 }
 
+/* crit:start */
 html{
 	font-size: 100%;
-	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-body{
-  	background-color: #ffffff;
+fieldset{
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
+
+input[type=search]{
+	box-sizing: border-box;
+}
+/* crit:end */

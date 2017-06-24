@@ -1,10 +1,13 @@
 //used by m-color, m-bgcolor, f-color(), f-bgcolor()
 $colors: (
-    'black': #232c2e,
+    'primary': #232c2e,
+    'secondary': #232c2e,
 );
 
 //If using Brackets and SassHints
 //This will be useful, to quickly find the right variable for the color you need
 //Don't need to uncomment the color variables. SassHints can still find the variables even if it's commented
 
-//$black: #232c2e
+$primary: #232c2e;
+$secondary: #232c2e;
+$border: #232c2e;

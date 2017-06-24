@@ -1,10 +1,5 @@
 //convert pixel to rem
-@function rem($target, $context: $base-font-size) {
+@function rem($target, $context: $font-size-base) {
    @if $target == 0 { @return 0 }
    @return $target / $context + 0rem;
-}
-
-// short for rem-calc (foundation function)
-@function rc($val){
-	@return rem-calc($val);
 }

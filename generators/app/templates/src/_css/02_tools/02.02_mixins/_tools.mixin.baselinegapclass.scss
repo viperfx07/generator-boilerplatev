@@ -1,0 +1,10 @@
+// baseline is term for the height on the grid designed by designer
+// it's used to make height or gap consistent
+// This mixin is used to make classes based on baseline height and its parent (i.e utility classes)
+@mixin baselinegapclass($property, $increment: 10, $bl: $baseline){
+    @for $i from 1 to $increment{
+          &#{$i}{
+          	#{$property}: $i * $bl;
+          }
+    }
+}

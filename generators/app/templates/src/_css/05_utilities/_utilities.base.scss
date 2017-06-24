@@ -1,22 +1,22 @@
+/* crit:start */
 .u{
     // Border
     &-bd {
+        border: 1px solid $border;
         &0 {
             border: 0;
         }
     }
     // Border Radius
-    &-radius {
+    &-bdra {
         &0 {
             border-radius: 0;
         }
-    }
-    // User Select
-    &-us {
-        &-all {
-            user-select: all;
+        &50p{
+            border-radius: 50%;
         }
     }
+    
     // Link Text Decoration None on Hover and Focus
     &-link-tdn {
         &:hover,
@@ -26,58 +26,24 @@
     }
     // Margin
     &-m {
+        &a{
+            margin: auto;
+        }
         &0 {
             margin: 0;
         }
-        &t {
-            &-gutter {
-                margin-top: $grid-gutter-width;
-            }
-            &-gutter0p5x {
-                margin-top: $grid-gutter-width * .5;
-            }
-            &-gutter2x {
-                margin-top: $grid-gutter-width * 2;
-            }
-            &-gutter1p5x {
-                margin-top: $grid-gutter-width * 1.5;
-            }
-            &-gutter3x {
-                margin-top: $grid-gutter-width * 3;
-            }
-        }
         &b {
-            &-gutter {
-                margin-bottom: $grid-gutter-width;
-            }
-            &-gutter0p5x {
-                margin-bottom: $grid-gutter-width * .5;
-            }
-            &-gutter2x {
-                margin-bottom: $grid-gutter-width * 2;
-            }
-            &-gutter1p5x {
-                margin-bottom: $grid-gutter-width * 1.5;
-            }
-            &-gutter3x {
-                margin-bottom: $grid-gutter-width * 3;
+            @include guttergapclass('margin-bottom');
+
+            &b{
+                @include baselinegapclass('margin-bottom');
             }
         }
         &r {
-            &-gutter {
-                margin-right: $grid-gutter-width;
-            }
-            &-gutter0p5x {
-                margin-right: $grid-gutter-width * .5;
-            }
-            &-gutter2x {
-                margin-right: $grid-gutter-width * 2;
-            }
-            &-gutter1p5x {
-                margin-right: $grid-gutter-width * 1.5;
-            }
-            &-gutter3x {
-                margin-right: $grid-gutter-width * 3;
+            @include guttergapclass('margin-right');
+
+            &b{
+                @include baselinegapclass('margin-right');
             }
         }
     }
@@ -86,55 +52,18 @@
         &0 {
             padding: 0;
         }
-        &t {
-            &-gutter {
-                padding-top: $grid-gutter-width;
-            }
-            &-gutter0p5x {
-                padding-top: $grid-gutter-width * .5;
-            }
-            &-gutter2x {
-                padding-top: $grid-gutter-width * 2;
-            }
-            &-gutter1p5x {
-                padding-top: $grid-gutter-width * 1.5;
-            }
-            &-gutter3x {
-                padding-top: $grid-gutter-width * 3;
-            }
-        }
         &b {
-            &-gutter {
-                padding-bottom: $grid-gutter-width;
-            }
-            &-gutter0p5x {
-                padding-bottom: $grid-gutter-width * .5;
-            }
-            &-gutter2x {
-                padding-bottom: $grid-gutter-width * 2;
-            }
-            &-gutter1p5x {
-                padding-bottom: $grid-gutter-width * 1.5;
-            }
-            &-gutter3x {
-                padding-bottom: $grid-gutter-width * 3;
+            @include guttergapclass('padding-bottom');
+
+            &b{
+                @include baselinegapclass('padding-bottom');
             }
         }
         &r {
-            &-gutter {
-                padding-right: $grid-gutter-width;
-            }
-            &-gutter0p5x {
-                padding-right: $grid-gutter-width * .5;
-            }
-            &-gutter2x {
-                padding-right: $grid-gutter-width * 2;
-            }
-            &-gutter1p5x {
-                padding-right: $grid-gutter-width * 1.5;
-            }
-            &-gutter3x {
-                padding-right: $grid-gutter-width * 3;
+            @include guttergapclass('padding-right');
+
+            &b{
+                @include baselinegapclass('padding-right');
             }
         }
     }
@@ -164,6 +93,9 @@
     }
     // Display
     &-d {
+        &f{
+            display: flex;
+        }
         &tb {
             display: table;
             &--fixed {
@@ -241,11 +173,10 @@
     }
     // Font Weight
     &-fw {
-        &b {
-            font-weight: bold;
-        }
-        &n {
-            font-weight: normal;
+        @each $weight in (300, 400, 700){
+            &#{$weight}{
+                font-weight: $weight;
+            }
         }
     }
 
@@ -273,3 +204,4 @@
         }
     }
 }
+/* crit:end */

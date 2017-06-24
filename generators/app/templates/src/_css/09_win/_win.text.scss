@@ -1,9 +1,1 @@
-.w{
-	&-text{
-		@each $c, $hex in $colors{
-			&-#{$c}{
-				color: $hex !important;
-			}
-		}
-	}
-}
+// where rules with !important belong to

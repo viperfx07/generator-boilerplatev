@@ -1,0 +1,13 @@
+.bootstrap-select .dropdown-toggle:focus {
+  outline: thin dotted #333333 !important;
+  outline: 5px auto -webkit-focus-ring-color !important;
+  outline-offset: -2px;
+}
+.bootstrap-select.btn-group.disabled,.bootstrap-select.btn-group>.disabled {
+    cursor: not-allowed;
+    opacity: .7;
+}
+.bootstrap-select.btn-group.disabled:focus,
+.bootstrap-select.btn-group > .disabled:focus {
+  outline: none !important;
+}
