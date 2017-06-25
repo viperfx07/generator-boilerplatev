@@ -56,19 +56,31 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                 }
             }<% } %>
             ]
-        }
+        },
+        plugins: [
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                minChunks: function(module, count) {
+                    return module.context && module.context.indexOf("node_modules") !== -1;
+                }
+            }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: "manifest",
+                minChunks: Infinity
+            }),
+        ]
     };
 
 
     if (args.production && args.production !== 'dev') {
         webpackSettings.devtool = 'source-map';
         webpackSettings.output.filename = config.entries.js;
-        webpackSettings.plugins = [
+        webpackSettings.plugins.push(
             new webpack.optimize.UglifyJsPlugin({
                 minimize: true,
                 sourceMap: true
             })
-        ];
+        );
     }
 
     gulp.task('webpack-ori', () => {
