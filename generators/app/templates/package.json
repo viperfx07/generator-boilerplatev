@@ -11,10 +11,10 @@
     "gulp-imagemin": "latest",
     "gulp-pug": "latest",
     "gulp-watch": "latest",
-    "pug": "latest",
-    "pug-include-glob": "latest",
+    "imagemin-jpegoptim": "latest",
     "imagemin-pngquant": "latest",
-    "imagemin-svgo": "latest"
+    "pug": "latest",
+    "pug-include-glob": "latest"
   },
   "//": "CUSTOM CONFIGURATION",
   "config": {
@@ -75,6 +75,7 @@
     "jquery-match-height": "latest",
     "json5": "latest",
     "lodash": "latest",
+    "name-all-modules-plugin": "latest",
     "postcss-assets": "latest",
     "postcss-critical-split": "latest",
     "postcss-pxtorem": "latest",

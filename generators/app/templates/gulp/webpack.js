@@ -3,6 +3,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
+import NameAllModulesPlugin from 'name-all-modules-plugin';
 
 export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs) {
     let assetsJs = path.join(dirs.assets, dirs.scripts.replace(/^_/, ''), '/');
@@ -58,6 +59,15 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
             ]
         },
         plugins: [
+            // This will keep the vendor chunk hash correct
+            // https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
+            new webpack.NamedModulesPlugin(),
+            new webpack.NamedChunksPlugin((chunk) => {
+                if (chunk.name) {
+                    return chunk.name;
+                }
+                return chunk.modules.map(m => path.relative(m.context, m.request)).join("_");
+            }),
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'vendor',
                 minChunks: function(module, count) {
@@ -68,6 +78,11 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                 name: "manifest",
                 minChunks: Infinity
             }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: "manifest",
+                minChunks: Infinity
+            }),
+            new NameAllModulesPlugin()
         ]
     };
 
