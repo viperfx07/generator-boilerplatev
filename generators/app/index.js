@@ -3,13 +3,18 @@
 var Generator = require('yeoman-generator');
 var underscore = require('underscore.string');
 var path = require('path');
+var updateNotifier = require('update-notifier');
+var pkg = require('../../package.json');
 require('colors');
-var pkg;
+
 
 module.exports = class extends Generator {
-	initializing(){
-		pkg = (this.fs.readJSON(path.join(__dirname, '../../package.json')));
-	}
+    initializing(){
+        updateNotifier({
+            pkg:pkg,
+            updateCheckInterval: 0
+        }).notify();
+    }
     prompting() {
     	this.log('----------------------------------------------------'.green);
     	this.log('    --------------------------------------------  '.cyan);
