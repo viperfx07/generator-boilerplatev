@@ -14,8 +14,8 @@ import serial from 'run-sequence';
 export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs) {
     let entries = config.entries;
     let dest = path.join(taskTarget, dirs.assets, dirs.styles.replace(/^_/, ''));
-
     let taskDir = path.join(taskTarget);
+    let spriteDest = path.join(taskTarget, dirs.assets, dirs.images.replace(/^_/, ''));
     let critCssPath = path.join(dest, 'critical.css');
 
     const sassTask = (isCritical) => {
@@ -30,7 +30,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                     path.join(dirs.source, dirs.styles),
                     path.join(dirs.source, dirs.modules), <% if (cssFramework == 'bootstrap') { %>
                     'node_modules/bootstrap-sass/assets/stylesheets'<% } %><% if (cssFramework == 'foundation') { %>
-                    'node_modules/foundation-sites/scss'<% } %>, 
+                    'node_modules/foundation-sites/scss'<% } %>,
                 ]
             }).on('error', plugins.sass.logError))
             .pipe(plugins.postcss([
@@ -38,19 +38,16 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                 rucksack({ reporter: true }),
                 pxtorem({ replace: false }),
                 assets({
-                    loadPaths: [path.join(dirs.source, dirs.images)]
+                    loadPaths: [spriteDest]
                 }),
+                // Use spriteurl function to get the correct url
+                // Note: the sprite.png needs to be minified/optimized
                 sprites({
                     stylesheetPath: dest,
-                    spritePath: path.join(taskTarget, dirs.assets, 'img'),
-                    filterBy: function(image) {
-                        // Allow only png files
-                        if (!/\.(png|jpg|bmp|gif|jpeg)$/.test(image.url)) {
-                            return Promise.reject();
-                        }
-
-                        return Promise.resolve();
-                    }
+                    spritePath: spriteDest,
+                    basePath: taskTarget,
+                    filterBy: (image) => (!/\.png$/.test(image.url)) ? Promise.reject() : Promise.resolve(),
+                    verbose: true,
                 }),
                 isCritical ? criticalCSS({
                     blockTag: 'crit',
@@ -122,7 +119,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
     gulp.task('sass', () => {
         serial('clone-main', ['sass-rest', 'sass-critical'], function(){
             gulp.start('inline-critical');
-            
+
             if(!args.production){
                 gulp.start('copy_otherWWW');
             }

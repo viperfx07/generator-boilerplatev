@@ -1,0 +1,3 @@
+@function spriteurl($file){
+	@return url('/assets/img/sprite/' + $file);
+}
