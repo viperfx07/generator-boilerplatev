@@ -1,6 +1,7 @@
 'use strict';
 
 import path from 'path';
+import serial from 'run-sequence';
 
 export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs) {
   // Watch task
@@ -20,14 +21,14 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
       // Use gulp-watch plugins to recognized new files.
       // there's a bug on Windows when using gulp.watch
      plugins.watch(
-        path.join(dirs.source, dirs.fonts, '**/*.{svg,ttf,eot,woff,woff2}'), 
+        path.join(dirs.source, dirs.fonts, '**/*.{svg,ttf,eot,woff,woff2}'),
         () => gulp.start('fonts'));
 
       // Icon font
       gulp.watch([
         path.join(dirs.source, dirs.icons, '**/*.svg'),
         path.join(dirs.source, dirs.styles, '_generic_icons_template.scss')
-      ], ['iconfont', 'fonts', 'sass']);
+      ], ()=>{ serial(['iconfont', 'fonts'], 'sass'); });
 
       // Pug Templates
       gulp.watch([
