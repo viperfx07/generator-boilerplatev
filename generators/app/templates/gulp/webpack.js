@@ -78,10 +78,6 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                 name: "manifest",
                 minChunks: Infinity
             }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: "manifest",
-                minChunks: Infinity
-            }),
             new NameAllModulesPlugin()
         ]
     };
@@ -89,7 +85,6 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 
     if (args.production && args.production !== 'dev') {
         webpackSettings.devtool = 'source-map';
-        webpackSettings.output.filename = config.entries.js;
         webpackSettings.plugins.push(
             new webpack.optimize.UglifyJsPlugin({
                 minimize: true,
