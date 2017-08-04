@@ -12,7 +12,7 @@
     "url": "git://github.com/viperfx07/generator-boilerplatev.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "istanbul cover node_modules/mocha/bin/_mocha -- tests/*.js --reporter list --timeout 300000 && rm -rf ./coverage"
   },
   "keywords": [
     "boilerplatev",
@@ -27,5 +27,10 @@
     "underscore.string": "^3.3.4",
     "update-notifier": "^2.2.0",
     "yeoman-generator": "^1.1.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "mocha": "^3.5.0",
+    "yeoman-test": "^1.7.0"
   }
 }

@@ -39,14 +39,12 @@ const prodTasks = [
 // This will grab all js in the `gulp` directory
 // in order to load all gulp tasks
 wrench.readdirSyncRecursive('./gulp').filter((file) => {
-  return (/\.(js)$/i).test(file);
-}).map(function(file) {
-  let task = file.split('.js')[0];
-  if(args.production && prodTasks.indexOf(task) >= 0){
-    require('./gulp/' + file)(gulp, plugins, args, config, taskTarget, browserSync, dirs, otherWWW);
-  } else{
-    require('./gulp/' + file)(gulp, plugins, args, config, taskTarget, browserSync, dirs, otherWWW);
-  }
+	const isJs = (/\.(js)$/i).test(file);
+	if(args.production)
+		return isJs && prodTasks.includes(file.split('.js')[0]);
+	return isJs;
+}).map((file) => {
+	require('./gulp/' + file)(gulp, plugins, args, config, taskTarget, browserSync, dirs, otherWWW);
 });
 
 // Default task

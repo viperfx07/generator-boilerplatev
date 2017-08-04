@@ -24,7 +24,7 @@
     "baseUrl": "./",
     "directories": {
       "source": "src",
-      "destination": "./",
+      "destination": "www",
       "otherWWW": [],
       "temporary": "tmp",
       "//": "Directories relative to `source` directory",
