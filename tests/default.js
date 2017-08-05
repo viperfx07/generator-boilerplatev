@@ -1,4 +1,5 @@
 var helpers = require('yeoman-test');
+var yeoman = require('yeoman-generator');
 var path = require('path');
 var exec = require('child_process').exec;
 var gulp = require('gulp');
