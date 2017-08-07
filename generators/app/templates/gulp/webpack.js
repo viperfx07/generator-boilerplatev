@@ -102,8 +102,6 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
     });
 
     gulp.task('webpack', ['webpack-ori'], function(){
-        if(!args.production){
-            gulp.start('copy_otherWWW');
-        }
+		gulp.start('copy_otherWWW');
     });
 }

@@ -120,8 +120,8 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
         serial('clone-main', ['sass-rest', 'sass-critical'], function(){
             if(!args.production){
             	gulp.start('inline-critical');
-                gulp.start('copy_otherWWW');
             }
+			gulp.start('copy_otherWWW');
         });
     });
 

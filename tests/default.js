@@ -46,19 +46,20 @@ describe('generator-boilerplatev:app', function(){
                             }
                         })
                         .on('close', function(){
-                            console.log('close gullp')
+                            console.log('close gullp');
+                            done();
                         })
                         .on('error', function(){
                             console.log('error')
                         })
                         .on('exit', function(){
                             console.log('exit gulp');
-                            done();
+                            
                         })
                     });
                 });
         })
-        it('generates and tries to build for production', function(done){
+        it('generates and tries to build for production', function(){
             assert.equal(hasError, 0);
         });
     })
