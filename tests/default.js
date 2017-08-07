@@ -24,8 +24,8 @@ describe('generator-boilerplatev:app', function(){
                     tmpDir = dir;
                 })
                 .on('end', function(){
-                    console.log('cd ' + tmpDir + ' && yarn --production');
-                    exec('cd ' + tmpDir + ' && yarn --production', function(error, stdout, stderr){
+                    console.log('cd ' + tmpDir + ' && yarn');
+                    exec('cd ' + tmpDir + ' && yarn', function(error, stdout, stderr){
                         if(!!error){
                             console.log(error);
                             hasError = 1;
