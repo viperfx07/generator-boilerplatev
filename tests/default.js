@@ -22,11 +22,10 @@ describe('generator-boilerplatev:app', function(){
                 .inTmpDir(function(dir){
                     console.log(dir);
                     tmpDir = dir;
-                    
                 })
                 .on('end', function(){
-                    console.log('yarn --production --modules-directory ' + tmpDir);
-                    exec('yarn --production --modules-directory ' + tmpDir, function(error, stdout, stderr){
+                    console.log('yarn --production --modules-folder ' + tmpDir + '/node_modules/');
+                    exec('yarn --production --modules-folder ' + tmpDir + '/node_modules/', function(error, stdout, stderr){
                         if(!!error){
                             console.log(error);
                             hasError = 1;
@@ -36,6 +35,7 @@ describe('generator-boilerplatev:app', function(){
                         }
                     })
                     .on('exit', function(){
+                        console.log('gulp --production=dev --gulpfile ' + path.join(tmpDir, 'gulpfile.babel.js'));
                         exec('gulp --production=dev --gulpfile ' + path.join(tmpDir, 'gulpfile.babel.js'), function(error, stdout, stderr){
                             if(!!error){
                                 console.log(error);
