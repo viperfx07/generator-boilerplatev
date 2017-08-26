@@ -18,7 +18,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 
 			//filename of the main app file
 			filename: '[name].js',
-			chunkFilename: '[name].js'
+			chunkFilename: '[name].js?v=[chunkhash]'
 		},
 		externals: {
 			"jquery": "jQuery"
