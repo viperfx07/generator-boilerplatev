@@ -48,6 +48,7 @@
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.4.1",
+    "babel-minify-webpack-plugin": "^0.2.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.22.0", <% if (cssFramework == 'bootstrap') { %>
     "bootstrap-sass": "latest", <% } %>
