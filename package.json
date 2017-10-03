@@ -1,6 +1,6 @@
 {
   "name": "generator-boilerplatev",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Scaffolds out a front-end boilerplate based on Boilerplatev",
   "main": "index.js",
   "homepage": "https://github.com/viperfx07/generator-boilerplatev",
