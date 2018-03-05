@@ -22,10 +22,10 @@ html.no-js
 	head
 		meta(charset='utf-8')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		
+
 		meta(content="#",name="description")
 		meta(content="#4285f4", name="theme-color")
-		
+
 		//-# Mobile Viewport Scaling
 		meta(content="True",name="HandheldFriendly")
 		meta(content="320",name="MobileOptimized")
@@ -33,16 +33,15 @@ html.no-js
 		meta(content="no",name="user-scalable")
 		//-#
 
-		meta(name="dns-prefetch", content="https://fonts.googleapis.com/")
+		meta(name="dns-prefetch", content="https://cdn.jsdelivr.net/")
 		meta(name="dns-prefetch", content="https://cdn.polyfill.io/")
-		meta(name="dns-prefetch", content="https://ajax.googleapis.com/")
 
 		title <%= _.titleize(projectName) %>
-		
+
 		//- Icons
 		link(rel='icon', type="image/x-icon", href='/favicon.ico')
 		link(rel='apple-touch-icon', href="assets/apple-touch-icon.png")
-		
+
 		//- CSS
 		// Critical CSS
 		// TODO: Critical CSS needs to be
@@ -70,15 +69,15 @@ html.no-js
 		footer.footer
 			block footer
 				include ../_partials/footer.pug
-		
-		script(src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,matchMedia,modernizr:placeholder")
-		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
-		<% if(vue){%>script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js")<%}%>
-		
+
+		script(defer src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,matchMedia,modernizr:placeholder,Array.prototype.includes")
+		script(defer src="https://cdn.jsdelivr.net/combine/npm/jquery@3/dist/jquery.min.js,npm/react@15.6.1/dist/react.js,npm/react-dom@15.6.1/dist/react-dom.js,npm/prop-types@15.5.10/prop-types.min.js,npm/mobx@3.3.0/lib/mobx.umd.min.js,npm/mobx-react@4.3.2/index.min.js,npm/jquery-validation@1.17.0/dist/jquery.validate.min.js,npm/jquery-validation-unobtrusive@3.2.6/jquery.validate.unobtrusive.min.js")
+		<% if(vue){%>script(src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js")<%}%>
+
 		//- how to make it read the arguments
-		script(src= baseUrl + 'assets/js/manifest.js')
-		script(src= baseUrl + 'assets/js/vendor.js')
-		script(src= baseUrl + 'assets/js/main.js')
+		script(defer src= baseUrl + 'assets/js/manifest.js')
+		script(defer src= baseUrl + 'assets/js/vendor.js')
+		script(defer src= baseUrl + 'assets/js/main.js')
 		//- Google Analytics: change UA-XXXXX-X to be your site's ID.
 		//-
 			script

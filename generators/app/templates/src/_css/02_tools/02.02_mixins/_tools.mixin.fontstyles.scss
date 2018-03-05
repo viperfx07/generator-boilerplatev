@@ -1,0 +1,73 @@
+// generate font-size and line-height based on line-height in pixel
+@mixin fzlh($fz, $lh){
+	font-size: $fz;
+	line-height: ($lh / $fz);
+}
+
+@mixin fs6 {
+	$font-size: 60px;
+	font-weight: 900;
+	@include fzlh($font-size, 66px);
+}
+@mixin fs5{
+	$font-size: 48px;
+	font-weight: 900;
+	@include fzlh($font-size, 54px);
+}
+@mixin fs4{
+	$font-size: 30px;
+	font-weight: 900;
+	@include fzlh($font-size, 36px);
+}
+@mixin fs3{
+	$font-size: 20px;
+	font-weight: 700;
+	@include fzlh($font-size, 24px);
+}
+
+@mixin fs2{
+	$font-size: 18px;
+	font-weight: 700;
+	@include fzlh($font-size, 24px);
+}
+@mixin fs1{
+	$font-size: 16px;
+	font-weight: 700;
+	@include fzlh($font-size, 24px);
+}
+
+@mixin fsblockquote{
+	$font-size: 23px;
+	font-style: italic;
+	@include fzlh($font-size, 36px);
+}
+
+@mixin fslead{
+	$font-size: 21px;
+	font-weight: 300;
+	@include fzlh($font-size, 30px);
+}
+
+@mixin fsbodylarge{
+	$font-size: 17px;
+	@include fzlh($font-size, 30px);
+}
+
+@mixin fssmall{
+	$font-size: 12px;
+	@include fzlh($font-size, 18px);
+}
+
+@mixin fsbtnlarge{
+	$font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	@include fzlh($font-size, 24px);
+}
+
+@mixin fsbtnsmall{
+	$font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	@include fzlh($font-size, 18px);
+}

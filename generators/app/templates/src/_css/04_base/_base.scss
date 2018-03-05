@@ -16,11 +16,20 @@
     text-shadow: none;
 }
 
+*:focus{
+	outline: 0;
+}
+
 /* crit:start */
 html{
 	font-size: 100%;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	-ms-overflow-style: scrollbar;
+}
+
+html, body{
+	height: 100%;
 }
 
 fieldset{
@@ -29,7 +38,92 @@ fieldset{
 	border: 0;
 }
 
-input[type=search]{
-	box-sizing: border-box;
+input{
+	border-radius: 0;
+	/* crit */
+
+	&[type=search]{
+		box-sizing: border-box;
+	}
+
+	&:invalid{
+		// remove red border on invalid input on mozilla
+		box-shadow: none;
+		/* crit */
+	}
+
+	&::placeholder{
+		color: rgba($text, .8);
+		/* crit */
+	}
 }
+
+table {
+	width: 100%;
+
+	td, th{
+		padding: 15px;
+
+		&:first-child{
+			padding-left: 0;
+		}
+	}
+
+	th{
+		color: $primary60;
+		text-align: left;
+	}
+
+	tr {
+		border-bottom: 1px solid $border;
+	}
+
+	thead {
+		tr{
+			border-bottom: 3px solid $primary60;
+		}
+	}
+}
+
+
+
+input:not([type="checkbox"]):not([type="radio"]),
+select, textarea{
+	// Prevent ios default box shadow and radius
+	appearance: none;
+	border-radius: 0;
+	display: block;
+	padding: 11px 18px;
+	width: 100%;
+	background-color: $lightestbg;
+	border: 1px solid $border;
+
+	&:disabled{
+		opacity: .5;
+	}
+
+	&:focus{
+		box-shadow: 0 0 10px 0 rgba(204, 218, 225, 0.7);
+		background-color: #fff;
+	}
+}
+
+label{
+	@include fssmall;
+	font-weight: 700;
+}
+
+select{
+	border-radius: 0;
+	background: #fff url('/static/images/chevron-down.svg') calc(100% - 16px) 50% no-repeat;
+	background-size: 12px auto;
+	&::-ms-expand {
+		display: none;
+	}
+}
+
+textarea{
+	min-height: 300px;
+}
+
 /* crit:end */

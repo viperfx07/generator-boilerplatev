@@ -35,21 +35,33 @@
         &--4by3{
             padding-bottom: 75%;
         }
+	}
+
+	// {{ .u-table-responsive }}
+    &-table-responsive {
+        overflow-x: auto;
+        min-height: 0.01%; // Workaround for IE9 bug (see https://github.com/twbs/bootstrap/issues/14837)
+        @include mq(xs){
+            width: 100%;
+            margin-bottom: ($line-height-computed * 0.75);
+            overflow-y: hidden;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
     }
 
-    // Reset Button Style
-    &-btn-unstyled {
-        @include btn-unstyled;
+	&-vertical-center {
+        @include vertical-center;
+        /* crit */
     }
-    // Reset List/ul Style
-    &-list-unstyled {
-        @include u-list-unstyled;
+    &-absolute-center {
+        @include absolute-center;
+        /* crit */
+    }
+    &-horizontal-center {
+        @include horizontal-center;
+        /* crit */
     }
 
-    &-input-unstyled {
-        @include input-unstyled;
-    }
-    
     // Ellipsis
     &-ellipsis {
         @include ellipsis;

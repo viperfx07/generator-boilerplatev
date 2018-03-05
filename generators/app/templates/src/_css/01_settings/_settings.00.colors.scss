@@ -1,13 +1,32 @@
 //used by m-color, m-bgcolor, f-color(), f-bgcolor()
-$colors: (
-    'primary': #232c2e,
-    'secondary': #232c2e,
-);
+
 
 //If using Brackets and SassHints
 //This will be useful, to quickly find the right variable for the color you need
 //Don't need to uncomment the color variables. SassHints can still find the variables even if it's commented
 
-$primary: #232c2e;
-$secondary: #232c2e;
-$border: #232c2e;
+$primary: #002031;
+$primary90: #002e46;
+$primary80: #003652;
+$primary60: #00476b;
+$primary50: #276381;
+$primary20: #b3c8d2;
+$highlight: #f37121;
+$text: #323232;
+$border: #ccdae1;
+$lightbg: #e6ecf0;
+$lightestbg: #f5f7f9;
+
+$colors: (
+    'primary': $primary,
+    'primary90': $primary90,
+    'primary60': $primary60,
+    'primary50': $primary50,
+    'highlight': $highlight,
+	'text': $text,
+	'border': $border,
+	'lightbg': $lightbg,
+	'lightestbg': $lightestbg,
+	'fff': #fff,
+	'transparent': transparent,
+);

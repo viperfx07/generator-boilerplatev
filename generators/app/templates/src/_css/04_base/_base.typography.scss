@@ -1,23 +1,31 @@
-// Setup file size in settings.bootstrap.scss
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6
-{
-
+h1,h2,h3,h4,h5,h6{
+	margin: 0;
 }
 
+// Mixin are from _tools.mixin.fontstyles.scss
+.b-fs1{ @include fs1; }
+.b-fs2{ @include fs2; }
+.b-fs3{ @include fs3; }
+.b-fs4{ @include fs4; }
+.b-fs4{ @include fs4; }
+.b-fs5{ @include fs5; }
+.b-fs6{ @include fs6;}
+.b-fsbodylarge{ @include fsbodylarge; }
+.b-fsbtnsmall{ @include fsbtnsmall; }
+.b-fsblockquote{ @include fsblockquote; }
 
 p{
-	margin-bottom: 1.5rem;
+	margin-bottom: 30px;
+
+	&:empty{
+		display: none;
+	}
 }
 
-a{
-
-}
-
-.lead, .b-lead{
-
+.lead{
+	@include fslead;
 }
 
 small, .small{
-
+	@include fssmall;
 }

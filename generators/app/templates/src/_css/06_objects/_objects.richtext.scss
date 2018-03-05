@@ -1,6 +1,39 @@
 .o-richtext{
-	> *:last-child{
+	> *:last-child:not(.lead):not(.b-lead){
 		margin-bottom: 0;
 		padding-bottom: 0;
+	}
+
+	h1,h2,h3,h4,h5,h6{
+		color: $primary90;
+		margin-bottom: 12px;
+		&:not(:first-child){
+			margin-top: 12px;
+		}
+	}
+
+	ul,	ol {
+		padding-left: 0;
+		margin-bottom: 30px;
+	}
+
+	ul {
+		list-style: none;
+		li {
+			position: relative;
+			padding-left: 13px;
+			&:before {
+				@include vertical-center;
+				content: '';
+				width: 4px;
+				height: 4px;
+				background-color: #000;
+				left: 0;
+			}
+		}
+	}
+
+	a{
+		text-decoration: underline;
 	}
 }

@@ -1,5 +1,5 @@
 'use strict';
-import mh from 'jquery-match-height';
+import 'jquery-match-height';
 import JSON5 from 'json5';
 
 //////////////////
@@ -9,11 +9,11 @@ import JSON5 from 'json5';
 /**
  * Standard Match Height with some customisation
  * IMPORTANT: don't use data-mh
- * 
+ *
  * 1. It can be grouped using data-mh-group, same as data-mh
  * 2. but can also set the options using data attribute as well i.e. data-mh-options
- * 
- * data-mh-group is different from data-mh data-mh can be used natively straight from matchHeight 
+ *
+ * data-mh-group is different from data-mh data-mh can be used natively straight from matchHeight
  * data-mh-group (require data-mh-options if needed) should be used like data-mh-group='groupName' that will be used as a selector
  * data-mh-options will be used for the options of the match height
  */

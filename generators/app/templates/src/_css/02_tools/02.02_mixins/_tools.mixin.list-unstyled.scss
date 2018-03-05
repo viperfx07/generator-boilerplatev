@@ -1,5 +1,5 @@
 // list-unstyled mixin is used by bootstrap, so rename it to u-list-unstyled
-@mixin u-list-unstyled{
+@mixin list-unstyled{
 	list-style-type: none;
     margin: 0;
     padding: 0;
