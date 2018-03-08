@@ -21,7 +21,12 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 			chunkFilename: '[name].js?v=[chunkhash]'
 		},
 		externals: {
-			"jquery": "jQuery"
+			"jquery": "jQuery",
+			'react': 'React',
+			'react-dom': 'ReactDOM',
+			'prop-types': 'PropTypes',
+			'mobx': 'mobx',
+			'mobx-react': 'mobxReact',
 		},
 		module: {
 			rules: [{
@@ -83,12 +88,28 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 				name: "manifest",
 				minChunks: Infinity
 			}),
-			new NameAllModulesPlugin(),
-			new MinifyJsPlugin()
+			new NameAllModulesPlugin()
 		]
 	};
 
 	gulp.task('webpack-ori', () => {
+		if(args.production){
+			// When mapbox gl is minified, there's an error
+			// Instead of using babel-minify-webpack-plugin, use UglifyJsPlugin
+			// https://github.com/mapbox/mapbox-gl-js/issues/4359#issuecomment-288001933
+
+			//
+			// The workaround:
+			//
+			webpackSettings.plugins.push(
+
+				new MinifyJsPlugin({
+					builtIns: false,
+				}, {
+					comments: false
+				})
+			);
+		}
 		return gulp.src(path.join(dirs.source, dirs.scripts, config.entries.js))
 			.pipe(plugins.plumber())
 			.pipe(webpackStream(webpackSettings, webpack))
