@@ -58,7 +58,8 @@
 	"babel-preset-react": "^6.24.1",
 	"babel-preset-stage-1": "^6.24.1", <% if (cssFramework == 'bootstrap') { %>
     "bootstrap-sass": "latest", <% } %>
-    "bootstrap-select": "latest",<% if (cssFramework == 'foundation') { %>
+	"bootstrap-select": "latest",
+	"conditioner-core": "^2.3.1",<% if (cssFramework == 'foundation') { %>
     "foundation-sites": "latest",<% } %>
     "gulp": "latest",
     "gulp-changed": "latest",
@@ -78,7 +79,8 @@
     "gulp-sass": "latest",
     "gulp-sourcemaps": "latest",
     "gulp-util": "latest",
-    "hamburgers": "latest",
+	"hamburgers": "latest",
+	"headroom.js": "^0.9.4",
 	"jquery-match-height": "latest",
 	"jquery.scrollto": "^2.1.2",
 	"json5": "latest",

@@ -1,6 +1,7 @@
 import JSON5 from 'json5';
 
-export default function focuson($els){
+export default els =>{
+	const $els = $(els);
 	const _targetFocus = ($el, opt) =>{
         let $target;
         if(opt.targetInside){
@@ -16,7 +17,7 @@ export default function focuson($els){
 
 	$els.each((i, el) => {
 		let $this = $(el);
-		let opt = JSON5.parse($this.attr('data-focuson'));
+		let opt = JSON5.parse($this.attr('data-module-options'));
 		if(opt.on !== 'load'){
 			$this.on(opt.on || 'click', () =>{
 				setTimeout(()=> {

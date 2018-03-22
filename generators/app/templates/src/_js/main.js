@@ -34,11 +34,13 @@ import './custom_vendors/umbracoforms-conditions';
 
 
 // Don't know why babel doesn't transpile ssm. Changed to the minified one
+import * as conditioner from 'conditioner-core';
 import ssm from 'simplestatemanager/dist/ssm.min';
 import mh from 'jquery-match-height';
 import JSON5 from 'json5';
 
 import 'lazysizes/plugins/respimg/ls.respimg';
+import 'lazysizes/plugins/attrchange/ls.attrchange';
 import 'lazysizes/plugins/bgset/ls.bgset';
 import 'lazysizes/plugins/unveilhooks/ls.unveilhooks';
 import 'lazysizes';
@@ -63,15 +65,10 @@ import 'bootstrap-sass/assets/javascripts/bootstrap/dropdown';
 import 'bootstrap-sass/assets/javascripts/bootstrap/transition';
 import 'bootstrap-sass/assets/javascripts/bootstrap/tab';
 
-import Headroom from 'headroom.js';
-
 ////////////////
 // Utils      //
 ////////////////
-import vtoggle from './utils/vtoggle';
-import triggerer from './utils/triggerer';
-import scrollTo from './utils/scrollto';
-import HeaderUtil from './utils/HeaderUtil';
+import HeaderUtil from './modules/HeaderUtil';
 
 // Setting Webpack public path dynamically so that it loads the utils
 // from the folder where the main.js is located
@@ -79,20 +76,19 @@ var bundleSrc = $('[src$="/main.js"]').attr("src");
 __webpack_public_path__ = bundleSrc.substr(0, bundleSrc.lastIndexOf("/") + 1);
 
 $(() => {
-    /////////////////////////////
-    // Match Height Customized //
-    /////////////////////////////
-	require('./utils/custom-matchheight');
+	///////////////////////////////
+	// Dynamic Lazy Load Modules //
+	///////////////////////////////
+	conditioner.addPlugin({
+		// converts module aliases to paths
+		moduleSetName: name => `${name}`,
 
-	///////////
-	// Slick //
-	///////////
-	let $jsSlick = $('[data-slickjs]');
-	if ($jsSlick.length) {
-		require.ensure([], () => {
-			require('./utils/slicker')($jsSlick);
-		}, 'slicker');
-	}
+		// use default exports as constructor
+		moduleGetConstructor: module => module,
+
+		moduleImport: name => import(/* webpackMode: "lazy"*/ /* webpackChunkName: "[request]"*/ `./modules/${name}`)
+	});
+	conditioner.hydrate(document.documentElement);
 
 	//////////////////////
     // Responsive Table //
@@ -101,123 +97,6 @@ $(() => {
     if ($table.length) {
         $table.wrap('<div class="u-table-responsive">');
     }
-
-    //////////////////
-	// Init Toggler //
-	//////////////////
-	vtoggle($('[data-vtoggle]'));
-
-	///////////////
-	// Triggerer //
-	///////////////
-	triggerer($('[data-triggerer]'));
-
-	/////////////
-	// FocusOn //
-	/////////////
-	let $focusOn = $('[data-focuson]');
-	if ($focusOn.length) {
-		require.ensure([], () => {
-			require('./utils/FocusOn')($focusOn);
-		}, 'focuson');
-	}
-
-	////////////////
-	// Scroll To //
-	////////////////
-	scrollTo($('[data-scrollto]'));
-
-	//////////////
-	// Headroom //
-	//////////////
-	const setStickyHeight= (el, isReset)=>{
-		const $this = $(el);
-		const $parent = $this.closest('[data-sticky]');
-		if(isReset){
-			$parent.data('height', $parent.height())
-		}
-		$parent.css('height', isReset ? 'auto' : $parent.data('height'));
-	};
-	$('[data-headroom]').each(function(){
-		const $this = $(this);
-		const attr = $this.attr('data-headroom');
-
-		const defaultOptions = {
-			classes:{
-				pinned: "is-pinned",
-				unpinned: "is-unpinned",
-				top: "is-top",
-				notTop: "is-not-top",
-				top: "is-top",
-				bottom: "is-bottom",
-				notBottom: "is-not-bottom"
-			},
-			onTop(){
-				$(this.elem).removeClass('has-transition');
-				setStickyHeight(this.elem, true);
-			},
-			onNotTop(){
-				const $this = $(this.elem);
-				setStickyHeight(this.elem, false);
-				setTimeout(() => {
-					if(!$this.hasClass('has-transition')){
-						$this.addClass('has-transition');
-					}
-				}, 0);
-			}
-		};
-
-		const OPTS ={
-			"header": {...defaultOptions},
-			"product-quote": {...defaultOptions}
-		};
-
-		let attrs= attr ? JSON5.parse(attr) : {};
-		let opt = (attrs.key) ? {...OPTS[attrs.key], ...attrs} : {};
-
-		const headroom =  new Headroom(this, opt);
-		headroom.init();
-	});
-
-	////////////////////
-	// Magnific Popup //
-	////////////////////
-	const $magnificPopup = $("[data-magnificpopup]");
-	if($magnificPopup.length){
-		require.ensure([], function(){
-			require('magnific-popup');
-
-			const OPTS = {
-				"iframe": {
-					type: 'iframe',
-					iframe: {
-						patterns: {
-							youtu: {
-								index: 'youtu.be/',
-								id: function( url ) {
-									// Capture everything after the hostname, excluding possible querystrings.
-									var m = url.match( /^.+youtu.be\/([^?]+)/ );
-									if ( null !== m ) {
-										return m[1];
-									}
-									return null;
-								},
-								// Use the captured video ID in an embed URL.
-								// Add/remove querystrings as desired.
-								src: '//www.youtube.com/embed/%id%?autoplay=1&rel=0'
-							}
-						}
-					}
-				}
-			};
-
-			$magnificPopup.each(function(){
-				const $this = $(this);
-				const key = $this.attr('data-magnificpopup');
-				$this.magnificPopup(OPTS[key]);
-			})
-		}, 'magnificpopup');
-	}
 
 	////////////
 	// Header //

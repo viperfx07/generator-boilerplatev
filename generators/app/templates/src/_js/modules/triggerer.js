@@ -1,9 +1,10 @@
 import JSON5 from 'json5';
 
-export default function triggerer($els){
+export default function triggerer(els){
+	const $els = $(els);
 	$els.each(function(){
 		let $this = $(this);
-		let attr = $this.attr('data-triggerer');
+		let attr = $this.attr('data-module-options');
 		if(attr){
 			// opts
 			// opt.target = target (CSS string selector)

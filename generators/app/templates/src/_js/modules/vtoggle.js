@@ -1,8 +1,9 @@
 import JSON5 from 'json5';
-export default function vtoggle($els){
+export default function vtoggle(els){
+	const $els = $(els);
 	$els.each(function(){
 		let $this = $(this);
-		let { key, selfClass, class:cls, target, event:ev, transitionProperty, removeClass, isAddClass } = JSON5.parse($this.attr('data-vtoggle'));
+		let { key, selfClass, class:cls, target, event:ev, transitionProperty, removeClass, isAddClass } = JSON5.parse($this.attr('data-module-options'));
 
 		$this.on(ev || 'click', function() {
 			let $this = $(this);

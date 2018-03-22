@@ -1,7 +1,8 @@
 import JSON5 from 'json5';
 import 'slick-carousel';
 
-export default function slicker($els){
+export default els =>{
+	const $els = $(els);
 	if ($els.length) {
 		window.jsSlickOptions = {
 			'hero':{
@@ -24,8 +25,8 @@ export default function slicker($els){
 
 		$els.each(function() {
 			let $el = $(this);
-			const attr = $el.attr('data-slickjs');
-			const opts = (attr && attr != 'data-slickjs') ? JSON5.parse(attr) : {};
+			const attr = $el.attr('data-module-options');
+			const opts = (attr && attr != 'data-module-options') ? JSON5.parse(attr) : {};
 			const options = (opts && opts.key) ? { ...jsSlickOptions[opts.key], ...opts } : opts;
 			const genericSlideCounts = $el.children().length;
 

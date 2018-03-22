@@ -12,24 +12,43 @@ block content
 				p
 					| This is content
 					+icon('facebook')
-		.row-flex
-			.col-flex-xs-6(data-mh-group="mh-1" data-mh-options="{ property: 'min-height', nonFlexBrowserOnly: 1}")
+		.u-mbb8.row
+			.col-xs-6(data-module="matchheight" data-mh-group="mh1" data-module-options="{ property: 'min-height', nonFlexBrowserOnly: 0}")
 				.u-embed.u-embed--16by9
 					.u-embed__item.u-bgimg(style="background-image: url(http://lorempixel.com/400/300)")
 						.c-section__content
 							p De quibusdam ea incididunt. Veniam eu singulis, aute possumus fabulas neingeniis qui esse incurreret do illum excepteur laboris. Nisi coniunctione nescius noster pariatur. Eu possumus philosophari, non ut quae illum sunt. Labore incurreret ex cupidatat. Qui a eruditionem se si aut firmissimum.
-			.col-flex-xs-6(data-mh-group="mh-1" data-mh-options="{ property: 'min-height', nonFlexBrowserOnly: 1}")
+			.col-xs-6(data-module="matchheight" data-mh-group="mh1" data-module-options="{ property: 'min-height', nonFlexBrowserOnly: 0}")
 				.u-embed.u-embed--16by9
-					.u-embed__item.u-bgimg(style="background-image: url(http://lorempixel.com/500/300)")
+					.u-embed__item.u-bgimg(style="background-image: url(http://lorempixel.com/500/500)")
 						.c-section__content
 							p De quibusdam ea incididunt. Veniam eu singulis, aute possumus fabulas neingeniis qui esse incurreret do illum excepteur laboris. Nisi coniunctione nescius noster pariatur. Eu possumus philosophari, non ut quae illum sunt. Labore incurreret ex cupidatat. Qui a eruditionem se si aut firmissimum.
-			.col-flex-xs-6(data-mh-group="mh-1" data-mh-options="{ property: 'min-height', nonFlexBrowserOnly: 1}")
-				.u-embed.u-embed--16by9
-					.u-embed__item.u-bgimg(style="background-image: url(http://lorempixel.com/400/300)")
-						.c-section__content
-							p De quibusdam ea incididunt. Veniam eu singulis, aute possumus fabulas neingeniis qui esse incurreret do illum excepteur laboris. Nisi coniunctione nescius noster pariatur. Eu possumus philosophari, non ut quae illum sunt. Labore incurreret ex cupidatat. Qui a eruditionem se si aut firmissimum.
-			.col-flex-xs-6(data-mh-group="mh-1" data-mh-options="{ property: 'min-height', nonFlexBrowserOnly: 1}")
-				.u-embed.u-embed--16by9
-					.u-embed__item.u-bgimg(style="background-image: url(http://lorempixel.com/500/300)")
-						.c-section__content
-							p De quibusdam ea incididunt. Veniam eu singulis, aute possumus fabulas neingeniis qui esse incurreret do illum excepteur laboris. Nisi coniunctione nescius noster pariatur. Eu possumus philosophari, non ut quae illum sunt. Labore incurreret ex cupidatat. Qui a eruditionem se si aut firmissimum.
+
+		.u-mbb8.row-flex
+			.col-flex-xs-12
+				h2.u-mbb2 Slider Example
+				div.o-slide(data-module="slickjs" data-module-options="{ key: 'hero', slidesToShow: 3 }")
+					each item,index in [1,2,3,4,5,6]
+						.o-slide__item
+							img(src="http://lorempixel.com/400/300/?image="+ (1000+index))
+
+		.u-mbb8
+			h2.u-mbb2 Focus On Example
+			button#btn1(data-module="focuson" data-module-options="{ target: '#btn2'}") Button 1
+			button#btn2(data-module="focuson" data-module-options="{ target: '#btn1'}") Button 2
+
+		.u-mbb8
+			h2.u-mbb2 Triggerer Example
+			button#btn3(data-module="triggerer" data-module-options="{ target: '#btn1', triggerEvents: 'focus' }") Trigger Focus of Btn1
+
+		.u-mbb8
+			h2.u-mbb2 ScrollTo Example
+			button(data-module="scrollto" data-module-options="{ target: 0 }") Scroll to top
+
+		.u-mbb8
+			h2#toggle-title.u-mbb2 Toggle Example
+			button(data-module="vtoggle" data-module-options="{ target: '#toggle-title', class:'hide' }") Show/Hide "Toggle Example" title
+
+		.u-mbb8
+			h2.u-mbb2 Magnific Popup Example
+			a(href="https://youtu.be/dQw4w9WgXcQ", data-module="magnificpopup" data-module-options="{ key: 'iframe' }") Open Video
