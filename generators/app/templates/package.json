@@ -103,7 +103,6 @@
     "wrench": "latest"
   },
   "resolutions":{
-	  "webpack/**/webpack-sources": "1.0.1",
-	  "babel-minify-webpack-plugin/**/webpack-sources": "1.0.1"
+	  "webpack-sources": "1.0.1"
   }
 }
