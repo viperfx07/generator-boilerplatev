@@ -83,7 +83,7 @@
 	"headroom.js": "^0.9.4",
 	"jquery-match-height": "latest",
 	"jquery.scrollto": "^2.1.2",
-	"json5": "latest",
+	"json5": "^0.5.1",
 	"lazysizes": "^4.0.1",
 	"lodash": "latest",
 	"magnific-popup": "^1.1.0",
