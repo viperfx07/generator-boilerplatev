@@ -1,4 +1,5 @@
 import Headroom from 'headroom.js';
+import JSON5 from 'json5';
 
 export default els =>{
 	const $els = $(els)	;
