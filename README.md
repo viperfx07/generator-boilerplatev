@@ -1,4 +1,4 @@
-# BoilerplateV Generator [![Build Status](https://travis-ci.org/viperfx07/generator-boilerplatev.svg?branch=master)](https://travis-ci.org/viperfx07/generator-boilerplatev) [![npm version](https://badge.fury.io/js/generator-boilerplatev.svg)](https://badge.fury.io/js/generator-boilerplatev)
+# BoilerplateV Generator [![npm version](https://badge.fury.io/js/generator-boilerplatev.svg)](https://badge.fury.io/js/generator-boilerplatev)
 
 A generator to scaffold out the front end boilerplate using BoilerplateV. BoilerplateV itself is an extensive HTML5 framework for building robust web sites utilising [Pug](https://pugjs.org), SCSS/PostCSS with [Gulp](http://gulpjs.com). The boilerplate is based on [Yeogurt Generator](https://github.com/larsonjj/generator-yeogurt). The differences are:
 - Pre-selected HTML (Pug) and JS preprocessor (Webpack)
