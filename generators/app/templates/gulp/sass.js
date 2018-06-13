@@ -29,12 +29,12 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                 includePaths: [
                     path.join(dirs.source, dirs.styles),
                     path.join(dirs.source, dirs.modules), <% if (cssFramework == 'bootstrap') { %>
-                    'node_modules/bootstrap-sass/assets/stylesheets'<% } %><% if (cssFramework == 'foundation') { %>
+                    'node_modules/bootstrap/scss'<% } %><% if (cssFramework == 'foundation') { %>
                     'node_modules/foundation-sites/scss'<% } %>,
                 ]
             }).on('error', plugins.sass.logError))
             .pipe(plugins.postcss([
-                autoprefixer({ browsers: ['last 2 version', '> 5%', 'safari 5', 'ios >= 8', 'android 4', 'ie >= 9'] }),
+                autoprefixer({ browsers: ["last 1 major version", ">= 1%", "Chrome >= 45", "Firefox >= 38", "Edge >= 12", "Explorer >= 10", "iOS >= 9", "Safari >= 9", "Android >= 4.4", "Opera >= 30"] }),
                 rucksack({ reporter: true }),
                 pxtorem({ replace: false }),
                 assets({

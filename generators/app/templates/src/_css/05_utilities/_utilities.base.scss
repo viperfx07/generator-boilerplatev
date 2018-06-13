@@ -397,7 +397,7 @@
 	}
 
     @each $c,
-    $hex in $colors {
+    $hex in $theme-colors {
         // Background color
         &-bgc-#{$c} {
             background-color: $hex;

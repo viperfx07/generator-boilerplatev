@@ -32,7 +32,8 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 			rules: [{
 				test: /\.js$/,
 				loader: "babel-loader",
-				exclude: /node_modules/
+				// bootstrap and ssm needs a babel-loader to transpile es6
+				exclude: /node_modules(\/|\\)(?!(bootstrap|ssm)(\/|\\)).*/
 			}<% if(vue){ %>, {
 				test: /\.vue$/,
 				loader: 'vue-loader',
