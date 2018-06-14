@@ -1,0 +1,10 @@
+mixin module--accordion(title, data)
+	- data = data || site.data.moduleaccordion
+	section.u-ptb5.u-pbb5.c-module.c-module--accordion&attributes(attributes)
+		.container.c-module__container
+			if title
+				.u-mbb7.c-module__head
+					h2.c-module__title=title
+			.c-module__body
+				// give accordion an integer increment for several accordion possibility
+				+accordion("contentaccordion1", data)

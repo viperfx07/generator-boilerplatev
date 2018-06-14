@@ -16,17 +16,11 @@
         // Set default width to max column
         width: percentage(($grid-columns / $grid-columns));
         flex-basis: percentage(($grid-columns / $grid-columns));
-        max-width: percentage(($grid-columns / $grid-columns));
+		max-width: percentage(($grid-columns / $grid-columns));
+		/* crit */
 
         .lt-ie10 &{
             float: left;
-        }
-    
-        @if(global-variable-exists(lg-grid-gutter-width)){
-            @include mq(lg){
-                padding-left: ceil(($lg-grid-gutter-width / 2));
-                padding-right: floor(($lg-grid-gutter-width / 2));
-            }
         }
     }
 }
@@ -69,7 +63,9 @@
 // [converter] This is defined recursively in LESS, but Sass supports real loops
 @mixin loop-grid-flex-columns($columns, $class, $type) {
     @for $i from 0 through $columns {
-        @include calc-grid-flex-column($i, $class, $type);
+		/* crit:start */
+		@include calc-grid-flex-column($i, $class, $type);
+		/* crit:end */
     }
 }
 
@@ -161,29 +157,37 @@
     // Extra small grid
     //
     // Columns, offsets, pushes, and pulls for extra small devices like
-    // smartphones.
+	// smartphones.
+	/* crit:start */
     @include make-aligment(xs);
-    @include make-grid-flex(xs);
+	@include make-grid-flex(xs);
+	/* crit:end */
     // Small grid
     //
     // Columns, offsets, pushes, and pulls for the small device range, from phones
     // to tablets.
     @media (min-width: $screen-sm-min) {
-        @include make-aligment(sm);
+		/* crit:start */
+		@include make-aligment(sm);
+		/* crit:end */
         @include make-grid-flex(sm);
     }
     // Medium grid
     //
     // Columns, offsets, pushes, and pulls for the desktop device range.
     @media (min-width: $screen-md-min) {
-        @include make-aligment(md);
+		/* crit:start */
+		@include make-aligment(md);
+		/* crit:end */
         @include make-grid-flex(md);
     }
     // Large grid
     //
     // Columns, offsets, pushes, and pulls for the large desktop device range.
     @media (min-width: $screen-lg-min) {
-        @include make-aligment(lg);
+		/* crit:start */
+		@include make-aligment(lg);
+		/* crit:end */
         @include make-grid-flex(lg);
     }
 }

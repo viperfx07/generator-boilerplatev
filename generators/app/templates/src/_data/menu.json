@@ -1,4 +1,25 @@
-[
-	{"title": "Home", "href": "/", "icon": "facebook"},
-	{"title": "Client", "href": "/", "icon": "facebook"}
+[{
+		"text": "Who We Are",
+		"href": "content.html"
+	},
+	{
+		"text": "What We Do",
+		"href": "content.html"
+	},
+	{
+		"text": "Why Us",
+		"href": "content.html"
+	},
+	{
+		"text": "Our Network",
+		"href": "content.html"
+	},
+	{
+		"text": "Training",
+		"href": "training.html"
+	},
+	{
+		"text": "Contact",
+		"href": "contact.html"
+	}
 ]

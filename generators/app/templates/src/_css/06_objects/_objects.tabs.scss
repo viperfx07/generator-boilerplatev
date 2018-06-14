@@ -1,0 +1,133 @@
+.o-tabs {
+	$_this: &; // {{ .o-tabs__nav }}
+	// Settings
+	$tabnav-highlight-height: 3px;
+	$tabnav-highlight-color: #000;
+	$tabnav-highlight-bgcolor: grey;
+	$tabcontent-bgcolor: #eee;
+	$tabmedia-width: 356px;
+	&__nav {
+		// {{ .o-tabs__nav-link }}
+		&-link {
+			padding: 15px 18px;
+			/* crit */
+			transition: background-color .3s;
+			.active & {
+				background-color: $tabnav-highlight-bgcolor;
+			}
+			@include mq(xs) {
+				// container padding size
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+			#{$_this}--bordered & {
+				position: relative;
+				/* crit */
+			}
+			.active &:after {
+				content: none;
+				/* crit */
+			}
+		} // {{ .o-tabs__nav-item }}
+		&-item {
+			@include fzlh(15px, 24px);
+			transition: .3s;
+			border-left: 1px solid $border;
+			border-top: 1px solid $border;
+			position: relative;
+			/* crit */
+			&:after {
+				content: '';
+				border-bottom: 1px solid $border;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				/* crit */
+			}
+			&.active {
+				// Bug on FF, if bordered table-cell is position:relative,
+				// its z-index higher than the next table-cells
+				// so need to set this cell transparent
+				background-color: transparent;
+				position: relative;
+				border-bottom-color: transparent;
+				/* crit */
+				&:before {
+					content: '';
+					position: absolute;
+					top: -1px;
+					right: 0;
+					left: 0;
+					height: $tabnav-highlight-height;
+					background-color: $tabnav-highlight-color;
+					display: block;
+					/* crit */
+				}
+				&:first-child:before {
+					left: -1px;
+					/* crit */
+				}
+				&:first-child {
+					border-left-color: $tabcontent-bgcolor;
+				}
+				&:after {
+					content: none;
+				}
+				&:last-child:after {
+					content: '';
+					position: absolute 0 -1px 0 auto;
+					width: 1px;
+					background-color: $tabcontent-bgcolor;
+				}
+			}
+		}
+	} // {{ .o-tabs__pane }}
+	&__pane {
+		&:not(.active) {
+			display: none;
+		}
+	} // {{ .o-tabs__media }}
+	&__media {
+		width: $tabmedia-width;
+		@include mq(sm-max) {
+			width: auto;
+			display: block;
+			margin-bottom: 24px;
+		}
+	} // {{ .o-tabs__text }}
+	&__text {
+		@include mq(sm-max) {
+			display: block;
+		}
+		#{$_this}__media+& {
+			@include mq(md) {
+				padding-left: 10%;
+			}
+		}
+	} // {{ .o-tabs__img }}
+	&__img {
+		padding-bottom: percentage(282/421);
+	} // {{ .o-tabs__content }}
+	&__content {
+		// border: 1px solid $border;
+		border-top: 0;
+		background-color: $tabcontent-bgcolor;
+		/* crit */
+		@include mq(xs) {
+			// container padding size
+			padding-left: 20px;
+			padding-right: 20px;
+		} // {{ .o-tabs__content-table }}
+		&-table {
+			@include mq(sm-max) {
+				display: block;
+			}
+		}
+	}
+	&__btn {
+		&+& {
+			margin-top: 24px;
+		}
+	}
+}

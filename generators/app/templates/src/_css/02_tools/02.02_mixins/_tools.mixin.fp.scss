@@ -1,0 +1,11 @@
+@mixin fp($property, $min-size, $max-size, $min-vw, $max-vw) {
+	$u1: unit($min-vw);
+	$u2: unit($max-vw);
+	$u3: unit($min-size);
+	$u4: unit($max-size);
+	@if $u1==$u2 and $u1==$u3 and $u1==$u4 {
+		& {
+			#{$property}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+		}
+	}
+}

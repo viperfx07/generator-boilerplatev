@@ -3,7 +3,14 @@
     // Background image reset
     // no-repeat, centered, and cover size
     &-bgimg {
-        @include bgimg-with-ratio;
+		@include bgimg-with-ratio;
+		page-break-inside: avoid;
+
+		&__backup {
+			@media print {
+				opacity: 1;
+			}
+		}
     }
 
     // Same embed responsive as Boostrap's embed-responsive, but with BEM style syntax

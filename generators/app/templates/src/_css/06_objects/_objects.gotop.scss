@@ -1,0 +1,14 @@
+.o-gotop {
+	width: 56px;
+	height: 56px;
+	transition: .3s;
+	color: $text2;
+	&:hover,
+	&:focus {
+		background-color: darken($lightbg, 10%);
+		color: $text2;
+	}
+	&__icon {
+		line-height: 56px;
+	}
+}

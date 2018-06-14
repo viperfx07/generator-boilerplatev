@@ -1,0 +1,37 @@
+.o-btn {
+	@include btn;
+	position: relative;
+	/* crit */
+	transition: .3s;
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: $highlight;
+		opacity: 0;
+		transform: scale(0.5, 1) skew(-35deg);
+		transition: .2s
+	}
+	&:hover,
+	&:focus {
+		color: #fff;
+		&:before {
+			transform: none;
+			opacity: 1;
+		}
+	}
+	&--primary {
+		background-color: $primary;
+		color: #fff;
+		&:before {
+			background-color: darken($primary, 10%);
+		}
+		&:hover,
+		&:focus {
+			border-color: darken($primary, 10%);
+		}
+	}
+}

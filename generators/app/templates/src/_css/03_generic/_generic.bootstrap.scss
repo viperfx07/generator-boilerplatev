@@ -13,11 +13,12 @@
 // Core CSS
 @import "bootstrap/scaffolding";
 @import "bootstrap/type";
-/* crit:end */
+
 
 // @import "bootstrap/code";
 @include init-bootstrap-crit-grid;
 @include init-bootstrap-flex-grid;
+/* crit:end */
 
 @import "bootstrap/tables";
 // @import "bootstrap/forms";
