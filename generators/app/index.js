@@ -32,16 +32,6 @@ module.exports = class extends Generator {
             message: 'Project Name',
             default: this.appname // Default to current folder name
         }, {
-            type: 'list',
-            name: 'cssFramework',
-            message: 'What CSS Framework would you like to use?',
-            choices: ['bootstrap', 'foundation', 'none']
-        }, {
-            type: 'confirm',
-            name: 'vue',
-            message: 'Do you use VueJs?',
-            default: false
-        }, {
             type: 'confirm',
             name: 'useNotif',
             message: 'Do you want notification for Gulp process?',
@@ -55,7 +45,6 @@ module.exports = class extends Generator {
         ]).then((answers) => {
             this.projectName =  answers.name;
             this.cssFramework = answers.cssFramework;
-            this.vue = answers.vue;
             this.useNotif = answers.useNotif;
             this.skipInstall = answers.skipInstall;
 
@@ -65,7 +54,6 @@ module.exports = class extends Generator {
         var config = {
             projectName: this.projectName,
             cssFramework: this.cssFramework,
-            vue: this.vue,
             useNotif: this.useNotif,
             skipInstall: this.skipInstall,
             _ : underscore,

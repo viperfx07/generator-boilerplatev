@@ -1,0 +1,8 @@
+mixin module--social(title)
+	.u-c-fff.u-ptb5.u-pbb5.c-module.c-module--social&attributes(attributes)
+		.container.c-module__container
+			if title
+				.u-mbb3.c-module__head
+					h2.c-module__title=title
+			.c-module__body
+				div(data-module="socialstream" data-module-options="{ order: 'twitter, youtube', twitter:{ pageName: 'vaworldwide', label: 'Twitter' }, youtube: { playlistId: 'UUQYiOlQZ8UCc7PXdAFKO-Jw', 'label': 'YouTube', apiKey: 'AIzaSyBMTLAbXyATQT0sbB8OiemEaZfOyRU8nKU', isLazyLoad: false }  }")

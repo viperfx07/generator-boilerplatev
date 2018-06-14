@@ -69,6 +69,9 @@
             &0{
 				margin-top: 0;
 			}
+			&a {
+				margin-top: auto;
+			}
 
             &b{
                 @include baselinegapclass('margin-top');
@@ -77,6 +80,9 @@
 		&r {
             &0{
 				margin-right: 0;
+			}
+			&a {
+				margin-right: auto;
 			}
 
             &b{
@@ -87,6 +93,9 @@
             &0{
 				margin-bottom: 0;
 			}
+			&a {
+				margin-bottom: auto;
+			}
             &b{
                 @include baselinegapclass('margin-bottom');
             }
@@ -94,6 +103,9 @@
 		&l {
             &0{
 				margin-left: 0;
+			}
+			&a{
+				margin-left: auto;
 			}
 
             &b{
@@ -146,17 +158,33 @@
 	}
 
 	// Height
-	&-h100p{
-		height: 100%;
+	&-h100{
+		&p{
+			height: 100%;
+		}
+		&vh{
+			height: 100vh;
+		}
     }
 
     // Width 100%
-    &-w100p {
-        width: 100%;
+    &-w100 {
+		&p{
+			width: 100%;
+		}
 	}
 
 	&-maw100p{
 		max-width: 100%;
+	}
+
+	&-mah100{
+		&p{
+			max-height: 100%;
+		}
+		&vh{
+			max-height: 100vh;
+		}
 	}
 
     // Background color
@@ -338,9 +366,6 @@
 	}
 	// Flex
 	&-fx{
-		&ww{
-			flex-wrap: wrap;
-		}
 		&1{
 			flex: 1 1 auto;
 		}
@@ -358,6 +383,9 @@
 		}
 		&dc{
 			flex-direction: column;
+		}
+		&ww {
+			flex-wrap: wrap;
 		}
     }
 

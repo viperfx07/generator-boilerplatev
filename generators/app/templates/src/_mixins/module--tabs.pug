@@ -1,0 +1,40 @@
+mixin module--tabs(title, data)
+	- data = data || site.data.moduletabs
+	// Tabs become accordion on mobile
+	section.u-ptb5.u-pbb5.c-module.c-module--tabs&attributes(attributes)
+		.container.c-module__container
+			if title
+				.u-mbb7.c-module__head
+					h2.c-module__title=title
+			.c-module__body
+				.hidden-xs.o-tabs(id="tab1")
+					// Nav tabs
+					.u-ova
+						ul.u-list-unstyled.u-bdr.u-df.o-tabs__nav(role='tablist')
+							each item, i in data
+								li.u-fx100.u-df.u-fxdc.u-vam.u-bgc-fourthy60.u-c-text2.o-tabs__nav-item(role='presentation', class=i == 0 ? 'active' : '')
+									a.u-fx1.u-df.u-fxdc.center-xs.u-fw700.u-tdn.u-c-inherit.u-link-colorstay.u-tac.u-w100p.u-link-tdn.o-tabs__nav-link(href='#tab1-pane' + i, aria-controls='tab1-pane' + i, role='tab', data-toggle='tab')
+										span.o-tabs__nav-linktext=item.text
+
+					.tab-content.u-ptb6.u-pbb5.u-plb6.u-prb6.o-tabs__content
+						// Tab panes
+						each item, i in data
+							.tab-pane.o-tabs__pane(role='tabpanel', id='tab1-pane'+ i, class=i == 0 ? 'active' : '')
+								.u-dtb.u-w100p.o-tabs__content-table
+									if item.img
+										.u-dtc.u-vat.o-tabs__media
+											.u-embed.u-bgimg.o-tabs__img(style="background-image:url(" + item.img+ ")")
+												+bgbackup(item.img)
+
+									.u-dtc.u-vat.o-tabs__text
+										h3.b-fs2.u-mbb2=item.text
+										.b-fsbodylarge.o-richtext
+											p Maecenas faucibus mollis interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Vestibulum id ligula porta felis euismod semper. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Curabitur blandit tempus porttitor.
+										.u-mtb5
+											a.u-tdn.u-link-tdn.o-btn.o-btn--small.o-tabs__btn(href="#")
+												span.u-posr.o-btn__text Text Link
+											a.u-tdn.u-link-tdn.o-btn.o-tabs__btn(href="#")
+												span.u-posr.o-btn__text Text Link
+				// Tab accordion
+				.visible-xs
+					+accordion("tab-accordion1", data)

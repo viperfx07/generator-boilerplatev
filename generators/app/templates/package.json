@@ -59,9 +59,10 @@
 	"babel-preset-stage-1": "^6.24.1", <% if (cssFramework == 'bootstrap') { %>
     "bootstrap": "^4.1.1", <% } %>
 	"bootstrap-select": "latest",
-	"conditioner-core": "^2.3.1",<% if (cssFramework == 'foundation') { %>
-    "foundation-sites": "latest",<% } %>
-    "gulp": "latest",
+	"clamp-js-main": "^0.11.4",
+	"conditioner-core": "^2.3.1",
+	"feature.js": "^1.0.0",
+	"gulp": "latest",
     "gulp-changed": "latest",
     "gulp-check-filesize": "latest",
     "gulp-consolidate": "latest",
@@ -81,6 +82,7 @@
     "gulp-util": "latest",
 	"hamburgers": "latest",
 	"headroom.js": "^0.9.4",
+	"instafeed.js": "^1.4.1",
 	"jquery-match-height": "latest",
 	"jquery.scrollto": "^2.1.2",
 	"json5": "^0.5.1",
@@ -92,18 +94,23 @@
     "postcss-assets": "latest",
     "postcss-critical-split": "latest",
     "postcss-pxtorem": "latest",
-    "postcss-sprites": "latest",
+	"postcss-sprites": "latest",
+	"raf-throttle": "^2.0.3",
     "rucksack-css": "latest",
     "run-sequence": "latest",
     "simplestatemanager": "latest",
-    "slick-carousel": "latest", <% if (vue) { %>
-    "vue-loader": "latest",
-    "vue-template-compiler": "latest", <% } %>
+    "slick-carousel": "latest",
+	"smoothscroll-for-websites": "^1.4.6",
+	"sprintf-js": "^1.1.1",
+	"twitter-fetcher": "^18.0.2",
     "webpack": "^3.5.6",
     "webpack-stream": "^3.2.0",
     "wrench": "latest"
   },
   "resolutions":{
-	  "webpack-sources": "1.0.1"
+	 "webpack-sources": "1.0.1",
+	 "chokidar": "2.0.0",
+	 "watchpack": "1.4.x",
+	 "natives": "^1.1.3"
   }
 }

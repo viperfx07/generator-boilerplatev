@@ -21,6 +21,12 @@
 }
 
 /* crit:start */
+*,
+*:before,
+*:after {
+	flex: 0 1 auto;
+}
+
 html{
 	font-size: 100%;
 	-webkit-font-smoothing: antialiased;
@@ -28,8 +34,8 @@ html{
 	-ms-overflow-style: scrollbar;
 }
 
-html, body{
-	height: 100%;
+body{
+	min-height: 100vh;
 }
 
 fieldset{
@@ -39,22 +45,40 @@ fieldset{
 }
 
 input{
+	@include fzlh(15px, 24px);
 	border-radius: 0;
 	/* crit */
 
-	&[type=search]{
+	&[type=search],
+	&[type=text],
+	&[type=password],
+	&[type=tel],
+	&[type=number],
+	&[type=email] {
 		box-sizing: border-box;
+		width: 100%;
+		padding: 12px 17px;
+		border: 1px solid $border;
+		min-height: 48px;
 	}
 
-	&:invalid{
+	&:invalid {
 		// remove red border on invalid input on mozilla
 		box-shadow: none;
 		/* crit */
 	}
 
-	&::placeholder{
+	&::placeholder {
 		color: rgba($text, .8);
 		/* crit */
+	}
+
+	&.error {
+		border-color: red;
+	}
+
+	&::-ms-clear {
+		display: none;
 	}
 }
 
@@ -87,7 +111,6 @@ table {
 
 
 
-input:not([type="checkbox"]):not([type="radio"]),
 select, textarea{
 	// Prevent ios default box shadow and radius
 	appearance: none;
@@ -95,7 +118,7 @@ select, textarea{
 	display: block;
 	padding: 11px 18px;
 	width: 100%;
-	background-color: $lightestbg;
+	background-color: #fff;
 	border: 1px solid $border;
 
 	&:disabled{
@@ -123,7 +146,9 @@ select{
 }
 
 textarea{
-	min-height: 300px;
+	overflow: auto;
+	resize: none;
+	resize: vertical;
 }
 
 /* crit:end */

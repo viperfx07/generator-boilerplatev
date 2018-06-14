@@ -1,0 +1,81 @@
+.o-socialstream {
+	$_this: &;
+	&__item {
+		a {
+			color: inherit;
+		}
+		&icon {
+			font-size: 24px;
+			&#{&} {
+				&:hover,
+				&:focus {
+					color: $highlight;
+				}
+			}
+		}
+		&-inner {
+			transition: .3s;
+			#{$_this}__item--youtube:hover &,
+			#{$_this}__item--youtube:focus & {
+				transform: scale(1.1);
+			}
+		}
+	}
+	&__filter {
+		&-item {
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+		&-indicator {
+			transition: .3s;
+			height: 3px;
+			.active & {
+				opacity: 1;
+			}
+		}
+		&-btn {
+			@include mq(xs) {
+				width: 48px;
+				height: 48px;
+			}
+			&-icon {
+				@include mq(xs) {
+					font-size: 24px;
+					text-align: center;
+					margin-right: 0;
+				}
+				#{$_this}__filter-btn--all & {
+					@include mq(xs) {
+						display: none;
+					}
+				}
+			}
+			&-text {
+				#{$_this}__filter-btn--all & {
+					display: inline-block !important;
+				}
+			}
+		}
+	}
+	&__content {
+		&-inner {
+			margin-left: -12px;
+			margin-right: -12px;
+			max-height: calc( ( 100vw - (30px * 2) + 24px) * 6); // 6 is the maximum total of tiles
+			@include mq(sm) {
+				max-height: calc( ( 100vw - (30px * 2) - 24px) / 2 * 3); //3 is the maximum total of tiles
+			}
+			@include mq(md) {
+				max-height: (269px * 2)+(24px * 2); //2 is the maximum total of tiles
+			}
+			@include mq(lg) {
+				max-height: (282px * 2)+(24px * 2); //2 is the maximum total of tiles
+			}
+		}
+	}
+	&__col {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+}
