@@ -28,15 +28,14 @@
  *
  *  Countour Form ones are from SundownersOverland.Web/App_Plugins/UmbracoForms/Assets/*.js
  */
-import './custom_vendors/umbracoforms-dependencies';
-import './custom_vendors/umbracoforms';
-import './custom_vendors/umbracoforms-conditions';
+// import './custom_vendors/umbracoforms-dependencies';
+// import './custom_vendors/umbracoforms';
+// import './custom_vendors/umbracoforms-conditions';
 
 
 // Don't know why babel doesn't transpile ssm. Changed to the minified one
 import * as conditioner from 'conditioner-core';
-import ssm from 'simplestatemanager/dist/ssm.min';
-import mh from 'jquery-match-height';
+// import ssm from 'simplestatemanager';
 import JSON5 from 'json5';
 
 import 'lazysizes/plugins/respimg/ls.respimg';
@@ -60,10 +59,9 @@ window.lazySizesConfig.loadingClass = 'is-lazysizes-loading';
 /////////////
 // Plugins //
 /////////////
-import 'bootstrap-sass/assets/javascripts/bootstrap/collapse';
-import 'bootstrap-sass/assets/javascripts/bootstrap/dropdown';
-import 'bootstrap-sass/assets/javascripts/bootstrap/transition';
-import 'bootstrap-sass/assets/javascripts/bootstrap/tab';
+import 'bootstrap/js/src/collapse';
+import 'bootstrap/js/src/dropdown';
+import 'bootstrap/js/src/tab';
 
 ////////////////
 // Utils      //
@@ -72,7 +70,7 @@ import HeaderUtil from './modules/HeaderUtil';
 
 // Setting Webpack public path dynamically so that it loads the utils
 // from the folder where the main.js is located
-var bundleSrc = $('[src$="/main.js"]').attr("src");
+var bundleSrc = $('[src*="/main.js"]').attr("src");
 __webpack_public_path__ = bundleSrc.substr(0, bundleSrc.lastIndexOf("/") + 1);
 
 $(() => {
@@ -108,40 +106,40 @@ $(() => {
 	/////////
 	// SSM //
 	/////////
-	ssm.addStates([{
-		id: 'xs',
-		query: '(max-width: 767px)',
-		onEnter: () => {
-			console.info('enter <=767px');
-		},
-		onLeave: () => {
-			console.info('leave <=767px');
-		},
-	}, {
-		id: 'sm',
-		query: '(max-width: 991px)',
-		onEnter: () => {
-			console.info('enter <=991');
-		},
-		onLeave: () => {
-			console.info('leave <=991');
-		}
-	}, {
-		id: 'md',
-		query: '(max-width: 1199px)',
-		onEnter: () => {
-			console.info('enter <=1199px');
-		},
-		onLeave: () => {
-			console.info('leave <= 1199px');
-		}
-	}, {
-		id: 'desktop',
-		query: '(min-width: 992px)',
-		onEnter: () => {
-			console.info('enter >= 992px');
-		},
-		onLeave: () => {
-		}
-	} ]);
+	// ssm.addStates([{
+	// 	id: 'xs',
+	// 	query: '(max-width: 767px)',
+	// 	onEnter: () => {
+	// 		console.info('enter <=767px');
+	// 	},
+	// 	onLeave: () => {
+	// 		console.info('leave <=767px');
+	// 	},
+	// }, {
+	// 	id: 'sm',
+	// 	query: '(max-width: 991px)',
+	// 	onEnter: () => {
+	// 		console.info('enter <=991');
+	// 	},
+	// 	onLeave: () => {
+	// 		console.info('leave <=991');
+	// 	}
+	// }, {
+	// 	id: 'md',
+	// 	query: '(max-width: 1199px)',
+	// 	onEnter: () => {
+	// 		console.info('enter <=1199px');
+	// 	},
+	// 	onLeave: () => {
+	// 		console.info('leave <= 1199px');
+	// 	}
+	// }, {
+	// 	id: 'desktop',
+	// 	query: '(min-width: 992px)',
+	// 	onEnter: () => {
+	// 		console.info('enter >= 992px');
+	// 	},
+	// 	onLeave: () => {
+	// 	}
+	// } ]);
 });

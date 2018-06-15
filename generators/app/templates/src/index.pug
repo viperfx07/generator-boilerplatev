@@ -1,36 +1,32 @@
 extends _layouts/global.pug
 
 block content
-	<%if(vue){%>
-	.container
-		#app
-			app-cool
-				test-cool<%}%>
+
 	.container
 		.row
-			.col-xs-2
+			.col-sm-2
 				p
 					| This is content
 					+icon('facebook')
 		.u-mbb8.row
-			.col-xs-6(data-module="matchheight" data-mh-group="mh1" data-module-options="{ property: 'min-height', nonFlexBrowserOnly: 0}")
+			.col-sm-6(data-module="matchheight" data-mh-group="mh1" data-module-options="{ property: 'min-height', nonFlexBrowserOnly: 0}")
 				.u-embed.u-embed--16by9
-					.u-embed__item.u-bgimg(style="background-image: url(http://lorempixel.com/400/300)")
+					.u-embed__item.u-bgimg(style="background-image: url(http://unsplash.it/400/300)")
 						.c-section__content
 							p De quibusdam ea incididunt. Veniam eu singulis, aute possumus fabulas neingeniis qui esse incurreret do illum excepteur laboris. Nisi coniunctione nescius noster pariatur. Eu possumus philosophari, non ut quae illum sunt. Labore incurreret ex cupidatat. Qui a eruditionem se si aut firmissimum.
-			.col-xs-6(data-module="matchheight" data-mh-group="mh1" data-module-options="{ property: 'min-height', nonFlexBrowserOnly: 0}")
+			.col-sm-6(data-module="matchheight" data-mh-group="mh1" data-module-options="{ property: 'min-height', nonFlexBrowserOnly: 0}")
 				.u-embed.u-embed--16by9
-					.u-embed__item.u-bgimg(style="background-image: url(http://lorempixel.com/500/500)")
+					.u-embed__item.u-bgimg(style="background-image: url(http://unsplash.it/500/500)")
 						.c-section__content
 							p De quibusdam ea incididunt. Veniam eu singulis, aute possumus fabulas neingeniis qui esse incurreret do illum excepteur laboris. Nisi coniunctione nescius noster pariatur. Eu possumus philosophari, non ut quae illum sunt. Labore incurreret ex cupidatat. Qui a eruditionem se si aut firmissimum.
 
-		.u-mbb8.row-flex
-			.col-flex-xs-12
+		.u-mbb8.row
+			.col
 				h2.u-mbb2 Slider Example
-				div.o-slide(data-module="slickjs" data-module-options="{ key: 'hero', slidesToShow: 3 }")
+				.o-slide(data-module="slickjs" data-module-options="{ rows:0, key: 'hero', slidesToShow: 3 }")
 					each item,index in [1,2,3,4,5,6]
-						.o-slide__item
-							img(src="http://lorempixel.com/400/300/?image="+ (1000+index))
+						.u-ovh.o-slide__item
+							img(src="http://unsplash.it/400/300/?image="+index)
 
 		.u-mbb8
 			h2.u-mbb2 Focus On Example
@@ -47,8 +43,31 @@ block content
 
 		.u-mbb8
 			h2#toggle-title.u-mbb2 Toggle Example
-			button(data-module="vtoggle" data-module-options="{ target: '#toggle-title', class:'hide' }") Show/Hide "Toggle Example" title
+			button(data-module="vtoggle" data-module-options="{ target: '#toggle-title', class:'u-dn' }") Show/Hide "Toggle Example" title
 
 		.u-mbb8
 			h2.u-mbb2 Magnific Popup Example
 			a(href="https://youtu.be/dQw4w9WgXcQ", data-module="magnificpopup" data-module-options="{ key: 'iframe' }") Open Video
+
+
+		.u-mbb8
+			h2.u-mbb2 Dropdown
+			.dropdown
+				button#dropdownMenuButton.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+					| Dropdown button
+				.dropdown-menu(aria-labelledby='dropdownMenuButton')
+					a.dropdown-item(href='#') Action
+					a.dropdown-item(href='#') Another action
+					a.dropdown-item(href='#') Something else here
+
+		.u-mbb8
+			h2.u-mbb2 Collapse
+			a(data-toggle='collapse', href='#collapseExample', role='button', aria-expanded='false', aria-controls='collapseExample')
+				| Link with href
+			button(type='button', data-toggle='collapse', data-target='#collapseExample', aria-expanded='false', aria-controls='collapseExample')
+				| Button with data-target
+			#collapseExample.collapse
+				div Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+
+	.u-mbb8
+		+module--tabs

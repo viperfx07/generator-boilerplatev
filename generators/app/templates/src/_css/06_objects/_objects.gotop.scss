@@ -2,11 +2,11 @@
 	width: 56px;
 	height: 56px;
 	transition: .3s;
-	color: $text2;
+	color: #fff;
 	&:hover,
 	&:focus {
-		background-color: darken($lightbg, 10%);
-		color: $text2;
+		background-color: grey;
+		color: #fff;
 	}
 	&__icon {
 		line-height: 56px;

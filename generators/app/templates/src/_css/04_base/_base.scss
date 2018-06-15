@@ -94,7 +94,7 @@ table {
 	}
 
 	th{
-		color: $primary60;
+		color: $text;
 		text-align: left;
 	}
 
@@ -104,7 +104,7 @@ table {
 
 	thead {
 		tr{
-			border-bottom: 3px solid $primary60;
+			border-bottom: 3px solid $border;
 		}
 	}
 }
@@ -138,7 +138,7 @@ label{
 
 select{
 	border-radius: 0;
-	background: #fff url('/static/images/chevron-down.svg') calc(100% - 16px) 50% no-repeat;
+	background: #fff url('<%= assetsDir %>/<%=templatePackage.config.directories.image %>/chevron-down.svg') calc(100% - 16px) 50% no-repeat;
 	background-size: 12px auto;
 	&::-ms-expand {
 		display: none;
@@ -151,4 +151,8 @@ textarea{
 	resize: vertical;
 }
 
+img{
+	max-width: 100%;
+	height: auto;
+}
 /* crit:end */

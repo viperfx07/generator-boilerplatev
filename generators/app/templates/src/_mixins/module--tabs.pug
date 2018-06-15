@@ -7,14 +7,13 @@ mixin module--tabs(title, data)
 				.u-mbb7.c-module__head
 					h2.c-module__title=title
 			.c-module__body
-				.hidden-xs.o-tabs(id="tab1")
+				.u-dn.u-db-sm.o-tabs(id="tab1")
 					// Nav tabs
-					.u-ova
-						ul.u-list-unstyled.u-bdr.u-df.o-tabs__nav(role='tablist')
+					nav.u-ova
+						.nav.u-list-unstyled.u-bdr.u-df.o-tabs__nav(role='tablist')
 							each item, i in data
-								li.u-fx100.u-df.u-fxdc.u-vam.u-bgc-fourthy60.u-c-text2.o-tabs__nav-item(role='presentation', class=i == 0 ? 'active' : '')
-									a.u-fx1.u-df.u-fxdc.center-xs.u-fw700.u-tdn.u-c-inherit.u-link-colorstay.u-tac.u-w100p.u-link-tdn.o-tabs__nav-link(href='#tab1-pane' + i, aria-controls='tab1-pane' + i, role='tab', data-toggle='tab')
-										span.o-tabs__nav-linktext=item.text
+								a.u-posr.u-bdl.u-bdt.u-bdb.u-fx1.u-df.u-fxdc.center-xs.u-fw700.u-tdn.u-c-inherit.u-link-colorstay.u-tac.u-w100p.u-link-tdn.o-tabs__nav-link(href='#tab1-pane' + i, aria-controls='tab1-pane' + i, role='tab', data-toggle='tab', aria-selected=i==0?'true':'false', class=i==0?'active': '')
+									span.o-tabs__nav-linktext=item.text
 
 					.tab-content.u-ptb6.u-pbb5.u-plb6.u-prb6.o-tabs__content
 						// Tab panes
@@ -30,11 +29,7 @@ mixin module--tabs(title, data)
 										h3.b-fs2.u-mbb2=item.text
 										.b-fsbodylarge.o-richtext
 											p Maecenas faucibus mollis interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Vestibulum id ligula porta felis euismod semper. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Curabitur blandit tempus porttitor.
-										.u-mtb5
-											a.u-tdn.u-link-tdn.o-btn.o-btn--small.o-tabs__btn(href="#")
-												span.u-posr.o-btn__text Text Link
-											a.u-tdn.u-link-tdn.o-btn.o-tabs__btn(href="#")
-												span.u-posr.o-btn__text Text Link
+
 				// Tab accordion
-				.visible-xs
+				.u-db.u-dn-sm
 					+accordion("tab-accordion1", data)

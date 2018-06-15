@@ -1,75 +1,95 @@
-@mixin mq($min: 0, $max: 0) {
-    $type: type-of($min);
-    @if $type==string {
-        @if $min==xs {
-            @media (max-width: rem($screen-xs-max, 16px)) {
-                @content;
-            }
-        }
-        @else if $min==sm {
-            @media (min-width: rem($screen-sm-min, 16px)) {
-                @content;
-            }
-        }
-        @else if $min==sm-md {
-            @media (min-width: rem($screen-sm-min, 16px)) and (max-width: rem($screen-sm-max, 16px))  {
-                @content;
-            }
-        }
-        @else if $min==md {
-            @media (min-width: rem($screen-md-min, 16px)) {
-                @content;
-            }
-        }
-        @else if $min==md-lg{
-            @media (min-width: rem($screen-md-min, 16px)) and (max-width: rem($screen-md-max, 16px))  {
-                @content;
-            }
-        }
-        @else if $min==lg {
-            @media (min-width: rem($screen-lg-min, 16px)) {
-                @content;
-            }
-        }
-        @else if $min==lg-xl {
-            @media (min-width: rem($screen-lg-min, 16px)) and (max-width: rem(1400px, 16px)) {
-                @content;
-            }
-        }
-        @else if $min==xl {
-            @media (min-width: rem(1400px, 16px)) {
-                @content;
-            }
-        }
-        @else if $min==sm-max{
-            @media (max-width: rem($screen-sm-max, 16px)){
-                @content;
-            }
-        }
-        @else if $min==md-max{
-            @media (max-width: rem($screen-md-max, 16px)){
-                @content;
-            }
-        }
-        @else if $min==lg-max{
-            @media (max-width: rem(1399px, 16px)){
-                @content;
-            }
-        }
-    }
-    @else if $type==number {
-        $query: "all" !default;
-        @if $min !=0 and $max !=0 {
-            $query: "(min-width: #{$min}) and (max-width: #{$max})";
-        }
-        @else if $min !=0 and $max==0 {
-            $query: "(min-width: #{$min})";
-        }
-        @else if $min==0 and $max !=0 {
-            $query: "(max-width: #{$max})";
-        }
-        @media #{$query} {
-            @content;
-        }
-    }
+@import "mixins/breakpoints";
+@mixin mq($min: 0, $max: 0, $breakpoints: $grid-breakpoints) {
+	$type: type-of($min);
+	@if $type==string {
+		@include media-breakpoint-up($min, $breakpoints);
+	}
+	@else if $type==number {
+		$query: "all" !default;
+		@if $min !=0 and $max !=0 {
+			$query: "(min-width: #{$min}) and (max-width: #{$max})";
+		}
+		@else if $min !=0 and $max==0 {
+			$query: "(min-width: #{$min})";
+		}
+		@else if $min==0 and $max !=0 {
+			$query: "(max-width: #{$max})";
+		}
+		@media #{$query} {
+			@content;
+		}
+	}
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin mq-up($name, $breakpoints: $grid-breakpoints) {
+	$min: breakpoint-min($name, $breakpoints);
+	@if $min {
+		@media (min-width: $min) {
+			@content;
+		}
+	}
+	@else {
+		@content;
+	}
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin mq-down($name, $breakpoints: $grid-breakpoints) {
+	$max: breakpoint-max($name, $breakpoints);
+	@if $max {
+		@media (max-width: $max) {
+			@content;
+		}
+	}
+	@else {
+		@content;
+	}
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+@mixin mq-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+	$min: breakpoint-min($lower, $breakpoints);
+	$max: breakpoint-max($upper, $breakpoints);
+	@if $min !=null and $max !=null {
+		@media (min-width: $min) and (max-width: $max) {
+			@content;
+		}
+	}
+	@else if $max==null {
+		@include media-breakpoint-up($lower, $breakpoints) {
+			@content;
+		}
+	}
+	@else if $min==null {
+		@include media-breakpoint-down($upper, $breakpoints) {
+			@content;
+		}
+	}
+}
+
+// Media between the breakpoint's minimum and maximum widths.
+// No minimum for the smallest breakpoint, and no maximum for the largest one.
+// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+@mixin mq-only($name, $breakpoints: $grid-breakpoints) {
+	$min: breakpoint-min($name, $breakpoints);
+	$max: breakpoint-max($name, $breakpoints);
+	@if $min !=null and $max !=null {
+		@media (min-width: $min) and (max-width: $max) {
+			@content;
+		}
+	}
+	@else if $max==null {
+		@include media-breakpoint-up($name, $breakpoints) {
+			@content;
+		}
+	}
+	@else if $min==null {
+		@include media-breakpoint-down($name, $breakpoints) {
+			@content;
+		}
+	}
 }
