@@ -34,37 +34,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 				loader: "babel-loader",
 				// bootstrap and ssm needs a babel-loader to transpile es6
 				exclude: /node_modules(\/|\\)(?!(bootstrap|ssm)(\/|\\)).*/
-			}<% if(vue){ %>, {
-				test: /\.vue$/,
-				loader: 'vue-loader',
-				options: {
-					// `loaders` will overwrite the default loaders.
-					// The following config will cause all <script> tags without "lang"
-					// attribute to be loaded with coffee-loader
-					loaders: {},
-
-					// `preLoaders` are attached before the default loaders.
-					// You can use this to pre-process language blocks - a common use
-					// case would be build-time i18n.
-					preLoaders: {},
-
-					// `postLoaders` are attached after the default loaders.
-					//
-					// - For `html`, the result returned by the default loader
-					//   will be compiled JavaScript render function code.
-					//
-					// - For `css`, the result will be returned by vue-style-loader
-					//   which isn't particularly useful in most cases. Using a postcss
-					//   plugin will be a better option.
-					postLoaders: {
-						html: 'babel-loader'
-					},
-
-					// `excludedPreLoaders` should be regex
-					excludedPreLoaders: /(eslint-loader)/
-				}
-			}<% } %>
-			]
+			}]
 		},
 		devtool: 'source-map',
 

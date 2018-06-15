@@ -46,14 +46,23 @@
 
 	// {{ .u-table-responsive }}
     &-table-responsive {
-        overflow-x: auto;
-        min-height: 0.01%; // Workaround for IE9 bug (see https://github.com/twbs/bootstrap/issues/14837)
-        @include mq(xs){
-            width: 100%;
-            margin-bottom: ($line-height-computed * 0.75);
-            overflow-y: hidden;
-            -ms-overflow-style: -ms-autohiding-scrollbar;
-        }
+    	@each $breakpoint in map-keys($grid-breakpoints) {
+    		$next: breakpoint-next($breakpoint, $grid-breakpoints);
+    		$infix: breakpoint-infix($next, $grid-breakpoints);
+    		&#{$infix} {
+    			@include media-breakpoint-down($breakpoint) {
+    				display: block;
+    				width: 100%;
+    				overflow-x: auto;
+    				-webkit-overflow-scrolling: touch;
+    				-ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
+    				// Prevent double border on horizontal scroll due to use of `display: block;`
+    				>.table-bordered {
+    					border: 0;
+    				}
+    			}
+    		}
+    	}
     }
 
 	&-vertical-center {

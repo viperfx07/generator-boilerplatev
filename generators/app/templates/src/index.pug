@@ -23,9 +23,9 @@ block content
 		.u-mbb8.row
 			.col
 				h2.u-mbb2 Slider Example
-				div.o-slide(data-module="slickjs" data-module-options="{ key: 'hero', slidesToShow: 3 }")
+				.o-slide(data-module="slickjs" data-module-options="{ rows:0, key: 'hero', slidesToShow: 3 }")
 					each item,index in [1,2,3,4,5,6]
-						.o-slide__item
+						.u-ovh.o-slide__item
 							img(src="http://unsplash.it/400/300/?image="+index)
 
 		.u-mbb8
@@ -69,19 +69,5 @@ block content
 			#collapseExample.collapse
 				div Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
 
-		.u-mbb8
-			h2.u-mbb2 Tab
-			ul#myTab.nav.nav-tabs(role='tablist')
-				li.nav-item
-					a#home-tab.nav-link.active(data-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true') Home
-				li.nav-item
-					a#profile-tab.nav-link(data-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false') Profile
-				li.nav-item
-					a#contact-tab.nav-link(data-toggle='tab', href='#contact', role='tab', aria-controls='contact', aria-selected='false') Contact
-			#myTabContent.tab-content
-				#home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='home-tab')
-					| Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum earum reiciendis sapiente nisi! Fuga dolorum ullam mollitia doloremque? Magni sunt libero sint similique? Earum a sapiente obcaecati quis dolorem voluptatem.
-				#profile.tab-pane.fade(role='tabpanel', aria-labelledby='profile-tab')
-					| Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quidem assumenda reiciendis fuga dolor harum dolores perferendis facilis esse. Hic, dolorum! Quam pariatur, est maxime ea perferendis facere in voluptatibus!
-				#contact.tab-pane.fade(role='tabpanel', aria-labelledby='contact-tab')
-					| Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus quae dicta rem sed, atque mollitia aliquid id, nostrum fugit porro eos incidunt eum esse earum facilis suscipit, dignissimos accusantium explicabo.
+	.u-mbb8
+		+module--tabs

@@ -42,10 +42,10 @@
 // @import "utilities/align";
 // @import "utilities/background";
 // @import "utilities/borders";
-@import "utilities/clearfix";
-// @import "utilities/display";
+// @import "utilities/clearfix";
+@import "utilities/display";
 // @import "utilities/embed";
-// @import "utilities/flex";
+@import "utilities/flex";
 // @import "utilities/float";
 // @import "utilities/position";
 @import "utilities/screenreaders";
@@ -53,7 +53,7 @@
 // @import "utilities/sizing";
 // @import "utilities/spacing";
 // @import "utilities/text";
-@import "utilities/visibility";
+// @import "utilities/visibility";
 
 /* crit:end */
 // @import "print";

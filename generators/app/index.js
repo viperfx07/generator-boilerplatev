@@ -5,6 +5,7 @@ var underscore = require('underscore.string');
 var path = require('path');
 var updateNotifier = require('update-notifier');
 var pkg = require('../../package.json');
+var templatePackage = require('./templates/package.json');
 require('colors');
 
 
@@ -31,33 +32,48 @@ module.exports = class extends Generator {
             name: 'name',
             message: 'Project Name',
             default: this.appname // Default to current folder name
-        }, {
-            type: 'confirm',
-            name: 'useNotif',
-            message: 'Do you want notification for Gulp process?',
-            default: true
-        }, {
+        },{
+            type: 'list',
+            name: 'dirStructure',
+            message: 'Directory structure standard',
+            choices: ['Kentico', 'Umbraco', 'None'],
+            default: 'Kentico'
+        },{
             type: 'confirm',
             name: 'skipInstall',
-            message: 'Do you want to skip install?',
+            message: 'Do you want to skip yarn install?',
             default: false
         }
         ]).then((answers) => {
             this.projectName =  answers.name;
-            this.cssFramework = answers.cssFramework;
-            this.useNotif = answers.useNotif;
             this.skipInstall = answers.skipInstall;
-
+            this.dirStructure = answers.dirStructure;
         });
     }
     writing() {
+        var dirByStructures = {
+            "Kentico":{
+                assets: '/www_shared/assets',
+                otherWWW: '../'
+            },
+            "Umbraco":{
+                assets: '/static',
+                otherWWW: '../XXX.Web'
+            },
+            "None":{
+                assets: '/assets',
+                otherWWW: '',
+            }
+        }
+
         var config = {
             projectName: this.projectName,
-            cssFramework: this.cssFramework,
-            useNotif: this.useNotif,
             skipInstall: this.skipInstall,
+            assetsDir: dirByStructures[this.dirStructure].assets,
+            otherWWW: dirByStructures[this.dirStructure].otherWWW,
             _ : underscore,
-            pkg: pkg
+            pkg: pkg,
+            templatePackage: templatePackage
         };
 
         var src = this.templatePath();

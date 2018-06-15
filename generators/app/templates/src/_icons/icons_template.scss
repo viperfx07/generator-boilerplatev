@@ -6,6 +6,7 @@
 // DON'T USE "icon" as a class. Adblock Plus apparently
 // has a CSS rule to hide icon-[social-icons] elements.
 
+/* crit:start */
 @font-face {
   font-family: "<%%= fontName %>";
   src: url('<%%= fontPath %><%%= fontName %>.eot?<%%= hash %>');
@@ -39,87 +40,6 @@
   @include iconfont;
 }
 
-.<%%= className %>-lg {
-  font-size: 1.33333333em;
-  line-height: 0.75em;
-  vertical-align: -15%;
-}
-.<%%= className %>-2x {
-  font-size: 2em;
-}
-.<%%= className %>-3x {
-  font-size: 3em;
-}
-.<%%= className %>-4x {
-  font-size: 4em;
-}
-.<%%= className %>-5x {
-  font-size: 5em;
-}
-.<%%= className %>-fw {
-  width: 1.28571429em;
-  text-align: center;
-}
-.<%%= className %>-ul {
-  padding-left: 0;
-  margin-left: 2.14285714em;
-  list-style-type: none;
-}
-.<%%= className %>-ul > li {
-  position: relative;
-}
-.<%%= className %>-li {
-  position: absolute;
-  left: -2.14285714em;
-  width: 2.14285714em;
-  top: 0.14285714em;
-  text-align: center;
-}
-.<%%= className %>-li.<%%= className %>-lg {
-  left: -1.85714286em;
-}
-.<%%= className %>-border {
-  padding: .2em .25em .15em;
-  border: solid 0.08em #eeeeee;
-  border-radius: .1em;
-}
-.<%%= className %>-pull-left {
-  float: left;
-}
-.<%%= className %>-pull-right {
-  float: right;
-}
-.<%%= className %>.<%%= className %>-pull-left {
-  margin-right: .3em;
-}
-.<%%= className %>.<%%= className %>-pull-right {
-  margin-left: .3em;
-}
-
-.<%%= className %>-stack {
-  position: relative;
-  display: inline-block;
-  width: 2em;
-  height: 2em;
-  line-height: 2em;
-  vertical-align: middle;
-}
-.<%%= className %>-stack-1x,
-.<%%= className %>-stack-2x {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  text-align: center;
-}
-.<%%= className %>-stack-1x {
-  line-height: inherit;
-}
-.<%%= className %>-stack-2x {
-  font-size: 2em;
-}
-.<%%= className %>-inverse {
-  color: #ffffff;
-}
 
 $icon-list: (
 <%% _.each(glyphs, function(glyph) { %>
@@ -132,6 +52,7 @@ $icon-list: (
     content: $refKey;
   }
 }
+/* crit:end */
 
 //usually this use on pseudo element
 @mixin icon($iconName){

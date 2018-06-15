@@ -1,447 +1,404 @@
 /* crit:start */
-.u{
-    // Border
-    &-bd {
-		border: 1px solid $border;
-		&0 {
-            border: 0;
-		}
-		&t{
-			border-top: 1px solid $border;
-			&0{
-				border-top: 0;
-			}
-		}
-		&r{
-			border-right: 1px solid $border;
-			&0{
-				border-right: 0;
-			}
-		}
-		&b{
-			border-bottom: 1px solid $border;
-			&0{
-				border-bottom: 0;
-			}
-		}
-		&l{
-			border-left: 1px solid $border;
-			&0{
-				border-left: 0
-			}
-		}
-    }
-    // Border Radius
-    &-bdra {
-        &0 {
-            border-radius: 0;
-        }
-        &50p{
-            border-radius: 50%;
-        }
-    }
 
-    // Link Text Decoration None on Hover and Focus
-    &-link-tdn {
-        &:hover,
-        &:focus {
-            text-decoration: none;
-        }
+.u {
+	// Border
+	@mixin u-bd($abbrev, $property) {
+		&-#{$abbrev}{
+			#{$property}: 1px solid $border;
+			&0 {
+				#{$property}: 0;
+			}
+		}
+	}
+	@each $prop,$abbrev  in (border:bd, border-top:bdt, border-left:bdl, border-right:bdr, border-bottom:bdb){
+		@include u-bd($abbrev, $prop);
+	}
+
+	// Border Radius
+	&-bdra {
+		&0 {
+			border-radius: 0;
+		}
+		&50p {
+			border-radius: 50%;
+		}
+	}
+
+	// Link Text Decoration None on Hover and Focus
+	&-link-tdn {
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
 	}
 
 	// {{ .u-link-colorstay }}
 	&-link-colorstay {
+		color: inherit;
 		&:hover,
 		&:focus {
 			color: inherit;
 		}
 	}
 
-    // Margin
-    &-m {
-		&0 {
-			margin: 0;
-		}
-        &a{
-            margin: auto;
-		}
-		&t {
-            &0{
-				margin-top: 0;
-			}
-			&a {
-				margin-top: auto;
+	// Margin and Padding
+	// Spacers variable defined in _settings.bootstrap.scss
+	@each $breakpoint in map-keys($grid-breakpoints) {
+		@include mq-up($breakpoint) {
+			$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+			@each $prop, $abbrev in (margin: m, padding: p) {
+				@each $size, $length in $spacers {
+					@if($length == 0){
+						&-#{$abbrev}#{$size}#{$infix} {
+							#{$prop}: $length;
+						}
+					}
+					&-#{$abbrev}tb#{$size}#{$infix}{
+						#{$prop}-top: $length;
+					}
+					&-#{$abbrev}yb#{$size}#{$infix} {
+						#{$prop}-top: $length;
+					}
+					&-#{$abbrev}rb#{$size}#{$infix}{
+						#{$prop}-right: $length;
+					}
+					&-#{$abbrev}xb#{$size}#{$infix} {
+						#{$prop}-right: $length;
+					}
+					&-#{$abbrev}bb#{$size}#{$infix}{
+						#{$prop}-bottom: $length;
+					}
+					&-#{$abbrev}yb#{$size}#{$infix} {
+						#{$prop}-bottom: $length;
+					}
+					&-#{$abbrev}lb#{$size}#{$infix}{
+						#{$prop}-left: $length;
+					}
+					&-#{$abbrev}xb#{$size}#{$infix} {
+						#{$prop}-left: $length;
+					}
+				}
 			}
 
-            &b{
-                @include baselinegapclass('margin-top');
-            }
-		}
-		&r {
-            &0{
-				margin-right: 0;
-			}
-			&a {
+			// Some special margin utils
+			// &-ma#{$infix} {
+			// 	margin: auto;
+			// }
+			// &-mta#{$infix}{
+			// 	margin-top: auto;
+			// }
+			// &-mya#{$infix} {
+			// 	margin-top: auto;
+			// }
+			&-mra#{$infix}{
 				margin-right: auto;
 			}
-
-            &b{
-                @include baselinegapclass('margin-right');
-            }
-		}
-        &b {
-            &0{
-				margin-bottom: 0;
+			&-mxa#{$infix} {
+				margin-right: auto;
 			}
-			&a {
-				margin-bottom: auto;
-			}
-            &b{
-                @include baselinegapclass('margin-bottom');
-            }
-        }
-		&l {
-            &0{
-				margin-left: 0;
-			}
-			&a{
+			// &-mba#{$infix}{
+			// 	margin-bottom: auto;
+			// }
+			// &-mya#{$infix} {
+			// 	margin-bottom: auto;
+			// }
+			&-mla#{$infix}{
 				margin-left: auto;
 			}
-
-            &b{
-                @include baselinegapclass('margin-left');
-            }
-        }
-    }
-    // Padding
-    &-p {
-		&0 {
-			padding: 0;
-		}
-		&t {
-            &0 {
-                padding-top: 0;
-            }
-
-            &b{
-                @include baselinegapclass('padding-top');
-			}
-
-		}
-		&r {
-            &0{
-				padding-right: 0;
-			}
-
-            &b{
-                @include baselinegapclass('padding-right');
-			}
-        }
-        &b {
-            &0{
-				padding-bottom: 0;
-			}
-
-            &b{
-                @include baselinegapclass('padding-bottom');
+			&-mxa#{$infix} {
+				margin-left: auto;
 			}
 		}
-		&l {
-            &0{
-				padding-left: 0;
-			}
-
-            &b{
-                @include baselinegapclass('padding-left');
-            }
-        }
 	}
 
 	// Height
-	&-h100{
-		&p{
+	&-h100 {
+		&p {
 			height: 100%;
 		}
-		&vh{
+		&vh {
 			height: 100vh;
 		}
-    }
+	} // Width 100%
 
-    // Width 100%
-    &-w100 {
-		&p{
+	&-w100 {
+		&p {
 			width: 100%;
 		}
 	}
 
-	&-maw100p{
-		max-width: 100%;
+	&-maw100 {
+		&p{
+			max-width: 100%;
+		}
 	}
 
-	&-mah100{
-		&p{
+	&-mah100 {
+		&p {
 			max-height: 100%;
 		}
-		&vh{
+		&vh {
 			max-height: 100vh;
 		}
 	}
 
-    // Background color
-    &-bgc {
-        &-t {
-            background-color: transparent;
-        }
-    }
-    // Overflow
-    &-ov {
-        &h {
-            overflow: hidden;
-        }
-        &a {
-            overflow: auto;
-        }
-    }
-    // Display
-    &-d {
-        &f{
-            display: flex;
+	&-mih100{
+		&vh{
+			min-height: 100vh;
 		}
-		&g{
-			display: grid;
-		}
-		&if{
-			display: inline-flex;
-		}
-        &tb {
-            display: table;
-            &--fixed {
-                width: 100%;
-                table-layout: fixed;
-            }
-        }
-        &tc {
-            display: table-cell;
-            vertical-align: middle;
-        }
-        &tr {
-            display: table-row;
-        }
-        &b {
-            display: block;
-        }
-        &ib {
-            display: inline-block;
-        }
-        &i {
-            display: inline;
-        }
-        &n{
-            display: none;
-        }
-    }
-    // Vertical Align
-    &-va {
-        &t {
-            vertical-align: top;
-        }
-        &m {
-            vertical-align: middle;
-        }
-        &b {
-            vertical-align: bottom;
-        }
-    }
-    // FLoat
-    &-fl {
-        &l {
-            float: left;
-        }
-        &r {
-            float: right;
-        }
-        &n {
-            float: none;
-        }
-    }
-    // Text align
-    &-ta {
-        &r {
-            text-align: right;
-        }
-        &c {
-            text-align: center;
-        }
-        &l {
-            text-align: left;
-        }
-	}
-	// Line Height
-	&-lh{
-		&1{
-			line-height: 1;
-        }
 	}
 
-    // Position
-    &-pos {
-        &r {
-            position: relative;
-        }
-        &a {
-			position: absolute;
-			&0{
+	// Background color
+	&-bgc {
+		&-t {
+			background-color: transparent;
+		}
+	}
+
+	// Overflow
+	&-ov {
+		&h {
+			overflow: hidden;
+		}
+		&a {
+			overflow: auto;
+		}
+	}
+
+	// Display
+	&-d {
+		&tb {
+			&--fixed {
+				width: 100%;
+				table-layout: fixed;
+			}
+		}
+
+		// There's display utility classes with !important which is imported to _generic.bootstrap.scss
+		@each $breakpoint in map-keys($grid-breakpoints) {
+			@include mq-up($breakpoint) {
+				$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+				&n#{$infix} {
+					display: none;
+				}
+				&i#{$infix} {
+					display: inline;
+				}
+				&ib#{$infix} {
+					display: inline-block;
+				}
+				&b#{$infix} {
+					display: block;
+				}
+				&tb#{$infix} {
+					display: table;
+				}
+				&tr#{$infix} {
+					display: table-row;
+				}
+				&tc#{$infix} {
+					display: table-cell;
+				}
+				&f#{$infix} {
+					display: flex;
+				}
+				&if#{$infix} {
+					display: inline-flex;
+				}
+				&g#{$infix} {
+					display: grid;
+				}
+			}
+		}
+	}
+
+	// Vertical Align
+	&-va {
+		&t {
+			vertical-align: top;
+		}
+		&m {
+			vertical-align: middle;
+		}
+		&b {
+			vertical-align: bottom;
+		}
+	}
+
+	// FLoat
+	&-fl {
+		&l {
+			float: left;
+		}
+		&r {
+			float: right;
+		}
+		&n {
+			float: none;
+		}
+	}
+
+	// Text align
+	&-ta {
+		&r {
+			text-align: right;
+		}
+		&c {
+			text-align: center;
+		}
+		&l {
+			text-align: left;
+		}
+	}
+
+	// Line Height
+	&-lh {
+		&1 {
+			line-height: 1;
+		}
+	}
+
+	// Position
+	&-pos {
+		&a {
+			&0 {
 				position: absolute 0;
 			}
-        }
-        &f {
-			position: fixed;
-			&0{
+		}
+		&f {
+			&0 {
 				position: fixed 0;
 			}
-        }
+		}
+
+		@each $breakpoint in map-keys($grid-breakpoints) {
+			@include mq-up($breakpoint) {
+				$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+				@each $val, $abbrev in (static: s, relative: r, absolute:a, fixed: f){
+					&#{$abbrev}#{$infix}{
+						position: $val;
+					}
+				}
+			}
+		}
+
 	}
 
-	// Left
-	&-l{
-		&0{
-			left: 0;
+	// Positioning
+	@each $prop, $abbrev in (left: l, right: r, top: t, bottom: b){
+		&-#{$abbrev}0 {
+			#{$prop}: 0;
 		}
-		&a{
-			left: auto;
-		}
-	}
-	// Top
-	&-t{
-		&0{
-			top: 0;
-		}
-		&a{
-			top: auto;
-		}
-	}
-	// Bottom
-	&-b{
-		&0{
-			bottom: 0;
-		}
-		&a{
-			bottom: auto;
-		}
-	}
-	// Right
-	&-r{
-		&0{
-			right: 0;
-		}
-		&a{
-			right: auto;
+
+		&-#{$abbrev}a {
+			#{$prop}: auto;
 		}
 	}
 
-    // Font Weight
-    &-fw {
-        @each $weight in (300, 400, 700){
-            &#{$weight}{
-                font-weight: $weight;
-            }
-        }
+	// Font Weight
+	&-fw {
+		@each $weight in (300, 400, 700) {
+			&#{$weight} {
+				font-weight: $weight;
+			}
+		}
 	}
 
 	// Font Style
-	&-fs{
-		&i{
+	&-fs {
+		&i {
 			font-style: italic;
 		}
 	}
 
 	// Text Transfrom
-	&-tt{
-		&u{
+	&-tt {
+		&u {
 			text-transform: uppercase;
 		}
-		&c{
+		&c {
 			text-transform: capitalize;
 		}
 	}
+
 	// Flex
-	&-fx{
-		&1{
+	&-fx {
+		&1 {
 			flex: 1 1 auto;
 		}
-		&110{
+		&110 {
 			flex: 1 1 0%;
 		}
-		&100{
+		&100 {
 			flex: 1 0 0%;
 		}
-		&10a{
+		&10a {
 			flex: 1 0 auto;
 		}
-		&00a{
+		&00a {
 			flex: 0 0 auto;
 		}
-		&dc{
+		&dc {
 			flex-direction: column;
 		}
 		&ww {
 			flex-wrap: wrap;
 		}
-    }
+	}
 
-    &-ai{
-		&b{
+	&-ai {
+		&b {
 			align-items: baseline;
 		}
 	}
 
 	// Justify Content
-	&-jc{
-		&sb{
+	&-jc {
+		&sb {
 			justify-content: space-between;
 		}
-		&fe{
+		&fe {
 			justify-content: flex-end;
 		}
 	}
 
 	// Z Index
-	&-z{
-		@for $i from -3 through 6{
-			&#{$i}{
+	&-z {
+		@for $i from -1 through 5 {
+			&#{$i} {
 				z-index: $i;
 			}
 		}
 	}
 
 	// Opacity
-	&-o{
-		&0{
+	&-o {
+		&0 {
 			opacity: 0;
-        }
-		&1{
+		}
+		&1 {
 			opacity: 1;
 		}
 	}
 
-    @each $c,
-    $hex in $theme-colors {
-        // Background color
-        &-bgc-#{$c} {
-            background-color: $hex;
-        }
-        // Color
-        &-c-#{$c} {
-            color: $hex;
-        }
-        // Border color
-        &-bdc-#{$c} {
-            border-color: $hex;
-        }
+	@each $c,
+	$hex in $bv-colors {
+		// Background color
+		&-bgc-#{$c} {
+			background-color: $hex;
+		} // Color
+		&-c-#{$c} {
+			color: $hex;
+		} // Border color
+		&-bdc-#{$c} {
+			border-color: $hex;
+		}
 	}
 
-	&-c-inherit{
+	&-c-inherit {
 		color: inherit;
 	}
 }
+
 /* crit:end */

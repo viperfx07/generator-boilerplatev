@@ -28,9 +28,8 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                 precision: 10,
                 includePaths: [
                     path.join(dirs.source, dirs.styles),
-                    path.join(dirs.source, dirs.modules), <% if (cssFramework == 'bootstrap') { %>
-                    'node_modules/bootstrap/scss'<% } %><% if (cssFramework == 'foundation') { %>
-                    'node_modules/foundation-sites/scss'<% } %>,
+                    path.join(dirs.source, dirs.modules),
+                    'node_modules/bootstrap/scss'
                 ]
             }).on('error', plugins.sass.logError))
             .pipe(plugins.postcss([
