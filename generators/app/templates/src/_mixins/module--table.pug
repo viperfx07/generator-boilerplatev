@@ -1,0 +1,30 @@
+mixin module--table(title, additionalClass)
+	- title = title || 'Section label'
+	- var totalCols = 5
+	- var totalRows = 5
+	- var i = 0
+	- var y = 0
+	- var z = 0
+
+	section.u-ptb5.u-pbb5.c-module.c-module--table(class=additionalClass)
+		.container.c-module__container
+			if title
+				.u-mbb7.c-module__head
+					h2.c-module__title=title
+
+			.c-module__body
+				.u-table-responsive
+					table
+						thead
+							tr
+								while i<totalCols
+									th Column label
+									- i++
+						tbody
+							while y<totalRows
+								tr
+									while z<totalCols
+										td Row label
+										- z++
+								- y++
+								- z=0

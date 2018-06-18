@@ -4,12 +4,16 @@ import 'slick-carousel';
 export default els =>{
 	const $els = $(els);
 	if ($els.length) {
-		window.jsSlickOptions = {
+		const defaultOptions = {
+			rows: 0
+		};
+
+		const jsSlickOptions = {
 			'hero':{
+				...defaultOptions,
 				dots: true,
 				arrows: false,
 				autoplay: true,
-				rows:0,
 				setCounter(slick, $el){
 				},
 				onSetPosition(slick, $el, opt){

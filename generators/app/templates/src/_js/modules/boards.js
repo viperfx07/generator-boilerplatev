@@ -62,7 +62,7 @@ export default el => {
 				$theCols.each((i, el) => {
 					const $el = $(el);
 					Object.keys(opts.cols).forEach(key => {
-						if ($el.is(`${opts.detailSelector}.visible-${key}`) && !temp.includes(key)) {
+						if ($el.is(`${opts.detailSelector}.u-db-${key}`) && !temp.includes(key)) {
 							$el.addClass('active').html($detailCollapse.clone(true));
 							temp.push(key);
 						}
@@ -97,7 +97,7 @@ export default el => {
 							})
 							.collapse('hide');
 					} else {
-						$theCollapse.addClass('in');
+						$theCollapse.addClass('show');
 						$el.find(`${opts.detailSelector}:not(.active)`).html('');
 					}
 				} else {

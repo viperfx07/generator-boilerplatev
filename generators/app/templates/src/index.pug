@@ -3,54 +3,74 @@ extends _layouts/global.pug
 block content
 
 	.container
-		.row
-			.col-sm-2
-				p
-					| This is content
-					+icon('facebook')
-		.u-mbb8.row
-			.col-sm-6(data-module="matchheight" data-mh-group="mh1" data-module-options="{ property: 'min-height', nonFlexBrowserOnly: 0}")
+		.u-mbb8.u-mbb10
+				p Welcome to BoilerplateV v1.*
+				p Changelogs:
+				ol
+					li
+						strong CSS
+						ul
+							li Using Bootstrap 4 by default.
+							li
+								| Some utility classes are now responsive (check on src/_css/05_utilities/_utilities.base.scss), such as
+								ul
+									li Display utility classes
+									li Spacing utility classes (margin and padding)
+									li Position utility classes
+									li Flex utility classes (check on https://getbootstrap.com/docs/4.1/utilities/flex/)
+							li Removed some icon classes that are not used
+							li Included some modules that are often used (check under src/_mixins). Some examples are shown below
+					li
+						strong JS
+						ul
+							li Removed Vue
+							li Added some node modules that are often used (e.g. wurl, date-fns)
+							li Gulp Notify is enabled by default
+							li Included some modules that are often used (check under src/_mixins). Some examples are shown below
+
+		.row.u-mbb8.u-mbb10-md
+			.col-sm-6
 				.u-embed.u-embed--16by9
-					.u-embed__item.u-bgimg(style="background-image: url(http://unsplash.it/400/300)")
-						.c-section__content
+					.u-embed__item.u-bgimg(style="background-image: url(http://unsplash.it/400/300/?blur)")
+						.u-pxb2.u-pyb2.u-pxb4-sm.u-pyb4-sm.c-section__content
 							p De quibusdam ea incididunt. Veniam eu singulis, aute possumus fabulas neingeniis qui esse incurreret do illum excepteur laboris. Nisi coniunctione nescius noster pariatur. Eu possumus philosophari, non ut quae illum sunt. Labore incurreret ex cupidatat. Qui a eruditionem se si aut firmissimum.
-			.col-sm-6(data-module="matchheight" data-mh-group="mh1" data-module-options="{ property: 'min-height', nonFlexBrowserOnly: 0}")
+			.col-sm-6
 				.u-embed.u-embed--16by9
-					.u-embed__item.u-bgimg(style="background-image: url(http://unsplash.it/500/500)")
-						.c-section__content
+					.u-embed__item.u-bgimg(style="background-image: url(http://unsplash.it/500/500/?blur)")
+						.u-pxb2.u-pyb2.u-pxb4-sm.u-pyb4-sm.c-section__content
 							p De quibusdam ea incididunt. Veniam eu singulis, aute possumus fabulas neingeniis qui esse incurreret do illum excepteur laboris. Nisi coniunctione nescius noster pariatur. Eu possumus philosophari, non ut quae illum sunt. Labore incurreret ex cupidatat. Qui a eruditionem se si aut firmissimum.
 
-		.u-mbb8.row
+		.row.u-mbb8.u-mbb10-md
 			.col
 				h2.u-mbb2 Slider Example
-				.o-slide(data-module="slickjs" data-module-options="{ rows:0, key: 'hero', slidesToShow: 3 }")
+				.o-slide(data-module="slickjs" data-module-options="{ key: 'hero', slidesToShow: 3 }")
 					each item,index in [1,2,3,4,5,6]
-						.u-ovh.o-slide__item
+						.slick-slide.u-ovh.o-slide__item
 							img(src="http://unsplash.it/400/300/?image="+index)
 
-		.u-mbb8
+		.u-mbb8.u-mbb10-md
 			h2.u-mbb2 Focus On Example
 			button#btn1(data-module="focuson" data-module-options="{ target: '#btn2'}") Button 1
 			button#btn2(data-module="focuson" data-module-options="{ target: '#btn1'}") Button 2
 
-		.u-mbb8
+		.u-mbb8.u-mbb10-md
 			h2.u-mbb2 Triggerer Example
 			button#btn3(data-module="triggerer" data-module-options="{ target: '#btn1', triggerEvents: 'focus' }") Trigger Focus of Btn1
 
-		.u-mbb8
+		.u-mbb8.u-mbb10-md
 			h2.u-mbb2 ScrollTo Example
 			button(data-module="scrollto" data-module-options="{ target: 0 }") Scroll to top
 
-		.u-mbb8
+		.u-mbb8.u-mbb10-md
 			h2#toggle-title.u-mbb2 Toggle Example
 			button(data-module="vtoggle" data-module-options="{ target: '#toggle-title', class:'u-dn' }") Show/Hide "Toggle Example" title
 
-		.u-mbb8
+		.u-mbb8.u-mbb10-md
 			h2.u-mbb2 Magnific Popup Example
 			a(href="https://youtu.be/dQw4w9WgXcQ", data-module="magnificpopup" data-module-options="{ key: 'iframe' }") Open Video
 
 
-		.u-mbb8
+		.u-mbb8.u-mbb10-md
 			h2.u-mbb2 Dropdown
 			.dropdown
 				button#dropdownMenuButton.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
@@ -60,7 +80,7 @@ block content
 					a.dropdown-item(href='#') Another action
 					a.dropdown-item(href='#') Something else here
 
-		.u-mbb8
+		.u-mbb8.u-mbb10-md
 			h2.u-mbb2 Collapse
 			a(data-toggle='collapse', href='#collapseExample', role='button', aria-expanded='false', aria-controls='collapseExample')
 				| Link with href
@@ -69,5 +89,14 @@ block content
 			#collapseExample.collapse
 				div Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
 
-	.u-mbb8
-		+module--tabs
+	.u-mbb8.u-mbb10-md
+		+module--accordion("Accordion Module")
+
+	.u-mbb8.u-mbb10-md
+		+module--tabs("Tabs Module")
+
+	.u-mbb8.u-mbb10-md
+		+module--social("Social Module")
+
+	.u-mbb8.u-mbb10-md
+		+module--boards("Boards/Profile Module")
