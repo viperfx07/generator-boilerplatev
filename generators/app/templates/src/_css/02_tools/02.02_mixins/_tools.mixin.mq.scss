@@ -2,7 +2,9 @@
 @mixin mq($min: 0, $max: 0, $breakpoints: $grid-breakpoints) {
 	$type: type-of($min);
 	@if $type==string {
-		@include media-breakpoint-up($min, $breakpoints);
+		@include media-breakpoint-up($min, $breakpoints){
+			@content;
+		}
 	}
 	@else if $type==number {
 		$query: "all" !default;
