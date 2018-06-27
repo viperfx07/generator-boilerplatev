@@ -97,8 +97,9 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
         let src = path.join(dirs.source, dirs.styles, entries.css);
         let ren = path.join(dirs.source, dirs.styles, 'critical.scss');
         return gulp
-            .src(src)
-            .pipe(plugins.changed(ren))
+			.src(src)
+			.pipe(plugins.plumber())
+            .pipe(plugins.changed(src))
             .pipe(plugins.rename(ren))
             .pipe(gulp.dest('.'));
     });
