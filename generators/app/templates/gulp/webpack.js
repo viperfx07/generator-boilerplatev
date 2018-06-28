@@ -6,7 +6,7 @@ import webpackStream from 'webpack-stream';
 import NameAllModulesPlugin from 'name-all-modules-plugin';
 import MinifyJsPlugin from 'babel-minify-webpack-plugin';
 
-export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs) {
+export default function (gulp, plugins, args, config, taskTarget, browserSync, dirs) {
 	let assetsJs = path.join(dirs.assets, dirs.scripts.replace(/^_/, ''), '/');
 	let dest = path.join(taskTarget, assetsJs);
 
@@ -32,6 +32,15 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 			rules: [{
 				test: /\.js$/,
 				loader: "babel-loader",
+				options: {
+					babelrc: false,
+					presets: [
+						["env", {
+							modules: false
+						}], "react", "stage-1"
+					],
+					plugins: ["transform-runtime", "transform-decorators-legacy", "transform-class-properties"]
+				},
 				// bootstrap and ssm needs a babel-loader to transpile es6
 				exclude: /node_modules(\/|\\)(?!(bootstrap|ssm)(\/|\\)).*/
 			}]
@@ -50,7 +59,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 			}),
 			new webpack.optimize.CommonsChunkPlugin({
 				name: 'vendor',
-				minChunks: function(module, count) {
+				minChunks: function (module, count) {
 
 					return module.context && module.context.indexOf("node_modules") !== -1;
 				}
@@ -64,7 +73,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 	};
 
 	gulp.task('webpack-ori', () => {
-		if(args.production){
+		if (args.production) {
 			// When mapbox gl is minified, there's an error
 			// Instead of using babel-minify-webpack-plugin, use UglifyJsPlugin
 			// https://github.com/mapbox/mapbox-gl-js/issues/4359#issuecomment-288001933
@@ -85,10 +94,10 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
 			.pipe(plugins.plumber())
 			.pipe(webpackStream(webpackSettings, webpack))
 			.pipe(gulp.dest(dest))
-			.on('end', !args.production ? browserSync.reload : function(){});
+			.on('end', !args.production ? browserSync.reload : function () {});
 	});
 
-	gulp.task('webpack', ['webpack-ori'], function(){
+	gulp.task('webpack', ['webpack-ori'], function () {
 		gulp.start('copy_otherWWW');
 	});
 }
