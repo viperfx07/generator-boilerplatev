@@ -5,7 +5,7 @@ import lodash from 'lodash';
 
 export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs){
 	let runTimestamp = Math.round(Date.now()/1000);
-	let assetsLoc = `/${dirs.assets}/${dirs.fonts.replace(/^_/, '')}/`;
+	let assetsLoc = `${dirs.assets}/${dirs.fonts.replace(/^_/, '')}/`;
 	let dest = path.join(taskTarget, assetsLoc);
 
 	//icon font settings
