@@ -5,6 +5,10 @@ import webpack from "webpack";
 import webpackStream from "webpack-stream";
 import UglifyJsPlugin from "uglifyjs-webpack-plugin";
 
+// Note:
+// Production and development build might result in different chunks
+// If you work on C# project, please always check the difference and add the references to .csproj files
+
 export default function(
 	gulp,
 	plugins,
