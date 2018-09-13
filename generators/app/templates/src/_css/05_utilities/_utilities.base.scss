@@ -2,17 +2,36 @@
 
 .u {
 	// Border
-	@mixin u-bd($abbrev, $property) {
-		&-#{$abbrev}{
+	@mixin u-bd($abbrev, $property, $infix) {
+		&-#{$abbrev}#{$infix} {
 			#{$property}: 1px solid $border;
-			&0 {
-				#{$property}: 0;
+		}
+		&-#{$abbrev}0#{$infix} {
+			#{$property}: 0;
+		}
+	}
+	@each $breakpoint in map-keys($grid-breakpoints) {
+		@include mq-up($breakpoint) {
+			$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+			@each $prop, $abbrev
+					in (
+						border: bd,
+						border-top: bdt,
+						border-left: bdl,
+						border-right: bdr,
+						border-bottom: bdb
+					)
+			{
+				@include u-bd($abbrev, $prop, $infix);
 			}
 		}
 	}
-	@each $prop,$abbrev  in (border:bd, border-top:bdt, border-left:bdl, border-right:bdr, border-bottom:bdb){
-		@include u-bd($abbrev, $prop);
+	&-bdb0-last{
+		&:last-child{
+			border-bottom: 0;
+		}
 	}
+
 
 	// Border Radius
 	&-bdra {
@@ -40,6 +59,23 @@
 			color: inherit;
 		}
 	}
+	&-focus-outline0{
+		&:focus{
+			outline: 0;
+		}
+	}
+
+	&-cur{
+		&p{
+			cursor: pointer;
+		}
+	}
+
+	&-pi{
+		&n{
+			pointer-events: none;
+		}
+	}
 
 	// Margin and Padding
 	@each $breakpoint in map-keys($grid-breakpoints) {
@@ -47,30 +83,30 @@
 			$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 			@each $prop, $abbrev in (margin: m, padding: p) {
 				@each $size, $length in $spacers {
-					@if($length == 0){
+					@if ($length == 0) {
 						&-#{$abbrev}#{$size}#{$infix} {
 							#{$prop}: $length;
 						}
 					}
-					&-#{$abbrev}tb#{$size}#{$infix}{
+					&-#{$abbrev}tb#{$size}#{$infix} {
 						#{$prop}-top: $length;
 					}
 					&-#{$abbrev}yb#{$size}#{$infix} {
 						#{$prop}-top: $length;
 					}
-					&-#{$abbrev}rb#{$size}#{$infix}{
+					&-#{$abbrev}rb#{$size}#{$infix} {
 						#{$prop}-right: $length;
 					}
 					&-#{$abbrev}xb#{$size}#{$infix} {
 						#{$prop}-right: $length;
 					}
-					&-#{$abbrev}bb#{$size}#{$infix}{
+					&-#{$abbrev}bb#{$size}#{$infix} {
 						#{$prop}-bottom: $length;
 					}
 					&-#{$abbrev}yb#{$size}#{$infix} {
 						#{$prop}-bottom: $length;
 					}
-					&-#{$abbrev}lb#{$size}#{$infix}{
+					&-#{$abbrev}lb#{$size}#{$infix} {
 						#{$prop}-left: $length;
 					}
 					&-#{$abbrev}xb#{$size}#{$infix} {
@@ -89,7 +125,7 @@
 			// &-mya#{$infix} {
 			// 	margin-top: auto;
 			// }
-			&-mra#{$infix}{
+			&-mra#{$infix} {
 				margin-right: auto;
 			}
 			&-mxa#{$infix} {
@@ -101,7 +137,7 @@
 			// &-mya#{$infix} {
 			// 	margin-bottom: auto;
 			// }
-			&-mla#{$infix}{
+			&-mla#{$infix} {
 				margin-left: auto;
 			}
 			&-mxa#{$infix} {
@@ -110,24 +146,65 @@
 		}
 	}
 
-	// Height
-	&-h100 {
-		&p {
-			height: 100%;
+	&-mlb0-first {
+		&:first-child {
+			margin-left: 0;
 		}
-		&vh {
-			height: 100vh;
-		}
-	} // Width 100%
+	}
 
+	&-mtb0-first {
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	&-mrb0-last {
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+	&-mbb0-last {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	// Height
+	&-h{
+		&100 {
+			&p {
+				height: 100%;
+			}
+			&vh {
+				height: 100vh;
+			}
+		}
+		&a{
+			height: auto;
+		}
+	}
+
+
+	// Width 100%
 	&-w100 {
 		&p {
 			width: 100%;
 		}
 	}
 
-	&-maw100 {
-		&p{
+	&-wa{
+		width: auto;
+		&-sm{
+			@include mq(sm){
+				width: auto;
+			}
+		}
+	}
+
+	&-maw {
+		&50p{
+			max-width: 50%;
+		}
+		&100p {
 			max-width: 100%;
 		}
 	}
@@ -141,8 +218,8 @@
 		}
 	}
 
-	&-mih100{
-		&vh{
+	&-mih100 {
+		&vh {
 			min-height: 100vh;
 		}
 	}
@@ -167,6 +244,7 @@
 	// Display
 	&-d {
 		&tb {
+			border-collapse: collapse;
 			&--fixed {
 				width: 100%;
 				table-layout: fixed;
@@ -240,12 +318,36 @@
 	&-ta {
 		&r {
 			text-align: right;
+
+			@include mq(md) {
+				&-md {
+					text-align: right;
+				}
+			}
 		}
 		&c {
 			text-align: center;
+
+			@include mq(sm) {
+				&-sm {
+					text-align: center;
+				}
+			}
 		}
 		&l {
 			text-align: left;
+
+			@include mq(sm) {
+				&-sm {
+					text-align: left;
+				}
+			}
+
+			@include mq(md) {
+				&-md {
+					text-align: left;
+				}
+			}
 		}
 	}
 
@@ -253,6 +355,9 @@
 	&-lh {
 		&1 {
 			line-height: 1;
+		}
+		&b {
+			line-height: 24px;
 		}
 	}
 
@@ -273,18 +378,19 @@
 			@include mq-up($breakpoint) {
 				$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-				@each $val, $abbrev in (static: s, relative: r, absolute:a, fixed: f){
-					&#{$abbrev}#{$infix}{
+				@each $val,
+					$abbrev in (static: s, relative: r, absolute: a, fixed: f)
+				{
+					&#{$abbrev}#{$infix} {
 						position: $val;
 					}
 				}
 			}
 		}
-
 	}
 
 	// Positioning
-	@each $prop, $abbrev in (left: l, right: r, top: t, bottom: b){
+	@each $prop, $abbrev in (left: l, right: r, top: t, bottom: b) {
 		&-#{$abbrev}0 {
 			#{$prop}: 0;
 		}
@@ -296,7 +402,7 @@
 
 	// Font Weight
 	&-fw {
-		@each $weight in (300, 400, 700) {
+		@each $weight in (300, 400, 500, 700) {
 			&#{$weight} {
 				font-weight: $weight;
 			}
@@ -308,6 +414,10 @@
 		&i {
 			font-style: italic;
 		}
+	}
+
+	&-fz0 {
+		font-size: 0;
 	}
 
 	// Text Transfrom
@@ -325,15 +435,15 @@
 		&1 {
 			flex: 1 1 auto;
 		}
-		&g{
-			&0{
+		&g {
+			&0 {
 				flex-grow: 0;
 			}
-			&1{
+			&1 {
 				flex-grow: 1;
 			}
 		}
-		&s{
+		&s {
 			&0 {
 				flex-shrink: 0;
 			}
@@ -342,11 +452,11 @@
 				flex-shrink: 1;
 			}
 		}
-		&b{
-			&0{
+		&b {
+			&0 {
 				flex-basis: 0%;
 			}
-			&a{
+			&a {
 				flex-basis: auto;
 			}
 		}
@@ -391,10 +501,12 @@
 		&1 {
 			opacity: 1;
 		}
+		&-lightmuted{
+			opacity: .6;
+		}
 	}
 
-	@each $c,
-	$hex in $bv-colors {
+	@each $c, $hex in $bv-colors {
 		// Background color
 		&-bgc-#{$c} {
 			background-color: $hex;
@@ -405,6 +517,18 @@
 		&-bdc-#{$c} {
 			border-color: $hex;
 		}
+	}
+
+	&-bdc-error{
+		border-color: red;
+	}
+
+	&-c-placeholder {
+		color: rgba($text, 0.65);
+	}
+
+	&-c-disabled{
+		color: rgba($text, .65);
 	}
 
 	&-c-inherit {

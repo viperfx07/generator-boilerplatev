@@ -1,10 +1,7 @@
 import 'jquery.scrollto';
-import JSON5 from 'json5';
 import wurl from 'wurl';
 
-export default el => {
-	const $el = $(el);
-
+export default (el, $el, opts) => {
 	const MQ_ORDER_FROM_THE_LARGEST = ['lg', 'md', 'sm', 'xs'];
 
 	// Required opts (examples)
@@ -15,7 +12,6 @@ export default el => {
 	// detailCloseSelector: '.js-profile-detail-close'
 	// detailCollapseSelector:'.js-profile-detail-collapse'
 	// stickyHeight: { xs: -55, sm: -63 }
-	const opts = JSON5.parse($el.attr('data-module-options'));
 
 	// Return lg, md, sm, or xs
 	const getMqBasedOnWindowWidth = () => {

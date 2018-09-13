@@ -1,14 +1,13 @@
- /* crit:start */
+/* crit:start */
 @import "functions";
 @import "variables";
 @import "mixins";
-@import "root";
+// @import "root";
 @import "reboot";
-@import "type";
+// @import "type";
 // @import "images";
-@import "code";
+// @import "code";
 @import "grid";
-/* crit:end */
 
 // @import "tables";
 // @import "forms";
@@ -37,8 +36,6 @@
 // @import "popover";
 // @import "carousel";
 
-/* crit:start */
-
 // @import "utilities/align";
 // @import "utilities/background";
 // @import "utilities/borders";
@@ -55,5 +52,5 @@
 // @import "utilities/text";
 // @import "utilities/visibility";
 
-/* crit:end */
+
 // @import "print";

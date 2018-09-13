@@ -7,54 +7,50 @@
  */
 
 ::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
+	background: #b3d4fc;
+	text-shadow: none;
 }
 
 ::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-*:focus{
-	outline: 0;
+	background: #b3d4fc;
+	text-shadow: none;
 }
 
 /* crit:start */
+
 *,
 *:before,
 *:after {
 	flex: 0 1 auto;
 }
 
-html{
+html {
 	font-size: 100%;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-ms-overflow-style: scrollbar;
 }
 
-body{
+body {
 	min-height: 100vh;
 }
 
-fieldset{
+fieldset {
 	margin: 0;
 	padding: 0;
 	border: 0;
 }
 
-input{
+input {
 	@include fzlh(15px, 24px);
 	border-radius: 0;
 	/* crit */
-
-	&[type=search],
-	&[type=text],
-	&[type=password],
-	&[type=tel],
-	&[type=number],
-	&[type=email] {
+	&[type="search"],
+	&[type="text"],
+	&[type="password"],
+	&[type="tel"],
+	&[type="number"],
+	&[type="email"] {
 		box-sizing: border-box;
 		width: 100%;
 		padding: 12px 17px;
@@ -82,34 +78,28 @@ input{
 	}
 }
 
-table {
+table:not(.u-table-unstyled) {
 	width: 100%;
-
-	td, th{
+	td,
+	th {
 		padding: 15px;
-
-		&:first-child{
+		&:first-child {
 			padding-left: 0;
 		}
 	}
-
-	th{
+	th {
 		color: $text;
 		text-align: left;
 	}
-
 	tr {
 		border-bottom: 1px solid $border;
 	}
-
 	thead {
-		tr{
+		tr {
 			border-bottom: 3px solid $border;
 		}
 	}
 }
-
-
 
 select, textarea{
 	// Prevent ios default box shadow and radius
@@ -129,11 +119,6 @@ select, textarea{
 		box-shadow: 0 0 10px 0 rgba(204, 218, 225, 0.7);
 		background-color: #fff;
 	}
-}
-
-label{
-	@include fssmall;
-	font-weight: 700;
 }
 
 select{

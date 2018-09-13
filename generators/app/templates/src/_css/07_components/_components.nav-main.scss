@@ -1,2 +1,21 @@
 .c-nav-main {
+	$_this: &;
+	&__link{
+	}
+	&__indicator{
+		height: 4px;
+		transform:scaleY(0);
+		/* crit */
+		transform-origin: top center;
+		transition: .3s;
+
+		.is-active &{
+			transform: none;
+		}
+
+		#{$_this}__link:hover ~ &,
+		#{$_this}__link:focus ~ &{
+			transform: none;
+		}
+	}
 }

@@ -50,7 +50,8 @@
 @mixin css-triangle(
   $triangle-size,
   $triangle-color,
-  $triangle-direction
+  $triangle-direction,
+  $isPseudo: true,
 ) {
   display: block;
   width: 0;
@@ -58,7 +59,9 @@
 
   border: inset $triangle-size;
 
-  content: '';
+  @if ($isPseudo){
+    content: '';
+  }
 
   @if ($triangle-direction == down) {
     border-bottom-width: 0;

@@ -141,7 +141,7 @@ $enable-print-styles:       true !default;
 $spacer: 1rem !default;
 $spacers: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$baseline: 6px;
+$baseline: <%= baseline %>px;
 $spacers: map-merge(
   (
     0: $baseline * 0,

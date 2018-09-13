@@ -1,18 +1,94 @@
+/* crit:start */
 h1,h2,h3,h4,h5,h6{
 	margin: 0;
 }
 
 // Mixin are from _tools.mixin.fontstyles.scss
-.b-fs1{ @include fs1; }
-.b-fs2{ @include fs2; }
-.b-fs3{ @include fs3; }
-.b-fs4{ @include fs4; }
-.b-fs4{ @include fs4; }
-.b-fs5{ @include fs5; }
-.b-fs6{ @include fs6;}
-.b-fsbodylarge{ @include fsbodylarge; }
-.b-fsbtnsmall{ @include fsbtnsmall; }
-.b-fsblockquote{ @include fsblockquote; }
+h1{
+	@include h1;
+}
+h2{
+	@include h2;
+}
+h3{
+	@include h3;
+}
+h4{
+	@include h4;
+}
+h5{
+	@include h5;
+}
+h6{
+	@include h6;
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+	@include mq-up($breakpoint) {
+		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+		.h1#{$infix} {
+			@include h1;
+		}
+
+		.h2#{$infix} {
+			@include h2;
+		}
+
+		.h3#{$infix} {
+			@include h3;
+		}
+
+		.h4#{$infix} {
+			@include h4;
+		}
+
+		.h5#{$infix} {
+			@include h5;
+		}
+
+		.h6#{$infix} {
+			@include h6;
+		}
+
+		.b-fsbodylarge#{$infix}{
+			@include fsbodylarge;
+		}
+
+		.b-fsbodyregular#{$infix}{
+			@include fzlh(15px, 24px);
+		}
+
+		.small#{$infix}{
+			@include fssmall;
+		}
+	}
+}
+
+.b-fsbtn{ @include fsbtn; }
+
+
+blockquote{
+	@include fsblockquote;
+	quotes: "�" "�" "�" "�";
+	padding-top: 62px;
+	position: relative;
+	color: #505050;
+	@include mq(md){
+		padding-left: 18px;
+	}
+
+	&:before{
+		@include icon(quote);
+		color: rgba(#000, .2);
+		font-size: 40px;
+		max-height: 40px;
+		line-height: 1;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
 
 p{
 	margin-bottom: 30px;

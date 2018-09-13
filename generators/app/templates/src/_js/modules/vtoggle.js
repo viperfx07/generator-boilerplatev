@@ -1,43 +1,57 @@
-import JSON5 from 'json5';
-export default function vtoggle(els){
-	const $els = $(els);
-	$els.each(function(){
-		let $this = $(this);
-		let { key, selfClass, class:cls, target, event:ev, transitionProperty, removeClass, isAddClass } = JSON5.parse($this.attr('data-module-options'));
+export default (el, $el, opts) => {
+	const {
+		key,
+		selfClass,
+		class: cls,
+		target,
+		event: ev,
+		transitionProperty,
+		removeClass,
+		isClosest,
+		isAddClass,
+		toggledEventName
+	} = opts;
 
-		$this.on(ev || 'click', function() {
-			let $this = $(this);
+	$el.on(ev || "click", () => {
+		let $target = $el;
 
-			if(cls){
-				let $target = $(target);
-				const TRANSITION_EVENT = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
-				const LOADING_CLASS = `${cls}-is-loading`;
+		if (target) {
+			$target = $(target);
+		}
 
-				if(!isAddClass){
-					$target.toggleClass(cls);
-				} else{
-					$target.addClass(cls);
-				}
+		if (isClosest) {
+			$target = $el.closest(target);
+		}
 
-				if(transitionProperty){
-					$target
-						.addClass(LOADING_CLASS)
-						.one(TRANSITION_EVENT, function(e){
-							if(transitionProperty == e.originalEvent.propertyName){
-								let $this = $(this);
-								$this.removeClass(LOADING_CLASS);
-							}
-						});
-				}
+		if (cls) {
+			const TRANSITION_EVENT =
+				"webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend";
+			const LOADING_CLASS = `${cls}-is-loading`;
 
-				if(removeClass){
-					$target.removeClass(removeClass);
-				}
+			$target.toggleClass(cls, isAddClass);
+
+			if (transitionProperty) {
+				$target
+					.addClass(LOADING_CLASS)
+					.one(TRANSITION_EVENT, function (e) {
+						if (
+							transitionProperty == e.originalEvent.propertyName
+						) {
+							const $this = $(this);
+							$this.removeClass(LOADING_CLASS);
+						}
+					});
 			}
 
-			if(selfClass){
-				$this.toggleClass(selfClass);
+			if (removeClass) {
+				$target.removeClass(removeClass);
 			}
-		});
+		}
+
+		if (selfClass) {
+			$target.toggleClass(selfClass);
+		}
+
+		$target.trigger(toggledEventName || "vtoggle.toggled");
 	});
-}
+};

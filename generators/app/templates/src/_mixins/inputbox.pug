@@ -1,0 +1,6 @@
+mixin inputbox(id, type, label)
+    - type = type || 'checkbox'
+    label.u-df.u-fw400.o-inputbox(for=id, class=(type=='radio' ? 'o-inputbox--radio' : ''))&attributes(attributes)
+        input.sr-only(id=id, type=type)
+        span.u-db.u-posr.u-tac.u-fxs0.u-mrb2.o-inputbox__box(aria-hidden="true")
+        span.o-inputbox__text=label

@@ -2,10 +2,14 @@
 	margin: 0;
     padding: 0;
     border: 0;
-    background-color: transparent;
+	background-color: transparent;
+	cursor: pointer;
     &:hover,
     &:focus {
         text-decoration: none;
         background-color: transparent;
-    }
+	}
+	&:disabled {
+		cursor: auto;
+	}
 }

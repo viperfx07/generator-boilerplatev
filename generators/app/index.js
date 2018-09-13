@@ -38,6 +38,12 @@ module.exports = class extends Generator {
             message: 'Directory structure standard',
             choices: ['Kentico', 'Umbraco', 'None'],
             default: 'Kentico'
+        },
+        {
+            type: 'input',
+            name: 'baseline',
+            message: 'Baseline (in px size)',
+            default: '6' // Default to current folder name
         },{
             type: 'confirm',
             name: 'skipInstall',
@@ -46,6 +52,7 @@ module.exports = class extends Generator {
         }
         ]).then((answers) => {
             this.projectName =  answers.name;
+            this.baseline =  answers.baseline;
             this.skipInstall = answers.skipInstall;
             this.dirStructure = answers.dirStructure;
         });

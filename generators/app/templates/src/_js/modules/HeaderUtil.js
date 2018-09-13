@@ -1,6 +1,5 @@
 'use strict';
 import '../custom_vendors/jquery-accessibleMegaMenu';
-import JSON5 from 'json5';
 
 export default class HeaderUtil {
 	static initMegamenu() {
