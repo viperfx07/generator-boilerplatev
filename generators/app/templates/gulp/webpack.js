@@ -52,12 +52,19 @@ export default function(
 					// bootstrap and ssm needs a babel-loader to transpile es6
 					exclude: /node_modules(\/|\\)(?!(conditioner-core|bootstrap|boundless-utils-omit-keys|boundless-utils-uuid|recompose|simplestatemanager)(\/|\\)).*/,
 					options: {
-						presets: ["env", "react", "stage-1"],
+						presets: ["@babel/preset-env", "@babel/preset-react"],
 						plugins: [
 							["add-module-exports"],
-							"transform-runtime",
-							"transform-decorators-legacy",
-							"transform-class-properties"
+							"@babel/plugin-transform-runtime",
+							"@babel/plugin-syntax-dynamic-import",
+							[
+								"@babel/plugin-proposal-decorators",
+								{ legacy: true }
+							],
+							[
+								"@babel/plugin-proposal-class-properties",
+								{ loose: false }
+							]
 						]
 					}
 				},

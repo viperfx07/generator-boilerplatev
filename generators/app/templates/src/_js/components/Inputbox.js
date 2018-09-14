@@ -1,5 +1,6 @@
 import cx from "classnames";
 import PropTypes from "prop-types";
+import HandlerPropReturner from "./HandlerPropReturner";
 
 const Inputbox = ({
 	id,
@@ -9,6 +10,7 @@ const Inputbox = ({
 	checked,
 	disabled,
 	className,
+	additionalClassName,
 	boxClassName,
 	additionalBoxClassName,
 	textClassName,
@@ -42,8 +44,9 @@ const Inputbox = ({
 
 	return (
 		<label htmlFor={id} className={_className}>
-			<input
+			<HandlerPropReturner
 				{...inputProps}
+				component="input"
 				id={id}
 				className="sr-only u-fxb0"
 				type={type}
@@ -60,15 +63,15 @@ const Inputbox = ({
 
 Inputbox.defaultProps = {
 	type: "checkbox",
-	name: "",
+	value: "",
 	checked: false,
 	disabled: false,
-	className: '',
-	boxClassName: '',
-	additionalBoxClassName: '',
-	textClassName: '',
-	additionalTextClassName: '',
-	inputProps: {},
+	className: "",
+	boxClassName: "",
+	additionalBoxClassName: "",
+	textClassName: "",
+	additionalTextClassName: "",
+	inputProps: {}
 };
 
 Inputbox.propTypes = {
@@ -84,7 +87,7 @@ Inputbox.propTypes = {
 	additionalBoxClassName: PropTypes.string,
 	textClassName: PropTypes.string,
 	additionalTextClassName: PropTypes.string,
-	inputProps: PropTypes.object,
+	inputProps: PropTypes.object
 };
 
 export default Inputbox;

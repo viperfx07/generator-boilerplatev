@@ -78,6 +78,7 @@ module.exports = class extends Generator {
             skipInstall: this.skipInstall,
             assetsDir: dirByStructures[this.dirStructure].assets,
             otherWWW: dirByStructures[this.dirStructure].otherWWW,
+            baseline: this.baseline,
             _ : underscore,
             pkg: pkg,
             templatePackage: templatePackage
