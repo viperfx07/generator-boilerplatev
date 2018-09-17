@@ -24,7 +24,7 @@ A generator to scaffold out the front end boilerplate using BoilerplateV. Boiler
 >- To install latest and save to dev a module => yarn add <module>@latest --dev
 
 # Requirements
-1. Node = use the latest version
+1. Node >= v8.x
 2. Python (this is required by imagemin, but without it, it works just fine)
 3. Yarn (alternative of npm but faster, so it's recommended to use)
 4. Gulp (run **npm i -g gulp** if you don't have it)
@@ -44,7 +44,7 @@ open Xcode and go to ***Preferences -> Download -> Command Line Tools -> Install
 > You may have some issues compiling [BrowserSync](http://www.browsersync.io/) during installation of packages. Please go to [http://www.browsersync.io/docs/#windows-users](http://www.browsersync.io/docs/#windows-users) for more information on how to get all the needed dependencies.
 
 ### Node.js
-Check to see if you already have Node installed. Do this by bringing up a terminal/command prompt and type `node -v`. If the response shows a version at or above `v0.12.x`, you are all set and can proceed to installing Yeoman, Gulp, and Bower. If you see an error and/or your version is too low, navigate to the [Node.js](http://nodejs.org/) website and install Node from there.
+Check to see if you already have Node installed. Do this by bringing up a terminal/command prompt and type `node -v`. If the response shows a version at or above `v8.x`, you are all set and can proceed to installing Yeoman, Gulp, and Bower. If you see an error and/or your version is too low, navigate to the [Node.js](http://nodejs.org/) website and install Node from there.
 
 ### Yeoman & Gulp
 Once you have Node installed, make sure you have these tools by opening up a terminal/command prompt and entering following commands:
