@@ -121,6 +121,7 @@
   "resolutions":{
 	 "chokidar": "2.0.0",
 	 "watchpack": "1.4.x",
-	 "natives": "^1.1.3"
+	 "natives": "^1.1.3",
+	 "svgo": "1.0.5"
   }
 }
