@@ -26,8 +26,25 @@
 			}
 		}
 	}
-	&-bdb0-last{
-		&:last-child{
+
+	&-bdl0-first {
+		&:first-child {
+			border-left: 0;
+		}
+	}
+
+	&-bdt0-first {
+		&:first-child {
+			border-top: 0;
+		}
+	}
+	&-bdr0-last {
+		&:last-child {
+			border-right: 0;
+		}
+	}
+	&-bdb0-last {
+		&:last-child {
 			border-bottom: 0;
 		}
 	}
@@ -430,10 +447,23 @@
 		}
 	}
 
+	// Text Decoration
+	&-td{
+		&u {
+			text-decoration: underline;
+		}
+		&n {
+			text-decoration: none;
+		}
+	}
+
 	// Flex
 	&-fx {
 		&1 {
 			flex: 1 1 auto;
+			&10{
+				flex: 1 1 0%;
+			}
 		}
 		&g {
 			&0 {
@@ -465,22 +495,6 @@
 		}
 		&ww {
 			flex-wrap: wrap;
-		}
-	}
-
-	&-ai {
-		&b {
-			align-items: baseline;
-		}
-	}
-
-	// Justify Content
-	&-jc {
-		&sb {
-			justify-content: space-between;
-		}
-		&fe {
-			justify-content: flex-end;
 		}
 	}
 
@@ -521,14 +535,6 @@
 
 	&-bdc-error{
 		border-color: red;
-	}
-
-	&-c-placeholder {
-		color: rgba($text, 0.65);
-	}
-
-	&-c-disabled{
-		color: rgba($text, .65);
 	}
 
 	&-c-inherit {

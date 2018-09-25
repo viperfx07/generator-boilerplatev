@@ -49,9 +49,12 @@ export default function (
 				{
 					test: /\.js$/,
 					loader: 'babel-loader',
-					// bootstrap and ssm needs a babel-loader to transpile es6
-					exclude: /node_modules(\/|\\)(?!(conditioner-core|bootstrap|boundless-utils-omit-keys|boundless-utils-uuid|recompose|simplestatemanager)(\/|\\)).*/,
+					// put the modules name here if it needs es6 transpilation
+					exclude: /node_modules(\/|\\)(?!(conditioner-core|bootstrap|recompose|simplestatemanager)(\/|\\)).*/,
 					options: {
+						// note: if some modules don't work on IE10/IE11, try loose mode on preset-env
+						// example below:
+						// presets: [['@babel/preset-env', { loose: true }], '@babel/preset-react'],
 						presets: ['@babel/preset-env', '@babel/preset-react'],
 						plugins: [
 							['add-module-exports'],
