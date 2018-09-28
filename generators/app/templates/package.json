@@ -88,6 +88,7 @@
 	"gulp-sourcemaps": "latest",
 	"gulp-util": "^3.0.8",
 	"hamburgers": "latest",
+	"hash-files": "^1.1.1",
 	"headroom.js": "^0.9.4",
 	"instafeed.js": "^1.4.1",
 	"jquery-match-height": "latest",
