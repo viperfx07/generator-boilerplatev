@@ -1,9 +1,11 @@
 'use strict';
 
 import path from 'path';
+import glob from 'glob';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';<% if (jsFramework === 'Vue') { %>
+import VueLoaderPlugin from 'vue-loader/lib/plugin';<% } %>
 
 // Note:
 // Production and development build might result in different chunks
@@ -27,6 +29,15 @@ export default function (
 
 	const webpackSettings = {
 		mode: args.production ? 'production' : 'development',
+		entry: () => {
+			const entryArray = [...glob.sync('./src/_js/*.js')<% if (jsFramework === 'Vue') { %>, ...glob.sync('./src/_js/pages/*.js')<% } %>];
+			const entryObject = entryArray.reduce((acc, item) => {
+				const name = path.basename(item).replace(/\.js$/ig, '');
+				acc[name] = item;
+				return acc;
+			}, {});
+			return entryObject;
+		},
 		output: {
 			// Not using publicPath, because we want to load async js dynamically from the assets folder
 			// where the entry point is located
@@ -38,11 +49,12 @@ export default function (
 		},
 		externals: {
 			jquery: 'jQuery',
+			vue: 'Vue', <% if (jsFramework === 'React') { %>
 			react: 'React',
 			'react-dom': 'ReactDOM',
 			'prop-types': 'PropTypes',
 			mobx: 'mobx',
-			'mobx-react': 'mobxReact',
+			'mobx-react': 'mobxReact', <% } %>
 		},
 		module: {
 			rules: [
@@ -55,7 +67,7 @@ export default function (
 						// note: if some modules don't work on IE10/IE11, try loose mode on preset-env
 						// example below:
 						// presets: [['@babel/preset-env', { loose: true }], '@babel/preset-react'],
-						presets: ['@babel/preset-env', '@babel/preset-react'],
+						presets: ['@babel/preset-env'<% if (jsFramework === 'React') { %>,'@babel/preset-react' <% } %>],
 						plugins: [
 							['add-module-exports'],
 							'@babel/plugin-transform-runtime',
@@ -68,14 +80,84 @@ export default function (
 							['@babel/plugin-proposal-class-properties', { loose: true }],
 						],
 					},
-				},
+				}, <% if (jsFramework === 'Vue') { %>
 				{
+					test: /\.vue$/,
+					loader: 'vue-loader',
+				}, {
+					test: /\.pug$/,
+					loader: 'pug-plain-loader',
+				}, {
 					test: /\.css$/,
-					loaders: ['style-loader', 'css-loader?modules'],
-				},
+					oneOf: [
+						// this matches `<style module>`
+						{
+							resourceQuery: /module/,
+							use: [
+								'vue-style-loader',
+								{
+									loader: 'css-loader',
+									options: {
+										modules: true,
+										localIdentName: args.production ? '[hash:base64:5]' : '[path][name]---[local]---[hash:base64:5]',
+										camelCase: true,
+									}
+								}
+							]
+						},
+						// this matches plain `<style>` or `<style scoped>`
+						{
+							use: [
+								'vue-style-loader',
+								'css-loader'
+							]
+						}
+					],
+				}, {
+					test: /\.scss$/,
+					oneOf: [
+						// this matches `<style module>`
+						{
+							resourceQuery: /module/,
+							use: [
+								'vue-style-loader',
+								{
+									loader: 'css-loader',
+									options: {
+										modules: true,
+										localIdentName: args.production ? '[hash:base64:5]' : '[path][name]---[local]---[hash:base64:5]',
+										camelCase: true,
+									}
+								},
+								{
+									loader: 'sass-loader',
+									options: {
+										data: `
+											@import "src/_css/01_settings/_settings.bootstrap.scss";
+											@import "src/_css/01_settings/_settings.icon.scss";
+											@import "src/_css/02_tools/02.01_functions/_tools.function.icon.scss";
+											@import "src/_css/02_tools/02.02_mixins/_tools.mixin.fontstyles.scss";
+											@import "src/_css/02_tools/02.02_mixins/_tools.mixin.foundation.scss";
+											@import "src/_css/02_tools/02.02_mixins/_tools.mixin.mq.scss";
+										`,
+									},
+								},
+							]
+						},
+						// this matches plain `<style>` or `<style scoped>`
+						{
+							use: [
+								'vue-style-loader',
+								'css-loader',
+								'sass-loader'
+							]
+						}
+					],
+				}, <% } %>
 			],
 		},
-		devtool: 'source-map',
+		devtool: 'source-map', <% if (jsFramework === 'Vue') { %>
+		plugins: [new VueLoaderPlugin()], <% } %>
 		optimization: {
 			minimizer: [
 				new UglifyJsPlugin({

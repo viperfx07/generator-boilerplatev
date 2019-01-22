@@ -123,7 +123,7 @@ select, textarea{
 
 select{
 	border-radius: 0;
-	background: #fff url('<%= assetsDir %>/<%=templatePackage.config.directories.image %>/chevron-down.svg') calc(100% - 16px) 50% no-repeat;
+	background: #fff url('<%= assetsDir %>/img/chevron-down.svg') calc(100% - 16px) 50% no-repeat;
 	background-size: 12px auto;
 	&::-ms-expand {
 		display: none;

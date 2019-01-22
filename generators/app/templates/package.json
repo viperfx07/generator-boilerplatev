@@ -7,9 +7,10 @@
 	"emitty": "1.4.0",
 	"eslint": "^5.5.0",
 	"eslint-config-airbnb": "^17.0.0",
-	"eslint-plugin-import": "^2.13.0",
+	"eslint-plugin-import": "^2.13.0", <% if (jsFramework === 'React') { %>
 	"eslint-plugin-jsx-a11y": "^6.1.1",
-	"eslint-plugin-react": "^7.10.0",
+	"eslint-plugin-react": "^7.10.0", <% } else { %>
+	"eslint-plugin-vue": "^4.7.1", <% } %>
 	"foldero": "latest",
 	"gulp-cheerio": "latest",
 	"gulp-data": "latest",
@@ -20,7 +21,8 @@
 	"imagemin-pngquant": "latest",
 	"prettier-eslint": "^8.8.2",
 	"pug": "latest",
-	"pug-include-glob": "latest"
+	"pug-include-glob": "latest", <% if (jsFramework === 'Vue') { %>
+	"vue-eslint-parser": "^3.2.2" <% } %>
   },
   "//": "CUSTOM CONFIGURATION",
   "config": {
@@ -55,20 +57,23 @@
 	"@babel/plugin-proposal-decorators": "^7.0.0",
 	"@babel/plugin-syntax-dynamic-import": "^7.0.0",
 	"@babel/plugin-transform-runtime": "^7.0.0",
-	"@babel/preset-env": "^7.0.0",
-	"@babel/preset-react": "^7.0.0",
+	"@babel/preset-env": "^7.0.0", <% if (jsFramework === 'React') { %>
+	"@babel/preset-react": "^7.0.0", <% } %>
 	"@babel/register": "^7.0.0",
 	"@babel/runtime": "^7.0.0",
 	"autoprefixer": "latest",
+	"axios": "^0.18.0",
 	"babel-eslint": "^8.2.6",
 	"babel-loader": "^8.0.2",
 	"babel-plugin-add-module-exports": "^1.0.0",
 	"bootstrap": "^4.1.1",
-	"clamp-js-main": "^0.11.4",
-	"classnames": "^2.2.6",
-	"conditioner-core": "^2.3.1",
+	"clamp-js-main": "^0.11.4", <% if (jsFramework === 'React') { %>
+	"classnames": "^2.2.6", <% } %>
+	"conditioner-core": "^2.3.1", <% if (jsFramework === 'Vue') { %>
+	"css-loader": "^2.1.0", <% } %>
 	"date-fns": "^1.29.0",
 	"feature.js": "^1.0.0",
+	"glob": "^7.1.3",
 	"gulp": "^3.9.1",
 	"gulp-changed": "latest",
 	"gulp-check-filesize": "latest",
@@ -102,18 +107,25 @@
 	"postcss-assets": "latest",
 	"postcss-critical-split": "latest",
 	"postcss-pxtorem": "latest",
-	"postcss-sprites": "latest",
-	"raf-throttle": "^2.0.3",
+	"postcss-sprites": "latest", <% if (jsFramework === 'Vue') { %>
+	"pug-plain-loader": "^1.0.0", <% } %>
+	"raf-throttle": "^2.0.3", <% if (jsFramework === 'React') { %>
 	"react-loadable": "^5.5.0",
-	"recompose": "^0.27.1",
+	"recompose": "^0.27.1", <% } %>
 	"rucksack-css": "latest",
-	"run-sequence": "latest",
+	"run-sequence": "latest", <% if (jsFramework === 'Vue') { %>
+	"sass-loader": "^7.1.0", <% } %>
 	"simplestatemanager": "latest",
 	"slick-carousel": "latest",
 	"smoothscroll-for-websites": "^1.4.6",
-	"sprintf-js": "^1.1.1",
+	"sprintf-js": "^1.1.1", <% if (jsFramework === 'Vue') { %>
+	"style-loader": "^0.23.1", <% } %>
 	"twitter-fetcher": "^18.0.2",
-	"uglifyjs-webpack-plugin": "^1.3.0",
+	"uglifyjs-webpack-plugin": "^1.3.0", <% if (jsFramework === 'Vue') { %>
+	"vue": "^2.5.21",
+	"vue-loader": "^15.4.2",
+	"vue-style-loader": "^4.1.2",
+	"vue-template-compiler": "^2.5.21", <% } %>
 	"webpack": "^4.19.0",
 	"webpack-stream": "viperfx07/webpack-stream",
 	"wrench": "latest",

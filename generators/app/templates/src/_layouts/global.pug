@@ -3,9 +3,9 @@ block config
 	//- Setup site's base URL to match the "baseUrl" key within `package.json`
 	//- Otherwise default to relative pathing
 	- var baseUrl = config.baseUrl || './'
-	- var assetsDir = '<%= assetsDir %>'
-	- var cssDir = assetsDir + '/<%= templatePackage.config.directories.styles.replace(/^_/, "") %>'
-	- var jsDir = assetsDir + '/<%= templatePackage.config.directories.scripts.replace(/^_/, "") %>'
+	- var assetsDir = config.directories.assets
+	- var cssDir = assetsDir + '/' + config.directories.styles.replace(/^_/, "")
+	- var jsDir = assetsDir + '/' + config.directories.scripts.replace(/^_/, "")
 
 block childConfig
 
@@ -58,24 +58,28 @@ html.no-js
 		noscript#deferred-styles
 			link(rel='stylesheet', href=cssDir + '/main.css')
 		script.
-			!function(){var e=function(){var e=document.getElementById("deferred-styles"),n=document.createElement("div");n.innerHTML=e.textContent,document.body.appendChild(n),e.parentElement.removeChild(e)},n=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame;n?n(function(){window.setTimeout(e,0)}):window.addEventListener("load",e)}();
-	body
-		header.c-header
+			!function () { var e = function () { var e = document.getElementById("deferred-styles"); (n = document.createElement("div")).innerHTML = e.textContent.trim(); for (var t = n.childNodes, i = 0; i < t.length; i++)document.head.insertBefore(t[i], e); e.parentElement.removeChild(e) }, n = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame; n ? n(function () { window.setTimeout(e, 0) }) : window.addEventListener("load", e) }();
+	body.u-df.u-fxdc
+		<% if(jsFramework == 'React') {%>header.c-header
 			block header
 				include ../_partials/header.pug
-		main
+		main.u-fx1
 			block content
 
 		footer.c-footer
 			block footer
-				include ../_partials/footer.pug
+				include ../_partials/footer.pug<% } else {%>
+		#app <% } %>
 
-		script(defer src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,matchMedia,modernizr:placeholder,Array.prototype.includes,Array.prototype.find,Array.prototype.findIndex,Array.from,Element.prototype.dataset")
-		script(defer src="https://cdn.jsdelivr.net/combine/npm/jquery@3/dist/jquery.js,npm/react@16.4.0/umd/react.development.js,npm/react-dom@16.4.0/umd/react-dom.development.js,npm/prop-types@15.6.1/prop-types.js,npm/mobx@3.3.0/lib/mobx.umd.js,npm/mobx-react@4.3.2/index.js,npm/jquery-validation@1.17.0/dist/jquery.validate.js")
+		script(defer src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,matchMedia,modernizr:placeholder,Array.prototype.includes,Array.prototype.find,Array.prototype.findIndex,Array.from,Element.prototype.dataset")<% if(jsFramework == 'React') {%>
+		script(defer src="https://cdn.jsdelivr.net/combine/npm/jquery@3/dist/jquery.js,npm/react@16.4.0/umd/react.development.js,npm/react-dom@16.4.0/umd/react-dom.development.js,npm/prop-types@15.6.1/prop-types.js,npm/mobx@3.3.0/lib/mobx.umd.js,npm/mobx-react@4.3.2/index.js,npm/jquery-validation@1.17.0/dist/jquery.validate.js")<% } else {%>
+		script(defer src="https://cdn.jsdelivr.net/combine/npm/jquery@3/dist/jquery.js,npm/vue@2.5.22/dist/vue.js")<% } %>
 
 		//- how to make it read the arguments
 		script(defer src= jsDir + '/manifest.js')
 		script(defer src= jsDir + '/main.js')
+
+		block scripts
 		//- Google Analytics: change UA-XXXXX-X to be your site's ID.
 		//-
 			script

@@ -1,6 +1,0 @@
-{
-	"root": ".",
-	"clean_urls": "true",
-	"basic_auth": false,
-	"_comment": "just a comment. To enable basic_auth, use https://github.com/viperfx07/heroku-buildpack-static"
-}

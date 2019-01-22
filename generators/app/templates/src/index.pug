@@ -1,10 +1,12 @@
-extends _layouts/global.pug
+extends _layouts/global.pug <% if(jsFramework == 'Vue') { %>
+
+block scripts
+	script(defer src=jsDir + '/page-home.js')<% } else { %>
 
 block content
-
 	.container
 		.u-mbb8.u-mbb10
-				p Welcome to BoilerplateV v1.*
+				p Welcome to BoilerplateV v2.2.6
 				p Changelogs:
 				ol
 					li
@@ -100,3 +102,4 @@ block content
 
 	.u-mbb8.u-mbb10-md
 		+module--boards("Boards/Profile Module")
+<%}%>

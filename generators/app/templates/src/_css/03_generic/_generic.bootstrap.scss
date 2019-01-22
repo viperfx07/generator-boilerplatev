@@ -1,6 +1,9 @@
 /* crit:start */
-@import "functions";
-@import "variables";
+
+// functions and variable are replaced by _settings.bootstrap.scss
+// @import "functions";
+// @import "variables";
+
 @import "mixins";
 // @import "root";
 @import "reboot";
