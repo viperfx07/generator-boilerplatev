@@ -10,7 +10,8 @@
 	"eslint-plugin-import": "^2.13.0", <% if (jsFramework === 'React') { %>
 	"eslint-plugin-jsx-a11y": "^6.1.1",
 	"eslint-plugin-react": "^7.10.0", <% } else { %>
-	"eslint-plugin-vue": "^4.7.1", <% } %>
+	"eslint-plugin-vue": "^4.7.1",
+	"file-loader": "^3.0.1", <% } %>
 	"foldero": "latest",
 	"gulp-cheerio": "latest",
 	"gulp-data": "latest",
@@ -18,12 +19,21 @@
 	"gulp-pug": "latest",
 	"gulp-watch": "latest",
 	"imagemin-jpegoptim": "latest",
-	"imagemin-pngquant": "latest",
+	"imagemin-pngquant": "latest", <% if (jsFramework === 'Vue') { %>
+	"import-glob-loader2": "^1.1.2",
+	"mini-css-extract-plugin": "^0.5.0", <% } %>
 	"prettier-eslint": "^8.8.2",
 	"pug": "latest",
 	"pug-include-glob": "latest", <% if (jsFramework === 'Vue') { %>
-	"vue-eslint-parser": "^3.2.2" <% } %>
-  },
+	"resolve-url-loader": "^3.0.0",
+	"vue-eslint-parser": "^3.2.2",
+	"vue-styleguidist": "^3.0.0",
+	"webfonts-loader": "^4.3.0" <% } %>
+  }, <% if (jsFramework === 'Vue') { %>
+  "scripts": {
+  	"styleguide": "vue-styleguidist server",
+  	"styleguide:build": "vue-styleguidist build"
+  }, <% } %>
   "//": "CUSTOM CONFIGURATION",
   "config": {
     "//": "Entry files",

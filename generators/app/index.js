@@ -92,23 +92,16 @@ module.exports = class extends Generator {
 			pkg: pkg,
 		};
 
-		var src = this.templatePath();
-		var dest = this.destinationPath();
-
 		// Files
 		const copyTplDirs = [
+			`${this.jsFramework}/`,
 			'gulp/*',
 			'src/*',
 			'src/_css/',
 			'src/_data/',
 			'src/_fonts/',
 			'src/_img/',
-			'src/_js/*',
-			`src/_js/${this.jsFramework}/`, // js framework folder only
-			`src/_js/components/${this.jsFramework}/`, // js framework specific components only
-			'src/_js/custom_vendors/',
-			'src/_js/modules/',
-			'src/_js/utils/',
+			'src/_js/',
 			'src/_layouts/',
 			'src/_mixins/',
 			'src/_partials/',
