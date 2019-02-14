@@ -116,7 +116,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
         }
     });
 
-    gulp.task('sass', () => {
+    gulp.task('sass', (cb) => {
 		if (args.production) {
 			serial('clone-main', ['sass-rest', 'sass-critical'], 'copy_otherWWW', cb);
 		} else {
