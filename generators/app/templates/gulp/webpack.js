@@ -4,6 +4,7 @@ import path from 'path';
 import glob from 'glob';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
+import serial from 'run-sequence';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';<% if (jsFramework === 'Vue') { %>
 import VueLoaderPlugin from 'vue-loader/lib/plugin';<% } %>
 
@@ -177,7 +178,7 @@ export default function (
 		.pipe(gulp.dest(dest))
 		.on('end', !args.production ? browserSync.reload : () => {}));
 
-	gulp.task('webpack', ['webpack-ori'], () => {
-		gulp.start('copy_otherWWW');
+	gulp.task('webpack', (cb) => {
+		serial('webpack-ori', 'copy_otherWWW', cb);
 	});
 }

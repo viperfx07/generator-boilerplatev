@@ -55,13 +55,13 @@ gulp.task('default', ['clean'], () => {
 });
 
 // Build production-ready code
-gulp.task('build', ()=>{
-  serial(['copy', 'iconfont', 'fonts', 'webpack'], 'sass');
+gulp.task('build', (cb)=>{
+  serial(['copy', 'iconfont', 'fonts', 'webpack'], 'sass', cb);
 });
 
 // Server tasks with watch
-gulp.task('serve', ()=>{
-  serial(['imagemin', 'iconfont', 'fonts', 'pug','webpack', 'copy', 'watch'], 'sass', 'browserSync');
+gulp.task('serve', (cb)=>{
+  serial(['imagemin', 'iconfont', 'fonts', 'pug','webpack', 'copy', 'watch'], 'sass', 'browserSync', cb);
 });
 
 // Testing
