@@ -3,6 +3,7 @@
 import path from 'path';
 import fs from 'fs';
 import hashFiles from 'hash-files';
+import serial from 'run-sequence';
 
 export default function (
 	gulp,
@@ -52,7 +53,8 @@ export default function (
 				fontName: iconFontSettings.fontName, // required
 				// appendUnicode: true, // recommended option
 				formats: ['ttf', 'eot', 'woff', 'woff2', 'svg'], // default, 'woff2' and 'svg' are available
-				timestamp: runTimestamp, // recommended to get consistent builds when watching files
+				timestamp: 1, // timestamp is recommended to get consistent builds when watching files.
+				// set a static timestamp to 1 so that the font binaries don't change when there's no new icons added
 
 				// If some font glyphs aren't converted properly you should append the normalize:true option and a fontHeight greater than 1000 (fontHeight: 1001).
 				normalize: true,
@@ -90,7 +92,7 @@ export default function (
 		})
 		.pipe(gulp.dest(dest)));
 
-	gulp.task('iconfont', ['pre-iconfont'], () => {
-		gulp.start('iconfont-ori');
+	gulp.task('iconfont', (cb) => {
+		serial('pre-iconfont', 'iconfont-ori', cb);
 	});
 }

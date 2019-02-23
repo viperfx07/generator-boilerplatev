@@ -39,10 +39,6 @@ module.exports = {
 			filename: '[name].js',
 			chunkFilename: '[name].js?v=[chunkhash]',
 		},
-		externals: {
-			jquery: 'jQuery',
-			vue: 'Vue',
-		},
 		module: {
 			rules: [{
 					test: /\.js$/,

@@ -24,7 +24,7 @@
 	"mini-css-extract-plugin": "^0.5.0", <% } %>
 	"prettier-eslint": "^8.8.2",
 	"pug": "latest",
-	"pug-include-glob": "latest", <% if (jsFramework === 'Vue') { %>
+	"pug-include-glob": "0.3.3", <% if (jsFramework === 'Vue') { %>
 	"resolve-url-loader": "^3.0.0",
 	"vue-eslint-parser": "^3.2.2",
 	"vue-styleguidist": "^3.0.0",
