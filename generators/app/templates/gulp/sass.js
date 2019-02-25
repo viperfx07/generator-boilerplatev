@@ -3,8 +3,8 @@
 import fs from 'fs';
 import path from 'path';
 import autoprefixer from 'autoprefixer';
-import sprites from 'postcss-sprites';
-import assets from 'postcss-assets';
+// import sprites from 'postcss-sprites';
+// import assets from 'postcss-assets';
 import pxtorem from 'postcss-pxtorem';
 import criticalCSS from 'postcss-critical-split';
 import rucksack from 'rucksack-css';
@@ -36,18 +36,18 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync, di
                 autoprefixer({ browsers: ["last 1 major version", ">= 1%", "Chrome >= 45", "Firefox >= 38", "Edge >= 12", "Explorer >= 10", "iOS >= 9", "Safari >= 9", "Android >= 4.4", "Opera >= 30"] }),
                 rucksack({ reporter: true }),
                 pxtorem({ replace: false }),
-                assets({
-                    loadPaths: [spriteDest]
-                }),
-                // Use spriteurl function to get the correct url
-                // Note: the sprite.png needs to be minified/optimized
-                sprites({
-                    stylesheetPath: dest,
-                    spritePath: spriteDest,
-                    basePath: taskTarget,
-                    filterBy: (image) => (!/\.png$/.test(image.url)) ? Promise.reject() : Promise.resolve(),
-                    verbose: true,
-                }),
+                // assets({
+                //     loadPaths: [spriteDest]
+                // }),
+                //// Use spriteurl function to get the correct url
+                //// Note: the sprite.png needs to be minified/optimized
+                // sprites({
+                //     stylesheetPath: dest,
+                //     spritePath: spriteDest,
+                //     basePath: taskTarget,
+                //     filterBy: (image) => (!/\.png$/.test(image.url)) ? Promise.reject() : Promise.resolve(),
+                //     verbose: true,
+                // }),
                 isCritical ? criticalCSS({
                     blockTag: 'crit',
                     startTag: 'crit:start',

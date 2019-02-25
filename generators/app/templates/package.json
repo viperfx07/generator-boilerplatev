@@ -114,10 +114,8 @@
 	"magnific-popup": "^1.1.0",
 	"minimist": "^1.2.0",
 	"popper.js": "^1.14.3",
-	"postcss-assets": "latest",
 	"postcss-critical-split": "latest",
-	"postcss-pxtorem": "latest",
-	"postcss-sprites": "latest", <% if (jsFramework === 'Vue') { %>
+	"postcss-pxtorem": "latest", <% if (jsFramework === 'Vue') { %>
 	"pug-plain-loader": "^1.0.0", <% } %>
 	"raf-throttle": "^2.0.3", <% if (jsFramework === 'React') { %>
 	"react-loadable": "^5.5.0",
