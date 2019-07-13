@@ -1,10 +1,18 @@
-'use strict';
+"use strict";
 
-export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs) {
+export default function(
+  gulp,
+  plugins,
+  args,
+  config,
+  taskTarget,
+  browserSync,
+  dirs
+) {
   // BrowserSync
-  gulp.task('browserSync', () => {
+  gulp.task("browsersync", () => {
     browserSync.init({
-      open: 'local',
+      open: "local",
       startPath: config.baseUrl,
       server: {
         baseDir: taskTarget,

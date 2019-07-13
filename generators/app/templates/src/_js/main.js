@@ -1,15 +1,6 @@
 "use strict";
 
 /**
- * Some useful packages (you can install by using npm)
- * 1. slick-carousel (pre-installed) = Simple, easy, responsive carousel (buggy centerMode - variableWidth - lazyMode)
- * 2. jquery-match-height (pre-installed) = Use this to match the height of elements. Either use this or Equalizer from Foundation
- *
- * IMPORTANT:
- * To import async-ly, you need to wrap your codes in require.ensure([], () => { });
- * It's best not to async plugins, to leverage browser cache
- * Ref: https://webpack.js.org/guides/code-splitting/
- *
  * NOTES:
  * This boilerplate uses CDN/external for jQuery/React package. Configured in gulp/webpack.js.
  * This to prevent the needs of jQuery/React from node_modules
