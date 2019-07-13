@@ -4,13 +4,10 @@ import path from 'path';
 import glob from 'glob';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
-import serial from 'run-sequence';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';<% if (jsFramework === 'Vue') { %>
 import VueLoaderPlugin from 'vue-loader/lib/plugin';<% } %>
 
-// Note:
-// Production and development build might result in different chunks
-// If you work on C# project, please always check the difference and add the references to .csproj files
+const pathResolve = path.resolve.bind(path, path.join(__dirname, '../'))
 
 export default function (
 	gulp,
@@ -56,6 +53,15 @@ export default function (
 			'prop-types': 'PropTypes',
 			mobx: 'mobx',
 			'mobx-react': 'mobxReact', <% } %>
+		},
+		resolve: {
+			alias: {
+				'@': pathResolve('src/_js'),
+				'@@': pathResolve('src'),
+				// the ScrollMagic alias needed for debug indicators when running define(['ScrollMagic'], factory)
+				ScrollMagic:
+					'scrollmagic/scrollmagic/uncompressed/ScrollMagic.js'
+			}
 		},
 		module: {
 			rules: [
@@ -171,14 +177,18 @@ export default function (
 		},
 	};
 
-	gulp.task('webpack-ori', () => gulp
-		.src(path.join(dirs.source, dirs.scripts, config.entries.js))
-		.pipe(plugins.plumber())
-		.pipe(webpackStream(webpackSettings, webpack))
-		.pipe(gulp.dest(dest))
-		.on('end', !args.production ? browserSync.reload : () => {}));
+	gulp.task("webpack-ori", () =>
+		gulp
+			.src(
+				path
+					.join(dirs.source, dirs.scripts, config.entries.js)
+					.replace(/\\/g, "/")
+			)
+			.pipe(plugins.plumber())
+			.pipe(webpackStream(webpackSettings, webpack))
+			.pipe(gulp.dest(dest))
+			.on("end", !args.production ? browserSync.reload : () => {})
+	);
 
-	gulp.task('webpack', (cb) => {
-		serial('webpack-ori', 'copy_otherWWW', cb);
-	});
+	gulp.task('webpack', gulp.series('webpack-ori', 'copy_otherWWW'));
 }

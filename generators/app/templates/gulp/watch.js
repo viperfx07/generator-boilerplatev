@@ -1,63 +1,93 @@
-'use strict';
+"use strict";
 
-import path from 'path';
-import serial from 'run-sequence';
+import path from "path";
 
-export default function(gulp, plugins, args, config, taskTarget, browserSync, dirs) {
+export default function(
+  gulp,
+  plugins,
+  args,
+  config,
+  taskTarget,
+  browserSync,
+  dirs
+) {
   // Watch task
-  gulp.task('watch', () => {
+  gulp.task("watch", () => {
     if (!args.production) {
       // Styles
-      gulp.watch([
-        path.join(dirs.source, dirs.styles, '**/*.{scss,sass}'),
-        path.join(dirs.source, dirs.modules, '**/*.{scss,sass}')
-      ], ['sass']);
+      gulp.watch(
+        [
+          path.join(dirs.source, dirs.styles, "**/*.{scss,sass}"),
+          path.join(dirs.source, dirs.modules, "**/*.{scss,sass}")
+        ].map(item => item.replace(/\\/g, "/")),
+        gulp.series("sass")
+      );
 
       // Scripts
-      gulp.watch([
-        path.join(dirs.source, dirs.scripts, '**/*.{js,vue}')], ['webpack']);
+      gulp.watch(
+        [path.join(dirs.source, dirs.scripts, "**/*.{js,vue}")].map(item =>
+          item.replace(/\\/g, "/")
+        ),
+        gulp.series("webpack")
+      );
 
       // Fonts
-      // Use gulp-watch plugins to recognized new files.
-      // there's a bug on Windows when using gulp.watch
-     plugins.watch(
-        path.join(dirs.source, dirs.fonts, '**/*.{svg,ttf,eot,woff,woff2}'),
-        () => gulp.start('fonts'));
+      plugins.watch(
+        path
+          .join(dirs.source, dirs.fonts, "**/*.{svg,ttf,eot,woff,woff2}")
+          .replace(/\\/g, "/"),
+        gulp.series("copy-fonts", "copy_otherWWW")
+      );
+
+	  // Images
+      plugins.watch(
+        path
+          .join(dirs.source, dirs.images, "**/*.{svg,jpg,jpeg,png,bmp,gif}")
+          .replace(/\\/g, "/"),
+        gulp.series("copy-images", "copy_otherWWW")
+      );
 
       // Icon font
-      gulp.watch([
-        path.join(dirs.source, dirs.icons, '**/*.svg'),
-        path.join(dirs.source, dirs.styles, '_generic_icons_template.scss')
-      ], ()=>{ serial(['iconfont', 'fonts'], 'sass'); });
+      gulp.watch(
+        [
+          path.join(dirs.source, dirs.icons, "**/*.svg"),
+          path.join(dirs.source, dirs.styles, "_generic_icons_template.scss")
+        ].map(item => item.replace(/\\/g, "/")),
+        gulp.series(gulp.parallel("iconfont", "copy-fonts"), "sass")
+      );
 
       // Pug Templates
-      gulp.watch([
-        path.join(dirs.source, '**/*.pug'),
-        path.join(dirs.source, dirs.data, '**/*.json')
-      ], ['pug']);
+      gulp.watch(
+        [
+          path.join(dirs.source, "**/*.pug"),
+          path.join(dirs.source, dirs.data, "**/*.json")
+        ].map(item => item.replace(/\\/g, "/")),
+        gulp.series("pug")
+      );
 
       // Copy
-      gulp.watch([
-        path.join(dirs.source, '**/*'),
-        '!' + path.join(dirs.source, '{**/\_*,**/\_*/**}'),
-        '!' + path.join(dirs.source, '**/*.pug')
-      ], ['copy']);
-
-      // Images
-      gulp.watch([
-        path.join(dirs.source, dirs.images, '**/*.{jpg,jpeg,gif,svg,png}')
-      ], ['imagemin']);
-
-      // Icons
-      gulp.watch([
-        path.join(dirs.source, dirs.icons, '**/*.{svg}')
-      ], ['iconfont']);
+      gulp.watch(
+        [
+          path.join(dirs.source, "**/*"),
+          "!" + path.join(dirs.source, "{**/_*,**/_*/**}"),
+          "!" + path.join(dirs.source, "**/*.pug")
+        ].map(item => item.replace(/\\/g, "/")),
+        gulp.series("copy")
+      );
 
       // All other files
-      gulp.watch([
-        path.join(dirs.temporary, '**/*'),
-        '!' + path.join(dirs.temporary, '**/*.{css,map,html,js,svg,ttf,eot,woff,woff2}')
-      ]).on('change', browserSync.reload);
+      gulp
+        .watch(
+          [
+            path.join(dirs.temporary, "**/*"),
+            "!" +
+              path.join(
+                dirs.temporary,
+                "**/*.{css,map,html,js,svg,ttf,eot,woff,woff2}"
+              )
+          ].map(item => item.replace(/\\/g, "/"))
+        )
+        .on("change", browserSync.reload);
     }
   });
 }
