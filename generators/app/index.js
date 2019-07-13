@@ -2,7 +2,6 @@
 
 var Generator = require('yeoman-generator');
 var underscore = require('underscore.string');
-var path = require('path');
 var updateNotifier = require('update-notifier');
 var pkg = require('../../package.json');
 require('colors');
