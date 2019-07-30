@@ -28,7 +28,7 @@
 import * as conditioner from "conditioner-core";
 // import ssm from 'simplestatemanager';
 import JSON5 from "json5";
-import "feature.js";
+import feature from "feature.js";
 
 import "lazysizes/plugins/respimg/ls.respimg";
 import "lazysizes/plugins/attrchange/ls.attrchange";
@@ -65,7 +65,7 @@ window.lazySizesConfig.loadingClass = "is-lazysizes-loading";
 const bundleSrc = $('[src*="/main.js"]').attr("src");
 __webpack_public_path__ = bundleSrc.substr(0, bundleSrc.lastIndexOf("/") + 1);
 
-if (!window.feature.touch) {
+if (!feature.touch) {
 	import(/* webpackMode: "lazy" */ /* webpackChunkName: "smoothscroll" */ "smoothscroll-for-websites").then(
 		({ default: SmoothScroll }) => {
 			SmoothScroll({ animationTime: 800 });
