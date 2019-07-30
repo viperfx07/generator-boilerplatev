@@ -81,7 +81,8 @@ export default function(
           ]
         })
       )
-      .pipe(gulp.dest(dest));
+	  .pipe(gulp.dest(dest))
+	  .on('end', browserSync.reload);
   });
 
   gulp.task("pug", gulp.series("pug-ori"));
