@@ -56,7 +56,7 @@ export default function(
         plugins.iconfont({
           fontName: iconFontSettings.fontName, // required
           // appendUnicode: true, // recommended option
-          formats: ["ttf", "eot", "woff", "woff2", "svg"], // default, 'woff2' and 'svg' are available
+          formats: ["woff", "woff2"], // default, 'woff2' and 'svg' are available
           timestamp: 1, // timestamp is recommended to get consistent builds when watching files.
           // set a static timestamp to 1 so that the font binaries don't change when there's no new icons added
 
@@ -67,17 +67,17 @@ export default function(
       )
       .on("glyphs", (glyphs, options) => {
         gulp
-          .src(path.join(dirs.source, dirs.icons, "_settings.icon.scss"))
+          .src(path.join(dirs.source, dirs.icons, "_settings.icon.scss").replace(/\\/g, "/"))
           .pipe(plugins.plumber())
           .pipe(
             plugins.consolidate("lodash", {
               glyphs: glyphs
             })
           )
-          .pipe(gulp.dest(path.join(dirs.source, dirs.styles, "01_settings")));
+          .pipe(gulp.dest(path.join(dirs.source, dirs.styles, "01_settings").replace(/\\/g, "/")));
 
         gulp
-          .src(path.join(dirs.source, dirs.icons, "icons_template.scss"))
+          .src(path.join(dirs.source, dirs.icons, "icons_template.scss").replace(/\\/g, "/"))
           .pipe(plugins.plumber())
           .pipe(
             plugins.consolidate("lodash", {
@@ -88,7 +88,7 @@ export default function(
             })
           )
           .pipe(plugins.rename("_generic.icons.scss"))
-          .pipe(gulp.dest(path.join(dirs.source, dirs.styles, "03_generic")));
+          .pipe(gulp.dest(path.join(dirs.source, dirs.styles, "03_generic").replace(/\\/g, "/")));
       })
       .pipe(gulp.dest(dest))
   );
