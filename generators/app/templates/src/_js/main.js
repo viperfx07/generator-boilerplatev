@@ -43,11 +43,6 @@ import "bootstrap/js/src/collapse";
 import "bootstrap/js/src/dropdown";
 import "bootstrap/js/src/tab";
 
-// //////////////
-// Utils      //
-// //////////////
-import HeaderUtil from "./modules/HeaderUtil";
-
 // Note for lazysizes
 // Need to do "mobile size first"
 // If you define bgset="imageA sizeA, imageB sizeB", then if the B is loaded first, the A won't load although it matches the size requirement
@@ -60,9 +55,24 @@ window.lazySizesConfig.lazyClass = "js-lazysizes";
 window.lazySizesConfig.loadedClass = "is-lazysizes-loaded";
 window.lazySizesConfig.loadingClass = "is-lazysizes-loading";
 
+//page is optimized for fast onload event
+window.lazySizesConfig.loadMode = 1;
+
+window.lazySizesConfig.customMedia = {
+	'--xxs-portrait': '(max-width: 479px) and (orientation: portrait)',
+	'--xxs': '(max-width: 479px)',
+	'--xs-portrait': '(max-width: 767px) and (orientation: portrait)',
+	'--xs': '(max-width: 767px)',
+	'--sm-portrait': '(max-width: 991px) and (orientation: portrait)',
+	'--sm': '(max-width: 991px)',
+	'--md-portrait': '(max-width: 1179px) and (orientation: portrait)',
+	'--md': '(max-width: 1179px)',
+	'--lg': '(max-width: 1399px)'
+}
+
 // Setting Webpack public path dynamically so that it loads the utils
 // from the folder where the main.js is located
-const bundleSrc = $('[src*="/main.js"]').attr("src");
+const bundleSrc = $('[src*="www_shared/assets/js/main.js"]').attr("src");
 __webpack_public_path__ = bundleSrc.substr(0, bundleSrc.lastIndexOf("/") + 1);
 
 if (!feature.touch) {
@@ -102,6 +112,29 @@ $(() => {
 				console.error(err);
 				return [el, $el, opts];
 			}
+		},
+
+		// the plugin "monitor" hook
+		monitor: {
+			// the name of our monitor, not prefixed with "@"
+			name: 'visible',
+
+			// the monitor factory method, this will create our monitor
+			create: (context, element) => ({
+				// current match state
+				matches: false,
+
+				// called by conditioner to start listening for changes
+				addListener(change) {
+					new IntersectionObserver(entries => {
+						// update the matches state
+						this.matches = entries.pop().isIntersecting == context
+
+						// inform conditioner of the new state
+						change()
+					}).observe(element)
+				}
+			})
 		}
 	});
 	conditioner.hydrate(document.documentElement);
@@ -113,12 +146,6 @@ $(() => {
 	if ($table.length) {
 		$table.wrap('<div class="u-table-responsive">');
 	}
-
-	// //////////
-	// Header //
-	// //////////
-	HeaderUtil.initMegamenu();
-	HeaderUtil.initCloseOffCanvas();
 
 	// ///////
 	// SSM //

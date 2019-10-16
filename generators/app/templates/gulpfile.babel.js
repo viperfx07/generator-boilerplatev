@@ -26,7 +26,7 @@ if (!args.production) {
   browserSync = require("browser-sync").create();
 }
 
-const prodTasks = ["clean", "copy", "iconfont", "fonts", "sass", "webpack"];
+const prodTasks = ["clean", "copy", "icon", "fonts", "sass", "webpack"];
 
 // This will grab all js in the `gulp` directory
 // in order to load all gulp tasks
@@ -55,14 +55,14 @@ wrench
 if (args.production) {
   gulp.task(
     "build",
-    gulp.series(gulp.parallel("copy", "iconfont", "webpack"), "sass")
+    gulp.series(gulp.parallel("copy", "icon", "webpack"), "sass")
   );
 } else {
   // Server tasks with watch
   gulp.task(
     "serve",
     gulp.series(
-      gulp.parallel("iconfont", "pug", "webpack", "copy"),
+      gulp.parallel("icon", "pug", "webpack", "copy"),
       "sass",
       gulp.parallel("browsersync", "watch")
     )

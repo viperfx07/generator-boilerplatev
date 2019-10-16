@@ -13,7 +13,6 @@
 		}
 
 		&:before{
-			@include icon(check);
 			@include absolute-center;
 			line-height: 18px;
 			color: #fff;
