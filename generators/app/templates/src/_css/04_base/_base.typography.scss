@@ -70,24 +70,6 @@ h6{
 
 blockquote{
 	@include fsblockquote;
-	quotes: "�" "�" "�" "�";
-	padding-top: 62px;
-	position: relative;
-	color: #505050;
-	@include mq(md){
-		padding-left: 18px;
-	}
-
-	&:before{
-		@include icon(quote);
-		color: rgba(#000, .2);
-		font-size: 40px;
-		max-height: 40px;
-		line-height: 1;
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
 }
 
 p{

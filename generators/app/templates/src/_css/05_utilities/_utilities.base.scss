@@ -1,545 +1,498 @@
 /* crit:start */
 
 .u {
-	// Border
-	@mixin u-bd($abbrev, $property, $infix) {
-		&-#{$abbrev}#{$infix} {
-			#{$property}: 1px solid $border;
-		}
-		&-#{$abbrev}0#{$infix} {
-			#{$property}: 0;
-		}
-	}
-	@each $breakpoint in map-keys($grid-breakpoints) {
-		@include mq-up($breakpoint) {
-			$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-			@each $prop, $abbrev
-					in (
-						border: bd,
-						border-top: bdt,
-						border-left: bdl,
-						border-right: bdr,
-						border-bottom: bdb
-					)
-			{
-				@include u-bd($abbrev, $prop, $infix);
-			}
-		}
-	}
+    // Border
+    @mixin u-bd($abbrev, $property, $infix) {
+        &-#{$abbrev}#{$infix} {
+            #{$property}: 1px solid $border;
+        }
+        &-#{$abbrev}0#{$infix} {
+            #{$property}: 0;
+        }
+    }
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include mq-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+            @each $prop,
+            $abbrev in ( border: bd, border-top: bdt, border-left: bdl, border-right: bdr, border-bottom: bdb) {
+                @include u-bd($abbrev, $prop, $infix);
+            }
+        }
+    }
+    &-bdl0-first {
+        &:first-child {
+            border-left: 0;
+        }
+    }
+    &-bdt0-first {
+        &:first-child {
+            border-top: 0;
+        }
+    }
+    &-bdr0-last {
+        &:last-child {
+            border-right: 0;
+        }
+    }
+    &-bdb0-last {
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+    // Border Radius
+    &-bdra {
+        &0 {
+            border-radius: 0;
+        }
+        &50p {
+            border-radius: 50%;
+        }
+    }
+    // Link Text Decoration None on Hover and Focus
+    &-link-tdn {
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+    }
+    // {{ .u-link-colorstay }}
+    &-link-colorstay {
+        color: inherit;
+        &:hover,
+        &:focus {
+            color: inherit;
+        }
+    }
+    &-focus-outline0 {
+        &:focus {
+            outline: 0;
+        }
+    }
+    &-cur {
+        &p {
+            cursor: pointer;
+        }
+    }
+    &-pe {
+        &n {
+            pointer-events: none;
+        }
+    }
+    // Margin and Padding
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include mq-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+            @each $prop,
+            $abbrev in (margin: m, padding: p) {
+                @each $size, $length in $spacers {
+                    @if ($length==0) {
+                        &-#{$abbrev}#{$size}#{$infix} {
+                            #{$prop}: $length;
+                        }
+                    }
+                    &-#{$abbrev}tb#{$size}#{$infix} {
+                        #{$prop}-top: $length;
+                    }
+                    &-#{$abbrev}yb#{$size}#{$infix} {
+                        #{$prop}-top: $length;
+                    }
+                    &-#{$abbrev}rb#{$size}#{$infix} {
+                        #{$prop}-right: $length;
+                    }
+                    &-#{$abbrev}xb#{$size}#{$infix} {
+                        #{$prop}-right: $length;
+                    }
+                    &-#{$abbrev}bb#{$size}#{$infix} {
+                        #{$prop}-bottom: $length;
+                    }
+                    &-#{$abbrev}yb#{$size}#{$infix} {
+                        #{$prop}-bottom: $length;
+                    }
+                    &-#{$abbrev}lb#{$size}#{$infix} {
+                        #{$prop}-left: $length;
+                    }
+                    &-#{$abbrev}xb#{$size}#{$infix} {
+                        #{$prop}-left: $length;
+                    }
+                }
+            }
+            // Some special margin utils
+            // &-ma#{$infix} {
+            // 	margin: auto;
+            // }
+            // &-mta#{$infix}{
+            // 	margin-top: auto;
+            // }
+            // &-mya#{$infix} {
+            // 	margin-top: auto;
+            // }
+            &-mra#{$infix} {
+                margin-right: auto;
+            }
+            &-mxa#{$infix} {
+                margin-right: auto;
+            }
+            // &-mba#{$infix}{
+            // 	margin-bottom: auto;
+            // }
+            // &-mya#{$infix} {
+            // 	margin-bottom: auto;
+            // }
+            &-mla#{$infix} {
+                margin-left: auto;
+            }
+            &-mxa#{$infix} {
+                margin-left: auto;
+            }
+        }
+    }
+    &-mlb0-first {
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+    &-mtb0-first {
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+    &-mrb0-last {
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    &-mbb0-last {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    // Height
+    &-h {
+        &100 {
+            &p {
+                height: 100%;
+            }
+            &vh {
+                height: 100vh;
+            }
+        }
+        &a {
+            height: auto;
+        }
+    }
+    // Width 100%
+    &-w100 {
+        &p {
+            width: 100%;
+        }
+    }
+    &-wa {
+        width: auto;
+        &-sm {
+            @include mq(sm) {
+                width: auto;
+            }
+        }
+    }
+    &-maw {
+        &50p {
+            max-width: 50%;
+        }
+        &100p {
+            max-width: 100%;
+        }
+    }
+    &-mah100 {
+        &p {
+            max-height: 100%;
+        }
+        &vh {
+            max-height: 100vh;
+        }
+    }
+    &-mih100 {
+        &vh {
+            min-height: 100vh;
+        }
+    }
+    // Background color
+    &-bgc {
+        &-t {
+            background-color: transparent;
+        }
+    }
+    // Overflow
+    &-ov {
+        &h {
+            overflow: hidden;
+        }
+        &a {
+            overflow: auto;
+        }
+    }
+    // Display
+    &-d {
+        &tb {
+            border-collapse: collapse;
+            &--fixed {
+                width: 100%;
+                table-layout: fixed;
+            }
+        }
+        @each $breakpoint in map-keys($grid-breakpoints) {
+            @include mq-up($breakpoint) {
+                $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+                &n#{$infix} {
+                    display: none;
+                }
+                &i#{$infix} {
+                    display: inline;
+                }
+                &ib#{$infix} {
+                    display: inline-block;
+                }
+                &b#{$infix} {
+                    display: block;
+                }
+                &tb#{$infix} {
+                    display: table;
+                }
+                &tr#{$infix} {
+                    display: table-row;
+                }
+                &tc#{$infix} {
+                    display: table-cell;
+                }
+                &f#{$infix} {
+                    display: flex;
+                }
+                &if#{$infix} {
+                    display: inline-flex;
+                }
+                &g#{$infix} {
+                    display: grid;
+                }
+            }
+        }
+        &n-on-collapsed {
+            .collapsed & {
+                display: none;
+            }
+        }
+        &ib-on-collapsed {
+            .collapsed & {
+                display: inline-block;
+            }
+        }
+        &b-on-collapsed {
+            .collapsed & {
+                display: block;
+            }
+        }
+    }
+    // Vertical Align
+    &-va {
+        &t {
+            vertical-align: top;
+        }
+        &m {
+            vertical-align: middle;
+        }
+        &b {
+            vertical-align: bottom;
+        }
+    }
+    // FLoat
+    &-fl {
+        &l {
+            float: left;
+        }
+        &r {
+            float: right;
+        }
+        &n {
+            float: none;
+        }
+    }
+    // Text align
+    &-ta {
+        @each $breakpoint in map-keys($grid-breakpoints) {
+            @include mq-up($breakpoint) {
+                $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+                &r#{$infix} {
+                    text-align: right;
+                }
+                &c#{$infix} {
+                    text-align: center;
+                }
+                &l#{$infix} {
+                    text-align: left;
+                }
+            }
+        }
+    }
+    // Line Height
+    &-lh {
+        &1 {
+            line-height: 1;
+        }
+        &b {
+            line-height: 24px;
+        }
+    }
+    // Position
+    &-pos {
+        &a {
+            &0 {
+                position: absolute 0;
+            }
+        }
+        &f {
+            &0 {
+                position: fixed 0;
+            }
+        }
+        @each $breakpoint in map-keys($grid-breakpoints) {
+            @include mq-up($breakpoint) {
+                $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+                @each $val,
+                $abbrev in (static: s, relative: r, absolute: a, fixed: f) {
+                    &#{$abbrev}#{$infix} {
+                        position: $val;
+                    }
+                }
+            }
+        }
+    }
+    // Positioning
+    @each $prop,
+    $abbrev in (left: l, right: r, top: t, bottom: b) {
+        &-#{$abbrev}0 {
+            #{$prop}: 0;
+        }
+        &-#{$abbrev}a {
+            #{$prop}: auto;
+        }
+    }
+    // Font Weight
+    &-fw {
+        @each $weight in (300, 400, 500, 700) {
+            &#{$weight} {
+                font-weight: $weight;
+            }
+        }
+    }
+    // Font Style
+    &-fs {
+        &i {
+            font-style: italic;
+        }
+    }
+    &-fz0 {
+        font-size: 0;
+    }
+    // Text Transfrom
+    &-tt {
+        &u {
+            text-transform: uppercase;
+        }
+        &c {
+            text-transform: capitalize;
+        }
+        &n {
+            text-transform: none;
+        }
+    }
+    // Text Decoration
+    &-td {
+        &u {
+            text-decoration: underline;
+        }
+        &n {
+            text-decoration: none;
+        }
+    }
+    // Flex
+    &-fx {
+        &1 {
+            flex: 1 1 auto;
+        }
+        &g {
+            &0 {
+                flex-grow: 0;
+            }
+            &1 {
+                flex-grow: 1;
+            }
+        }
+        &s {
+            &0 {
+                flex-shrink: 0;
+            }
+            &1 {
+                flex-shrink: 1;
+            }
+        }
+        &b {
+            &0 {
+                flex-basis: 0%;
+            }
+            &a {
+                flex-basis: auto;
+            }
+        }
+        &dc {
+            flex-direction: column;
+        }
+        &ww {
+            flex-wrap: wrap;
+        }
+    }
+    // Z Index
+    &-z {
+        @for $i from -1 through 5 {
+            &#{$i} {
+                z-index: $i;
+            }
+        }
+    }
+    // Opacity
+    &-o {
+        &0 {
+            opacity: 0;
+        }
+        &1 {
+            opacity: 1;
+        }
+    }
 
-	&-bdl0-first {
-		&:first-child {
-			border-left: 0;
-		}
-	}
-
-	&-bdt0-first {
-		&:first-child {
-			border-top: 0;
-		}
-	}
-	&-bdr0-last {
-		&:last-child {
-			border-right: 0;
-		}
-	}
-	&-bdb0-last {
-		&:last-child {
-			border-bottom: 0;
-		}
-	}
-
-
-	// Border Radius
-	&-bdra {
-		&0 {
-			border-radius: 0;
-		}
-		&50p {
-			border-radius: 50%;
-		}
-	}
-
-	// Link Text Decoration None on Hover and Focus
-	&-link-tdn {
-		&:hover,
-		&:focus {
-			text-decoration: none;
-		}
-	}
-
-	// {{ .u-link-colorstay }}
-	&-link-colorstay {
-		color: inherit;
-		&:hover,
-		&:focus {
-			color: inherit;
-		}
-	}
-	&-focus-outline0{
-		&:focus{
-			outline: 0;
-		}
-	}
-
-	&-cur{
-		&p{
-			cursor: pointer;
-		}
-	}
-
-	&-pi{
-		&n{
-			pointer-events: none;
-		}
-	}
-
-	// Margin and Padding
-	@each $breakpoint in map-keys($grid-breakpoints) {
-		@include mq-up($breakpoint) {
-			$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-			@each $prop, $abbrev in (margin: m, padding: p) {
-				@each $size, $length in $spacers {
-					@if ($length == 0) {
-						&-#{$abbrev}#{$size}#{$infix} {
-							#{$prop}: $length;
-						}
-					}
-					&-#{$abbrev}tb#{$size}#{$infix} {
-						#{$prop}-top: $length;
-					}
-					&-#{$abbrev}yb#{$size}#{$infix} {
-						#{$prop}-top: $length;
-					}
-					&-#{$abbrev}rb#{$size}#{$infix} {
-						#{$prop}-right: $length;
-					}
-					&-#{$abbrev}xb#{$size}#{$infix} {
-						#{$prop}-right: $length;
-					}
-					&-#{$abbrev}bb#{$size}#{$infix} {
-						#{$prop}-bottom: $length;
-					}
-					&-#{$abbrev}yb#{$size}#{$infix} {
-						#{$prop}-bottom: $length;
-					}
-					&-#{$abbrev}lb#{$size}#{$infix} {
-						#{$prop}-left: $length;
-					}
-					&-#{$abbrev}xb#{$size}#{$infix} {
-						#{$prop}-left: $length;
-					}
-				}
-			}
-
-			// Some special margin utils
-			// &-ma#{$infix} {
-			// 	margin: auto;
-			// }
-			// &-mta#{$infix}{
-			// 	margin-top: auto;
-			// }
-			// &-mya#{$infix} {
-			// 	margin-top: auto;
-			// }
-			&-mra#{$infix} {
-				margin-right: auto;
-			}
-			&-mxa#{$infix} {
-				margin-right: auto;
-			}
-			// &-mba#{$infix}{
-			// 	margin-bottom: auto;
-			// }
-			// &-mya#{$infix} {
-			// 	margin-bottom: auto;
-			// }
-			&-mla#{$infix} {
-				margin-left: auto;
-			}
-			&-mxa#{$infix} {
-				margin-left: auto;
-			}
-		}
-	}
-
-	&-mlb0-first {
-		&:first-child {
-			margin-left: 0;
-		}
-	}
-
-	&-mtb0-first {
-		&:first-child {
-			margin-top: 0;
-		}
-	}
-	&-mrb0-last {
-		&:last-child {
-			margin-right: 0;
-		}
-	}
-	&-mbb0-last {
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
-
-	// Height
-	&-h{
-		&100 {
-			&p {
-				height: 100%;
-			}
-			&vh {
-				height: 100vh;
-			}
-		}
-		&a{
-			height: auto;
-		}
-	}
-
-
-	// Width 100%
-	&-w100 {
-		&p {
-			width: 100%;
-		}
-	}
-
-	&-wa{
-		width: auto;
-		&-sm{
-			@include mq(sm){
-				width: auto;
-			}
-		}
-	}
-
-	&-maw {
-		&50p{
-			max-width: 50%;
-		}
-		&100p {
-			max-width: 100%;
-		}
-	}
-
-	&-mah100 {
-		&p {
-			max-height: 100%;
-		}
-		&vh {
-			max-height: 100vh;
-		}
-	}
-
-	&-mih100 {
-		&vh {
-			min-height: 100vh;
-		}
-	}
-
-	// Background color
-	&-bgc {
-		&-t {
-			background-color: transparent;
-		}
-	}
-
-	// Overflow
-	&-ov {
-		&h {
-			overflow: hidden;
-		}
-		&a {
-			overflow: auto;
-		}
-	}
-
-	// Display
-	&-d {
-		&tb {
-			border-collapse: collapse;
-			&--fixed {
-				width: 100%;
-				table-layout: fixed;
-			}
-		}
-
-		@each $breakpoint in map-keys($grid-breakpoints) {
-			@include mq-up($breakpoint) {
-				$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-				&n#{$infix} {
-					display: none;
-				}
-				&i#{$infix} {
-					display: inline;
-				}
-				&ib#{$infix} {
-					display: inline-block;
-				}
-				&b#{$infix} {
-					display: block;
-				}
-				&tb#{$infix} {
-					display: table;
-				}
-				&tr#{$infix} {
-					display: table-row;
-				}
-				&tc#{$infix} {
-					display: table-cell;
-				}
-				&f#{$infix} {
-					display: flex;
-				}
-				&if#{$infix} {
-					display: inline-flex;
-				}
-				&g#{$infix} {
-					display: grid;
-				}
-			}
-		}
-	}
-
-	// Vertical Align
-	&-va {
-		&t {
-			vertical-align: top;
-		}
-		&m {
-			vertical-align: middle;
-		}
-		&b {
-			vertical-align: bottom;
-		}
-	}
-
-	// FLoat
-	&-fl {
-		&l {
-			float: left;
-		}
-		&r {
-			float: right;
-		}
-		&n {
-			float: none;
-		}
-	}
-
-	// Text align
-	&-ta {
-		&r {
-			text-align: right;
-
-			@include mq(md) {
-				&-md {
-					text-align: right;
-				}
-			}
-		}
-		&c {
-			text-align: center;
-
-			@include mq(sm) {
-				&-sm {
-					text-align: center;
-				}
-			}
-		}
-		&l {
-			text-align: left;
-
-			@include mq(sm) {
-				&-sm {
-					text-align: left;
-				}
-			}
-
-			@include mq(md) {
-				&-md {
-					text-align: left;
-				}
-			}
-		}
-	}
-
-	// Line Height
-	&-lh {
-		&1 {
-			line-height: 1;
-		}
-		&b {
-			line-height: 24px;
-		}
-	}
-
-	// Position
-	&-pos {
-		&a {
-			&0 {
-				position: absolute 0;
-			}
-		}
-		&f {
-			&0 {
-				position: fixed 0;
-			}
-		}
-
-		@each $breakpoint in map-keys($grid-breakpoints) {
-			@include mq-up($breakpoint) {
-				$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
-				@each $val,
-					$abbrev in (static: s, relative: r, absolute: a, fixed: f)
-				{
-					&#{$abbrev}#{$infix} {
-						position: $val;
-					}
-				}
-			}
-		}
-	}
-
-	// Positioning
-	@each $prop, $abbrev in (left: l, right: r, top: t, bottom: b) {
-		&-#{$abbrev}0 {
-			#{$prop}: 0;
-		}
-
-		&-#{$abbrev}a {
-			#{$prop}: auto;
-		}
-	}
-
-	// Font Weight
-	&-fw {
-		@each $weight in (300, 400, 500, 700) {
-			&#{$weight} {
-				font-weight: $weight;
-			}
-		}
-	}
-
-	// Font Style
-	&-fs {
-		&i {
-			font-style: italic;
-		}
-	}
-
-	&-fz0 {
-		font-size: 0;
-	}
-
-	// Text Transfrom
-	&-tt {
-		&u {
-			text-transform: uppercase;
-		}
-		&c {
-			text-transform: capitalize;
-		}
-	}
-
-	// Text Decoration
-	&-td{
-		&u {
-			text-decoration: underline;
-		}
-		&n {
-			text-decoration: none;
-		}
-	}
-
-	// Flex
-	&-fx {
-		&1 {
-			flex: 1 1 auto;
-			&10{
-				flex: 1 1 0%;
-			}
-		}
-		&g {
-			&0 {
-				flex-grow: 0;
-			}
-			&1 {
-				flex-grow: 1;
-			}
-		}
-		&s {
-			&0 {
-				flex-shrink: 0;
-			}
-
-			&1 {
-				flex-shrink: 1;
-			}
-		}
-		&b {
-			&0 {
-				flex-basis: 0%;
-			}
-			&a {
-				flex-basis: auto;
-			}
-		}
-		&dc {
-			flex-direction: column;
-		}
-		&ww {
-			flex-wrap: wrap;
-		}
+	&-bdc-cc {
+        border-color: currentColor;
+    }
+    &-fill-cc {
+        fill: currentColor;
 	}
 
-	// Z Index
-	&-z {
-		@for $i from -1 through 5 {
-			&#{$i} {
-				z-index: $i;
-			}
-		}
-	}
-
-	// Opacity
-	&-o {
-		&0 {
-			opacity: 0;
-		}
-		&1 {
-			opacity: 1;
-		}
-		&-lightmuted{
-			opacity: .6;
-		}
-	}
-
-	@each $c, $hex in $bv-colors {
-		// Background color
-		&-bgc-#{$c} {
-			background-color: $hex;
-		} // Color
-		&-c-#{$c} {
-			color: $hex;
-		} // Border color
-		&-bdc-#{$c} {
-			border-color: $hex;
-		}
-	}
-
-	&-bdc-error{
-		border-color: red;
-	}
-
-	&-c-inherit {
-		color: inherit;
-	}
+    @each $c,
+    $hex in $bv-colors {
+        // Background color
+        &-bgc-#{$c} {
+            background-color: $hex;
+        } // Color
+        &-c-#{$c} {
+            color: $hex;
+        } // Border color
+        &-bdc-#{$c} {
+            border-color: $hex;
+        }
+    }
+    &-bdc-error {
+        border-color: red;
+    }
+    &-c-inherit {
+        color: inherit;
+    }
 }
+
 
 /* crit:end */

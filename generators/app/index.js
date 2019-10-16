@@ -39,6 +39,12 @@ module.exports = class extends Generator {
 				default: 'Vue'
 			},
 			{
+				type: 'confirm',
+				name: 'hasVueStyleguide',
+				message: 'Do you want to add vue-styleguide',
+				default: false,
+			},
+			{
 				type: 'list',
 				name: 'dirStructure',
 				message: 'Directory structure standard',
@@ -49,7 +55,7 @@ module.exports = class extends Generator {
 				type: 'input',
 				name: 'baseline',
 				message: 'Baseline (in px size)',
-				default: '6' // Default to current folder name
+				default: '8' // Default to current folder name
 			}, {
 				type: 'confirm',
 				name: 'skipInstall',
@@ -84,6 +90,7 @@ module.exports = class extends Generator {
 			projectName: this.projectName,
 			skipInstall: this.skipInstall,
 			jsFramework: this.jsFramework,
+			hasVueStyleguide: this.hasVueStyleguide,
 			assetsDir: dirByStructures[this.dirStructure].assets,
 			otherWWW: dirByStructures[this.dirStructure].otherWWW,
 			baseline: this.baseline,

@@ -4,10 +4,48 @@ import path from 'path';
 import glob from 'glob';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
+import magicImporter from 'node-sass-magic-importer';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';<% if (jsFramework === 'Vue') { %>
 import VueLoaderPlugin from 'vue-loader/lib/plugin';<% } %>
 
 const pathResolve = path.resolve.bind(path, path.join(__dirname, '../'))
+
+const sassLoaderConfig = {
+	loader: 'sass-loader',
+	options: {
+		data: `
+			@import "src/_css/01_settings/**/*.scss";
+			@import "src/_css/02_tools/**/*.scss";
+		`
+	}
+}
+
+const getPostCssPlugins = () =>
+	[
+		require('autoprefixer')(),
+		require('rucksack-css')({ reporter: true }),
+		require('postcss-pxtorem')({ replace: false }),
+		require('cssnano')({
+			rebase: false,
+			discardComments: {
+				removeAll: true
+			},
+			discardUnused: false,
+			minifyFontValues: true,
+			filterOptimiser: true,
+			functionOptimiser: true,
+			minifyParams: true,
+			normalizeUrl: true,
+			reduceBackgroundRepeat: true,
+			convertValues: true,
+			discardEmpty: true,
+			minifySelectors: true,
+			reduceInitial: true,
+			reduceIdents: false,
+			mergeRules: false,
+			zindex: false
+		})
+	].filter(item => !!item)
 
 export default function (
 	gulp,
@@ -85,6 +123,8 @@ export default function (
 							// Stage 3
 							'@babel/plugin-syntax-dynamic-import',
 							['@babel/plugin-proposal-class-properties', { loose: true }],
+
+							'@babel/plugin-proposal-optional-chaining',
 						],
 					},
 				}, <% if (jsFramework === 'Vue') { %>
@@ -137,17 +177,18 @@ export default function (
 									}
 								},
 								{
+									loader: 'postcss-loader',
+									options: {
+										ident: 'postcss-scss-module',
+										plugins: () => getPostCssPlugins()
+									}
+								},
+								{
 									loader: 'sass-loader',
 									options: {
-										data: `
-											@import "src/_css/01_settings/_settings.bootstrap.scss";
-											@import "src/_css/01_settings/_settings.icon.scss";
-											@import "src/_css/02_tools/02.01_functions/_tools.function.icon.scss";
-											@import "src/_css/02_tools/02.02_mixins/_tools.mixin.fontstyles.scss";
-											@import "src/_css/02_tools/02.02_mixins/_tools.mixin.foundation.scss";
-											@import "src/_css/02_tools/02.02_mixins/_tools.mixin.mq.scss";
-										`,
-									},
+										...sassLoaderConfig.options,
+										importer: magicImporter()
+									}
 								},
 							]
 						},
@@ -156,7 +197,20 @@ export default function (
 							use: [
 								'vue-style-loader',
 								'css-loader',
-								'sass-loader'
+								{
+									loader: 'postcss-loader',
+									options: {
+										ident: 'postcss-scss',
+										plugins: () => getPostCssPlugins()
+									}
+								},
+								{
+									loader: 'sass-loader',
+									options: {
+										...sassLoaderConfig.options,
+										importer: magicImporter()
+									}
+								}
 							]
 						}
 					],

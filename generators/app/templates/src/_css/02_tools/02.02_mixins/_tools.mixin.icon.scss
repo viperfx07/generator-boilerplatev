@@ -1,5 +1,0 @@
-//usually this use on pseudo element
-@mixin icon($iconName) {
-	@include iconfont;
-	content: icon($iconName);
-}

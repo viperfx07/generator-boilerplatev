@@ -25,7 +25,7 @@ export default function(
 
       // Scripts
       gulp.watch(
-        [path.join(dirs.source, dirs.scripts, "**/*.{js,vue}")].map(item =>
+        [path.join(dirs.source, dirs.scripts, "**/*.{js,vue,scss}")].map(item =>
           item.replace(/\\/g, "/")
         ),
         gulp.series("webpack")
@@ -39,7 +39,7 @@ export default function(
         gulp.series("copy-fonts", "copy_otherWWW")
       );
 
-	  // Images
+      // Images
       plugins.watch(
         path
           .join(dirs.source, dirs.images, "**/*.{svg,jpg,jpeg,png,bmp,gif}")
@@ -53,7 +53,7 @@ export default function(
           path.join(dirs.source, dirs.icons, "**/*.svg"),
           path.join(dirs.source, dirs.styles, "_generic_icons_template.scss")
         ].map(item => item.replace(/\\/g, "/")),
-        gulp.series(gulp.parallel("iconfont", "copy-fonts"), "sass")
+        gulp.series(gulp.parallel("icon", "copy-fonts"), "sass")
       );
 
       // Pug Templates
